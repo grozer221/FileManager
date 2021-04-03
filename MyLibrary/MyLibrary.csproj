@@ -51,7 +51,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="StructureTable.cs" />
+    <Compile Include="StructureQuickAccessFolders.cs" />
+    <Compile Include="StructureTableFileManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

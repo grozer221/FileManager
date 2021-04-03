@@ -32,9 +32,10 @@ namespace FileManager
             Console.OutputEncoding = Encoding.Unicode;
             Console.InputEncoding = Encoding.Unicode;
 
-            dataGridViewVisualise = new DataGridViewVisualise(dataGridViewFileManager);
+            dataGridViewVisualise = new DataGridViewVisualise(dataGridViewFileManager, dataGridViewQuickAccessFolders);
             dataGridViewVisualise.PrintDisks();
-            textBoxPath.Text = currentPath;
+            dataGridViewVisualise.PrintQuickAccessFolders();
+
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -90,6 +91,23 @@ namespace FileManager
         private void pictureBoxStepBack_Click(object sender, EventArgs e)
         {
             dataGridViewVisualise.StepBack(ref currentPath);
+            textBoxPath.Text = currentPath;
+        }
+
+        private void dataGridViewFileManager_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+                dataGridViewFileManager.ClearSelection();
+        }
+
+        private void dataGridViewQuickAccessFolders_MouseDown(object sender, MouseEventArgs e)
+        {
+            dataGridViewQuickAccessFolders.ClearSelection();
+        }
+
+        private void dataGridViewQuickAccessFolders_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            dataGridViewVisualise.dataGridQuickAccessCellMouseClick(e, ref currentPath);
             textBoxPath.Text = currentPath;
         }
     }

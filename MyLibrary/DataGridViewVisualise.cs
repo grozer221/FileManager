@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,25 +14,30 @@ namespace MyLibrary
     {
 
         private DataGridView DataGridViewFileManager;
-        List<string> listVisualisedItems = new List<string>();
+        private DataGridView DataGridViewQuickAccessFolders;
+        private List<string> ListVisualisedItems = new List<string>();
+        private List<string> ListQuickAccessFolders;
 
-        public DataGridViewVisualise(DataGridView DataGridViewFileManager)
+        public DataGridViewVisualise(DataGridView DataGridViewFileManager, DataGridView DataGridViewQuickAccessFolders)
         {
             this.DataGridViewFileManager = DataGridViewFileManager;
+            this.DataGridViewQuickAccessFolders = DataGridViewQuickAccessFolders;
+            ListQuickAccessFolders = GetListQuickAccessFoldersFromFile();
         }
 
         public void PrintDisks()
         {
-            DataGridViewFileManager.DataSource = GetDisksInObj(ref listVisualisedItems);
+            DataGridViewFileManager.DataSource = GetDisksInObj(ref ListVisualisedItems);
             SetSizeForDataGrid();
             SetReadOnlyForDisks();
+            DataGridViewFileManager.SelectedRows[0].Selected = false;
         }
 
         public void PrintFilesAndFolder(ref string currentPath)
         {
             try
             {
-                DataGridViewFileManager.DataSource = GetFilesAndFoldersInObj(currentPath, ref listVisualisedItems);
+                DataGridViewFileManager.DataSource = GetFilesAndFoldersInObj(currentPath, ref ListVisualisedItems);
             }
             catch
             {
@@ -41,6 +47,7 @@ namespace MyLibrary
             }
             SetSizeForDataGrid();
             SetReadOnlyForFilesAndFolders();
+            DataGridViewFileManager.SelectedRows[0].Selected = false;
         }
 
         public void SetReadOnlyForDisks()
@@ -50,8 +57,8 @@ namespace MyLibrary
             DataGridViewFileManager.Columns[2].ReadOnly = true;
             DataGridViewFileManager.Columns[3].ReadOnly = true;
             DataGridViewFileManager.Columns[4].ReadOnly = true;
-        }      
-        
+        }
+
         public void SetReadOnlyForFilesAndFolders()
         {
             DataGridViewFileManager.Columns[0].ReadOnly = true;
@@ -68,8 +75,8 @@ namespace MyLibrary
             DataGridViewFileManager.Columns[0].Width = 25;
             DataGridViewFileManager.Columns[1].Width = 250;
             DataGridViewFileManager.Columns[2].Width = 175;
-            DataGridViewFileManager.Columns[3].Width = 100;
-            DataGridViewFileManager.Columns[4].Width = 100;
+            DataGridViewFileManager.Columns[3].Width = 115;
+            DataGridViewFileManager.Columns[4].Width = 110;
             DataGridViewFileManager.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
@@ -77,13 +84,13 @@ namespace MyLibrary
         {
             try
             {
-                if (Directory.Exists(listVisualisedItems[e.RowIndex - 1]))
+                if (Directory.Exists(ListVisualisedItems[e.RowIndex - 1]))
                 {
-                    currentPath = listVisualisedItems[e.RowIndex - 1];
+                    currentPath = ListVisualisedItems[e.RowIndex - 1];
                     PrintFilesAndFolder(ref currentPath);
                 }
-                else if (File.Exists(listVisualisedItems[e.RowIndex - 1]))
-                    Process.Start(listVisualisedItems[e.RowIndex - 1]);
+                else if (File.Exists(ListVisualisedItems[e.RowIndex - 1]))
+                    Process.Start(ListVisualisedItems[e.RowIndex - 1]);
             }
             catch { }
         }
@@ -101,5 +108,48 @@ namespace MyLibrary
                 PrintDisks();
             }
         }
+
+        public void PrintQuickAccessFolders()
+        {
+            DataGridViewQuickAccessFolders.DataSource = GetQuickAccessFoldersInObjs(ListQuickAccessFolders);
+            DataGridViewQuickAccessFolders.ClearSelection();
+            DataGridViewQuickAccessFolders.Columns[0].Width = 25;
+            DataGridViewQuickAccessFolders.Columns[1].Width = 150;
+            for (int i = 0; i < DataGridViewQuickAccessFolders.RowCount; i++)
+                DataGridViewQuickAccessFolders.Rows[i].Height = 25;
+        }
+
+        public void dataGridQuickAccessCellMouseClick(DataGridViewCellMouseEventArgs e, ref string currentPath)
+        {
+            DataGridViewQuickAccessFolders.ClearSelection();
+            if (e.RowIndex == 0 || DataGridViewQuickAccessFolders[1, e.RowIndex].Value == null)
+                return;
+
+            if (e.RowIndex == DataGridViewQuickAccessFolders.Rows.Count - 1)
+            {
+                currentPath = "";
+                PrintDisks();
+                return;
+            }
+
+            //if (!Directory.Exists(ListQuickAccessFolders[e.RowIndex - 1]))
+            //{
+            //    if (MessageBox.Show("Папка була видалена.\nВидалили із швидкого доступу?", "Попередження", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            //    {
+            //        fileManager.RemoveQuickAccessFolder(e.RowIndex - 1);
+            //        fileManager.PrintQuickAccessFolders();
+            //        return;
+            //    }
+            //    else
+            //        return;
+            //}
+            currentPath = ListQuickAccessFolders[e.RowIndex - 1];
+            PrintFilesAndFolder(ref currentPath);
+        }
+
+
+
+
+    
     }
 }
