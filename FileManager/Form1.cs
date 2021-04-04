@@ -33,7 +33,8 @@ namespace FileManager
             Console.InputEncoding = Encoding.Unicode;
 
             dataGridViewVisualise = new DataGridViewVisualise(dataGridViewFileManager, dataGridViewQuickAccessFolders);
-            dataGridViewVisualise.PrintDisks();
+            ReloadToolStripMenuItem_Click(null, null);
+            dataGridViewVisualise.GetListQuickAccessFoldersFromFile();
             dataGridViewVisualise.PrintQuickAccessFolders();
 
         }
@@ -99,6 +100,11 @@ namespace FileManager
             if (e.Button == MouseButtons.Left)
                 dataGridViewFileManager.ClearSelection();
         }
+        private void dataGridViewFileManager_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                dataGridViewFileManager.Rows[e.RowIndex].Selected = true;
+        }
 
         private void dataGridViewQuickAccessFolders_MouseDown(object sender, MouseEventArgs e)
         {
@@ -109,6 +115,81 @@ namespace FileManager
         {
             dataGridViewVisualise.dataGridQuickAccessCellMouseClick(e, ref currentPath);
             textBoxPath.Text = currentPath;
+        }
+
+        private void pictureBoxSearch_Click(object sender, EventArgs e)
+        {
+            string tmpCurrentPath = textBoxPath.Text;
+            try { dataGridViewVisualise.SearchDirectory(ref tmpCurrentPath); }
+            catch { return; }
+            currentPath = tmpCurrentPath;
+        }
+
+        private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataGridViewVisualise.GetFilesAndFolderForCopyFromDataGrid(currentPath, dataGridViewFileManager);
+        }
+
+        private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataGridViewVisualise.PasteCopiedFoldersAndFile(currentPath);
+            ReloadToolStripMenuItem_Click(null, null);
+        }
+
+        private void AddToQuickAccessToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataGridViewVisualise.AddQuickAccessFolderToList(Path.Combine(currentPath, dataGridViewFileManager[1, dataGridViewFileManager.SelectedRows[0].Index].Value.ToString()));
+            dataGridViewVisualise.PrintQuickAccessFolders();
+        }
+
+        private void ReloadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (currentPath == null)
+                dataGridViewVisualise.PrintDisks();
+            else
+                dataGridViewVisualise.PrintFilesAndFolder(ref currentPath);
+        }
+
+        private void DeleteToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            dataGridViewVisualise.RemoveQuickAccessFolder(dataGridViewQuickAccessFolders.SelectedRows[0].Index - 1);
+            dataGridViewVisualise.PrintQuickAccessFolders();
+        }
+
+        private void dataGridViewQuickAccessFolders_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Right)
+                dataGridViewQuickAccessFolders.Rows[e.RowIndex].Selected = true;
+        }
+
+        private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show($"Ви впевнені, що хочете видалити ?", "Попередження", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+                return;
+            dataGridViewVisualise.DeleteDirectoryOrFileFromDataGrid(currentPath, dataGridViewFileManager);
+            ReloadToolStripMenuItem_Click(null, null);
+        }
+
+        private void NewFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataGridViewVisualise.AddNewRowForNewFolder(currentPath);
+        }
+
+        private void dataGridViewFileManager_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridViewFileManager[2, dataGridViewFileManager.SelectedRows[0].Index].Value == null) 
+                    dataGridViewVisualise.CreateNewFolder(currentPath, dataGridViewFileManager[1, dataGridViewFileManager.Rows.Count - 1].Value.ToString());
+            else
+            {
+                dataGridViewVisualise.RenameFileOfFolderInDataGrid(ref currentPath);
+            }
+            dataGridViewVisualise.PrintFilesAndFolder(ref currentPath);
+        }
+
+        private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataGridViewFileManager.CurrentCell = dataGridViewFileManager.Rows[dataGridViewFileManager.SelectedRows[0].Index].Cells[1];
+            dataGridViewFileManager.BeginEdit(true);
         }
     }
 }

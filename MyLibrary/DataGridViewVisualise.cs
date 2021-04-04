@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,13 +17,11 @@ namespace MyLibrary
         private DataGridView DataGridViewFileManager;
         private DataGridView DataGridViewQuickAccessFolders;
         private List<string> ListVisualisedItems = new List<string>();
-        private List<string> ListQuickAccessFolders;
 
         public DataGridViewVisualise(DataGridView DataGridViewFileManager, DataGridView DataGridViewQuickAccessFolders)
         {
             this.DataGridViewFileManager = DataGridViewFileManager;
             this.DataGridViewQuickAccessFolders = DataGridViewQuickAccessFolders;
-            ListQuickAccessFolders = GetListQuickAccessFoldersFromFile();
         }
 
         public void PrintDisks()
@@ -111,7 +110,7 @@ namespace MyLibrary
 
         public void PrintQuickAccessFolders()
         {
-            DataGridViewQuickAccessFolders.DataSource = GetQuickAccessFoldersInObjs(ListQuickAccessFolders);
+            DataGridViewQuickAccessFolders.DataSource = GetQuickAccessFoldersInObjs();
             DataGridViewQuickAccessFolders.ClearSelection();
             DataGridViewQuickAccessFolders.Columns[0].Width = 25;
             DataGridViewQuickAccessFolders.Columns[1].Width = 150;
@@ -143,13 +142,63 @@ namespace MyLibrary
             //    else
             //        return;
             //}
-            currentPath = ListQuickAccessFolders[e.RowIndex - 1];
+            currentPath = GetListQuickAccessFolders()[e.RowIndex - 1];
+            PrintFilesAndFolder(ref currentPath);
+        }
+
+        public void SearchDirectory(ref string currentPath)
+        {
+            if (currentPath == null)
+                PrintDisks();
+            else if (Regex.IsMatch(currentPath, @"^[A-Z\|a-z]:$"))
+            {
+                currentPath = null;
+                PrintDisks();
+            }
+            else if (Directory.Exists(currentPath))
+            {
+                currentPath = new DirectoryInfo(currentPath).FullName;
+                PrintFilesAndFolder(ref currentPath);
+            }
+            else if (File.Exists(currentPath))
+            {
+                Process.Start(currentPath);
+                currentPath = Directory.GetParent(currentPath).ToString();
+            }
+            else
+                throw new Exception();
+        }
+
+
+        public void AddNewRowForNewFolder(string currentPath)
+        {
+            DataGridViewFileManager.DataSource = GetFilesAndFoldersInObj(currentPath, ref ListVisualisedItems, "CreateNewFolder");
+            SetSizeForDataGrid();
+           
+            DataGridViewFileManager.CurrentCell = DataGridViewFileManager.Rows[DataGridViewFileManager.Rows.Count - 1].Cells[1];
+            DataGridViewFileManager.BeginEdit(true);
+        }
+
+        public void RenameFileOfFolderInDataGrid(ref string currentPath)
+        {
+            if (DataGridViewFileManager[1, DataGridViewFileManager.SelectedRows[0].Index].Value.ToString() == new DirectoryInfo(ListVisualisedItems[DataGridViewFileManager.SelectedRows[0].Index - 1]).Name ||
+               DataGridViewFileManager[1, DataGridViewFileManager.SelectedRows[0].Index].Value.ToString() == new FileInfo(ListVisualisedItems[DataGridViewFileManager.SelectedRows[0].Index - 1]).Name)
+                return;
+            if (Directory.Exists($@"{currentPath}\{DataGridViewFileManager[1, DataGridViewFileManager.SelectedRows[0].Index].Value}") || File.Exists($@"{currentPath}\{DataGridViewFileManager[1, DataGridViewFileManager.SelectedRows[0].Index].Value}"))
+            {
+                MessageBox.Show($"Файл або папка з іменем {DataGridViewFileManager[1, DataGridViewFileManager.SelectedRows[0].Index].Value} вже існує", "Попередження", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                PrintFilesAndFolder(ref currentPath);
+                return;
+            }
+            RenameFolderOfFile(ListVisualisedItems[DataGridViewFileManager.SelectedRows[0].Index - 1], $@"{currentPath}\{DataGridViewFileManager[1, DataGridViewFileManager.SelectedRows[0].Index].Value}");
             PrintFilesAndFolder(ref currentPath);
         }
 
 
 
 
-    
+
+
+
     }
 }
