@@ -187,6 +187,7 @@ namespace FileManager
             // 
             // pictureBoxSearch
             // 
+            this.pictureBoxSearch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxSearch.Image = global::FileManager.Properties.Resources.searchzoomflat_106031;
             this.pictureBoxSearch.Location = new System.Drawing.Point(718, 64);
             this.pictureBoxSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -204,7 +205,7 @@ namespace FileManager
             this.pictureBoxStepBack.Location = new System.Drawing.Point(3, 64);
             this.pictureBoxStepBack.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pictureBoxStepBack.Name = "pictureBoxStepBack";
-            this.pictureBoxStepBack.Size = new System.Drawing.Size(30, 32);
+            this.pictureBoxStepBack.Size = new System.Drawing.Size(30, 27);
             this.pictureBoxStepBack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxStepBack.TabIndex = 2;
             this.pictureBoxStepBack.TabStop = false;
@@ -255,6 +256,9 @@ namespace FileManager
             this.dataGridViewFileManager.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewFileManager_CellDoubleClick);
             this.dataGridViewFileManager.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewFileManager_CellEndEdit);
             this.dataGridViewFileManager.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewFileManager_CellMouseDown);
+            this.dataGridViewFileManager.DragDrop += new System.Windows.Forms.DragEventHandler(this.dataGridViewFileManager_DragDrop);
+            this.dataGridViewFileManager.DragEnter += new System.Windows.Forms.DragEventHandler(this.dataGridViewFileManager_DragEnter);
+            this.dataGridViewFileManager.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridViewFileManager_KeyDown);
             this.dataGridViewFileManager.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridViewFileManager_MouseDown);
             // 
             // contextMenuStripFileManager
@@ -269,7 +273,7 @@ namespace FileManager
             this.NewFolderToolStripMenuItem,
             this.RenameToolStripMenuItem});
             this.contextMenuStripFileManager.Name = "contextMenuStripFileManager";
-            this.contextMenuStripFileManager.Size = new System.Drawing.Size(257, 200);
+            this.contextMenuStripFileManager.Size = new System.Drawing.Size(257, 172);
             // 
             // CopyToolStripMenuItem
             // 

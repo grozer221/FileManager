@@ -22,7 +22,7 @@ namespace MyLibrary
         {
             this.DataGridViewFileManager = DataGridViewFileManager;
             this.DataGridViewQuickAccessFolders = DataGridViewQuickAccessFolders;
-        }
+        }     
 
         public void PrintDisks()
         {
@@ -47,6 +47,7 @@ namespace MyLibrary
             SetSizeForDataGrid();
             SetReadOnlyForFilesAndFolders();
             DataGridViewFileManager.SelectedRows[0].Selected = false;
+            DataGridViewFileManager[1, 0].ReadOnly = true;
         }
 
         public void SetReadOnlyForDisks()
@@ -131,17 +132,16 @@ namespace MyLibrary
                 return;
             }
 
-            //if (!Directory.Exists(ListQuickAccessFolders[e.RowIndex - 1]))
-            //{
-            //    if (MessageBox.Show("Папка була видалена.\nВидалили із швидкого доступу?", "Попередження", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
-            //    {
-            //        fileManager.RemoveQuickAccessFolder(e.RowIndex - 1);
-            //        fileManager.PrintQuickAccessFolders();
-            //        return;
-            //    }
-            //    else
-            //        return;
-            //}
+            if (!Directory.Exists(GetListQuickAccessFolders()[e.RowIndex - 1]))
+            {
+                if (MessageBox.Show("Дана папка була видалена.\nВидалили із швидкого доступу?", "Попередження", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                {
+                    RemoveQuickAccessFolder(e.RowIndex - 1);
+                    PrintQuickAccessFolders();
+                }
+                return;
+            }
+
             currentPath = GetListQuickAccessFolders()[e.RowIndex - 1];
             PrintFilesAndFolder(ref currentPath);
         }
@@ -193,8 +193,6 @@ namespace MyLibrary
             RenameFolderOfFile(ListVisualisedItems[DataGridViewFileManager.SelectedRows[0].Index - 1], $@"{currentPath}\{DataGridViewFileManager[1, DataGridViewFileManager.SelectedRows[0].Index].Value}");
             PrintFilesAndFolder(ref currentPath);
         }
-
-
 
 
 

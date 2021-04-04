@@ -28,6 +28,7 @@ namespace MyLibrary
             return listDisks;
         }
 
+        public string[] GetCollectionPathsToCopiedFoldersAndFiles() { return CollectionPathsToCopiedFoldersAndFiles; }
         public List<StructureTableFileManager> GetFilesAndFoldersInObj(string currentPath, ref List<string> listVisualisedItems,string args = null)
         {
             listVisualisedItems.Clear();

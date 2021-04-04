@@ -23,6 +23,8 @@ namespace FileManager
 
         DataGridViewVisualise dataGridViewVisualise;
         string currentPath;
+        ContextMenuStripVisualise ContextMenuFileManager;
+        ContextMenuStripVisualise ContextMenuQuickAccess;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -33,6 +35,8 @@ namespace FileManager
             Console.InputEncoding = Encoding.Unicode;
 
             dataGridViewVisualise = new DataGridViewVisualise(dataGridViewFileManager, dataGridViewQuickAccessFolders);
+            ContextMenuFileManager = new ContextMenuStripVisualise(contextMenuStripFileManager, dataGridViewFileManager);
+            ContextMenuQuickAccess = new ContextMenuStripVisualise(contextMenuStripQuickAccess, dataGridViewQuickAccessFolders);
             ReloadToolStripMenuItem_Click(null, null);
             dataGridViewVisualise.GetListQuickAccessFoldersFromFile();
             dataGridViewVisualise.PrintQuickAccessFolders();
@@ -99,11 +103,17 @@ namespace FileManager
         {
             if (e.Button == MouseButtons.Left)
                 dataGridViewFileManager.ClearSelection();
+            if(e.Button == MouseButtons.Right)
+                ContextMenuFileManager.VisualiseContextMenuForFileManagerNoneCellClick(currentPath, dataGridViewVisualise.GetCollectionPathsToCopiedFoldersAndFiles());
         }
+
         private void dataGridViewFileManager_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
+            {
                 dataGridViewFileManager.Rows[e.RowIndex].Selected = true;
+                ContextMenuFileManager.VisualiseContextMenuForFileManagerCellClick(e, currentPath, dataGridViewVisualise.GetCollectionPathsToCopiedFoldersAndFiles());
+            }
         }
 
         private void dataGridViewQuickAccessFolders_MouseDown(object sender, MouseEventArgs e)
@@ -158,8 +168,11 @@ namespace FileManager
 
         private void dataGridViewQuickAccessFolders_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if(e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
+            {
                 dataGridViewQuickAccessFolders.Rows[e.RowIndex].Selected = true;
+                ContextMenuQuickAccess.VisualiseContextMenuForQuickAccess(e);
+            }
         }
 
         private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -177,8 +190,10 @@ namespace FileManager
 
         private void dataGridViewFileManager_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (dataGridViewFileManager[2, dataGridViewFileManager.SelectedRows[0].Index].Value == null) 
-                    dataGridViewVisualise.CreateNewFolder(currentPath, dataGridViewFileManager[1, dataGridViewFileManager.Rows.Count - 1].Value.ToString());
+            //create new folder
+            if (dataGridViewFileManager[2, dataGridViewFileManager.SelectedRows[0].Index].Value == null)
+                dataGridViewVisualise.CreateNewFolder(currentPath, dataGridViewFileManager[1, dataGridViewFileManager.Rows.Count - 1].Value.ToString());
+            //rename file of folder
             else
             {
                 dataGridViewVisualise.RenameFileOfFolderInDataGrid(ref currentPath);
@@ -190,6 +205,66 @@ namespace FileManager
         {
             dataGridViewFileManager.CurrentCell = dataGridViewFileManager.Rows[dataGridViewFileManager.SelectedRows[0].Index].Cells[1];
             dataGridViewFileManager.BeginEdit(true);
+        }
+
+        private void dataGridViewFileManager_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                if (dataGridViewFileManager.SelectedRows.Count == 1)
+                {
+                    //dataGridViewVisualise.CellDoubleClick(e, ref currentPath);
+                    //textBoxPath.Text = currentPath;
+                }
+            }
+
+            if (e.KeyCode == Keys.Delete)
+                DeleteToolStripMenuItem_Click(sender, e);
+
+            if (e.Control && e.KeyCode == Keys.C)
+                if (dataGridViewFileManager.SelectedRows.Count != 0 && currentPath != null)
+                    CopyToolStripMenuItem_Click(sender, e);
+
+            if (e.Control && e.KeyCode == Keys.V)
+            {
+                if (dataGridViewVisualise.GetCollectionPathsToCopiedFoldersAndFiles() == null)
+                    return;
+                if (currentPath != null)
+                    PasteToolStripMenuItem_Click(sender, e);
+            }
+
+            if (e.Control && e.KeyCode == Keys.Left)
+                if (currentPath != null)
+                    pictureBoxStepBack_Click(sender, e);
+
+            if (e.Control && e.KeyCode == Keys.R)
+                ReloadToolStripMenuItem_Click(sender, null);
+        }
+
+        private void dataGridViewFileManager_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop) && textBoxPath.Text != "")
+            {
+                e.Effect = DragDropEffects.Move;
+            }
+        }
+
+        private void dataGridViewFileManager_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Effect == DragDropEffects.Move)
+            {
+                foreach (string line in (string[])e.Data.GetData(DataFormats.FileDrop))
+                {
+                    if (Directory.Exists(line))
+                        dataGridViewVisualise.PasteFolderOrFile(line, $@"{textBoxPath.Text}\{new DirectoryInfo(line).Name}");
+                    else if (File.Exists(line))
+                        dataGridViewVisualise.PasteFolderOrFile(line, $@"{textBoxPath.Text}\{new FileInfo(line).Name}");
+                    else
+                        MessageBox.Show("Невідома помилка", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                dataGridViewVisualise.PrintFilesAndFolder(ref currentPath);
+            }
         }
     }
 }
