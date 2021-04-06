@@ -80,23 +80,24 @@ namespace MyLibrary
             DataGridViewFileManager.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
-        public void CellDoubleClick(DataGridViewCellEventArgs e, ref string currentPath)
+        public void CellDoubleClick(int rowIndex, ref string currentPath)
         {
             try
             {
-                if (Directory.Exists(ListVisualisedItems[e.RowIndex - 1]))
+                if (Directory.Exists(ListVisualisedItems[rowIndex - 1]))
                 {
-                    currentPath = ListVisualisedItems[e.RowIndex - 1];
+                    currentPath = ListVisualisedItems[rowIndex - 1];
                     PrintFilesAndFolder(ref currentPath);
                 }
-                else if (File.Exists(ListVisualisedItems[e.RowIndex - 1]))
-                    Process.Start(ListVisualisedItems[e.RowIndex - 1]);
+                else if (File.Exists(ListVisualisedItems[rowIndex - 1]))
+                    Process.Start(ListVisualisedItems[rowIndex - 1]);
             }
             catch { }
         }
 
         public void StepBack(ref string currentPath)
         {
+            string currentFolderName = new DirectoryInfo(currentPath).Name;
             try
             {
                 currentPath = Directory.GetParent(currentPath).FullName;
@@ -107,6 +108,14 @@ namespace MyLibrary
                 currentPath = null;
                 PrintDisks();
             }
+            SelectPreviusChoseFolder(currentFolderName);
+        }
+
+        public void SelectPreviusChoseFolder(string currentFolderName)
+        {
+            for (int i = 0; i < DataGridViewFileManager.Rows.Count; i++)
+                if (DataGridViewFileManager[1, i].Value.ToString() == currentFolderName)
+                    DataGridViewFileManager.Rows[i].Selected = true;
         }
 
         public void PrintQuickAccessFolders()
@@ -169,7 +178,6 @@ namespace MyLibrary
                 throw new Exception();
         }
 
-
         public void AddNewRowForNewFolder(string currentPath)
         {
             DataGridViewFileManager.DataSource = GetFilesAndFoldersInObj(currentPath, ref ListVisualisedItems, "CreateNewFolder");
@@ -184,7 +192,7 @@ namespace MyLibrary
             if (DataGridViewFileManager[1, DataGridViewFileManager.SelectedRows[0].Index].Value.ToString() == new DirectoryInfo(ListVisualisedItems[DataGridViewFileManager.SelectedRows[0].Index - 1]).Name ||
                DataGridViewFileManager[1, DataGridViewFileManager.SelectedRows[0].Index].Value.ToString() == new FileInfo(ListVisualisedItems[DataGridViewFileManager.SelectedRows[0].Index - 1]).Name)
                 return;
-            if (Directory.Exists($@"{currentPath}\{DataGridViewFileManager[1, DataGridViewFileManager.SelectedRows[0].Index].Value}") || File.Exists($@"{currentPath}\{DataGridViewFileManager[1, DataGridViewFileManager.SelectedRows[0].Index].Value}"))
+            if (Directory.Exists(Path.Combine(currentPath, DataGridViewFileManager[1, DataGridViewFileManager.SelectedRows[0].Index].Value.ToString())) || File.Exists(Path.Combine(currentPath, DataGridViewFileManager[1, DataGridViewFileManager.SelectedRows[0].Index].Value.ToString()))) 
             {
                 MessageBox.Show($"Файл або папка з іменем {DataGridViewFileManager[1, DataGridViewFileManager.SelectedRows[0].Index].Value} вже існує", "Попередження", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 PrintFilesAndFolder(ref currentPath);
@@ -193,10 +201,5 @@ namespace MyLibrary
             RenameFolderOfFile(ListVisualisedItems[DataGridViewFileManager.SelectedRows[0].Index - 1], $@"{currentPath}\{DataGridViewFileManager[1, DataGridViewFileManager.SelectedRows[0].Index].Value}");
             PrintFilesAndFolder(ref currentPath);
         }
-
-
-
-
-
     }
 }

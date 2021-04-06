@@ -27,7 +27,7 @@ namespace MyLibrary
             menuItem = this.ContextMenu.Items;
         }
 
-        public void VisualiseContextMenuForFileManagerCellClick(DataGridViewCellMouseEventArgs e, string currentPath, string[] collectionPathsToCopiedFoldersAndFiles)
+        public void VisualiseContextMenuForFileManagerCellClick(DataGridView dataGridView, DataGridViewCellMouseEventArgs e, string currentPath, List<string> listPathsToCopiedFoldersAndFiles)
         {
             if (currentPath == null)
             {
@@ -48,7 +48,7 @@ namespace MyLibrary
                 ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = true;
             }
 
-            if (currentPath != null && collectionPathsToCopiedFoldersAndFiles == null)
+            if (currentPath != null && listPathsToCopiedFoldersAndFiles == null)
                 ContextMenu.Items[menuItem[NumberMenuPaste].Name].Enabled = false;
 
 
@@ -58,10 +58,16 @@ namespace MyLibrary
                 ContextMenu.Items[menuItem[NumberMenuAddQuickAccess].Name].Enabled = true;
                 ContextMenu.Items[menuItem[NumberMenuDelete].Name].Enabled = true;
                 ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = true;
+            }
+
+            if(dataGridView.SelectedRows.Count > 1)
+            {
+                ContextMenu.Items[menuItem[NumberMenuAddQuickAccess].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = false;
             }
         }
 
-        public void VisualiseContextMenuForFileManagerNoneCellClick(string currentPath, string[] collectionPathsToCopiedFoldersAndFiles)
+        public void VisualiseContextMenuForFileManagerNoneCellClick(string currentPath, List<string> listPathsToCopiedFoldersAndFiles)
         {
             if (currentPath == null)
             {
@@ -82,7 +88,7 @@ namespace MyLibrary
                 ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = true;
             }
 
-            if (currentPath != null && collectionPathsToCopiedFoldersAndFiles == null)
+            if (currentPath != null && listPathsToCopiedFoldersAndFiles == null)
                 ContextMenu.Items[menuItem[NumberMenuPaste].Name].Enabled = false;
 
             if (currentPath != null)
@@ -92,7 +98,6 @@ namespace MyLibrary
                 ContextMenu.Items[menuItem[NumberMenuDelete].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = false;
             }
-
         }
         
         public void VisualiseContextMenuForQuickAccess(DataGridViewCellMouseEventArgs e)

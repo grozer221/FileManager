@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyLibrary
 {
-    public interface IStructureQuickAccessFolders { }
-    public class StructureQuickAccessFolders : IStructureQuickAccessFolders
+    public class StructureQuickAccessFolders
     {
         public Bitmap Image { get; set; }
         public string Name { get; set; }

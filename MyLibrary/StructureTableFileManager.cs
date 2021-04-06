@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyLibrary
 {
-    public interface IStructureTableFileManager { };
-    public class StructureTableFileManager: IStructureTableFileManager
+    public class StructureTableFileManager
     {
         public Bitmap Image { get; set; }
         public string Name { get; set; }

@@ -9,10 +9,10 @@ using System.Windows.Forms;
 
 namespace MyLibrary
 {
-    public class ClassFileManager : IStructureTableFileManager, IStructureQuickAccessFolders
+    public class ClassFileManager
     {
         private List<string> ListQuickAccessFolders = new List<string>();
-        private string[] CollectionPathsToCopiedFoldersAndFiles;
+        private List<string> ListPathsToCopiedFoldersAndFiles;
 
         public List<StructureTableFileManager> GetDisksInObj(ref List<string> listVisualisedItems)
         {
@@ -28,7 +28,7 @@ namespace MyLibrary
             return listDisks;
         }
 
-        public string[] GetCollectionPathsToCopiedFoldersAndFiles() { return CollectionPathsToCopiedFoldersAndFiles; }
+        public List<string> GetCollectionPathsToCopiedFoldersAndFiles() { return ListPathsToCopiedFoldersAndFiles; }
         public List<StructureTableFileManager> GetFilesAndFoldersInObj(string currentPath, ref List<string> listVisualisedItems,string args = null)
         {
             listVisualisedItems.Clear();
@@ -98,8 +98,6 @@ namespace MyLibrary
             return listQuickAccessFoldersInObj;
         }
 
-
-
         public void AddQuickAccessFolderToList(string pathSelectedFolder)
         {
             foreach (string folder in ListQuickAccessFolders)
@@ -123,36 +121,35 @@ namespace MyLibrary
                     stream.WriteLine(folder);
         }
 
-
         public void GetFilesAndFolderForCopyFromDataGrid(string currenPath, DataGridView dataGridView)
         {
             int selectedRowsCount = dataGridView.SelectedRows.Count;
-            CollectionPathsToCopiedFoldersAndFiles = new string[selectedRowsCount];
+            ListPathsToCopiedFoldersAndFiles = new List<string>();
             int j = 0;
             for (int i = 0; i < selectedRowsCount; i++)
             {
                 if (dataGridView.SelectedRows[j].Index == 0)
                     j++;
-                CollectionPathsToCopiedFoldersAndFiles[i] = $@"{currenPath}\{dataGridView[1, dataGridView.SelectedRows[j].Index].Value}";
+                ListPathsToCopiedFoldersAndFiles.Add(Path.Combine(currenPath, dataGridView[1, dataGridView.SelectedRows[j].Index].Value.ToString()));
                 j++;
             }
         }
 
         public void PasteCopiedFoldersAndFile(string currentPath)
         {
-            for (int i = 0; i < CollectionPathsToCopiedFoldersAndFiles.Length; i++)
+            for (int i = 0; i < ListPathsToCopiedFoldersAndFiles.Count; i++)
             {
                 try
                 {
-                    if (new DirectoryInfo(CollectionPathsToCopiedFoldersAndFiles[i]).FullName == currentPath)
+                    if (new DirectoryInfo(ListPathsToCopiedFoldersAndFiles[i]).FullName == currentPath)
                     {
-                        MessageBox.Show($"Скопійована папка {new DirectoryInfo(CollectionPathsToCopiedFoldersAndFiles[i]).Name} є субпапкою вибраної", "Перервана дія", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show($"Скопійована папка {new DirectoryInfo(ListPathsToCopiedFoldersAndFiles[i]).Name} є субпапкою вибраної", "Перервана дія", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         continue;
                     }
-                    if (Directory.Exists(CollectionPathsToCopiedFoldersAndFiles[i]))
-                        PasteFolderOrFile(CollectionPathsToCopiedFoldersAndFiles[i], $@"{currentPath}\{new DirectoryInfo(CollectionPathsToCopiedFoldersAndFiles[i]).Name}");
+                    if (Directory.Exists(ListPathsToCopiedFoldersAndFiles[i]))
+                        PasteFolderOrFile(ListPathsToCopiedFoldersAndFiles[i], $@"{currentPath}\{new DirectoryInfo(ListPathsToCopiedFoldersAndFiles[i]).Name}");
                     else
-                        PasteFolderOrFile(CollectionPathsToCopiedFoldersAndFiles[i], $@"{currentPath}\{new FileInfo(CollectionPathsToCopiedFoldersAndFiles[i]).Name}");
+                        PasteFolderOrFile(ListPathsToCopiedFoldersAndFiles[i], $@"{currentPath}\{new FileInfo(ListPathsToCopiedFoldersAndFiles[i]).Name}");
                 }
                 catch { MessageBox.Show("Невідома помилка", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             }
@@ -242,10 +239,5 @@ namespace MyLibrary
             else
                 MessageBox.Show("Невідома помилка", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-
-
-
-
-
     }
 }

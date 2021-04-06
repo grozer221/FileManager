@@ -40,6 +40,7 @@ namespace FileManager
             this.contextMenuStripQuickAccess = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.DeleteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.panelFileManager = new System.Windows.Forms.Panel();
+            this.panelUnderTextBoxPath = new System.Windows.Forms.Panel();
             this.pictureBoxSearch = new System.Windows.Forms.PictureBox();
             this.pictureBoxStepBack = new System.Windows.Forms.PictureBox();
             this.textBoxPath = new System.Windows.Forms.TextBox();
@@ -73,7 +74,7 @@ namespace FileManager
             this.panelTop.Location = new System.Drawing.Point(0, 0);
             this.panelTop.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(1019, 26);
+            this.panelTop.Size = new System.Drawing.Size(1019, 24);
             this.panelTop.TabIndex = 0;
             this.panelTop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTop_MouseDown);
             this.panelTop.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTop_MouseMove);
@@ -87,7 +88,7 @@ namespace FileManager
             this.buttonHide.Location = new System.Drawing.Point(959, 0);
             this.buttonHide.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.buttonHide.Name = "buttonHide";
-            this.buttonHide.Size = new System.Drawing.Size(30, 26);
+            this.buttonHide.Size = new System.Drawing.Size(30, 24);
             this.buttonHide.TabIndex = 1;
             this.buttonHide.Text = "-";
             this.buttonHide.UseVisualStyleBackColor = true;
@@ -102,7 +103,7 @@ namespace FileManager
             this.buttonClose.Location = new System.Drawing.Point(989, 0);
             this.buttonClose.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(30, 26);
+            this.buttonClose.Size = new System.Drawing.Size(30, 24);
             this.buttonClose.TabIndex = 0;
             this.buttonClose.Text = "X";
             this.buttonClose.UseVisualStyleBackColor = true;
@@ -115,10 +116,10 @@ namespace FileManager
             this.panelQuickAccess.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(33)))), ((int)(((byte)(43)))));
             this.panelQuickAccess.Controls.Add(this.dataGridViewQuickAccessFolders);
             this.panelQuickAccess.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelQuickAccess.Location = new System.Drawing.Point(0, 26);
+            this.panelQuickAccess.Location = new System.Drawing.Point(0, 24);
             this.panelQuickAccess.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.panelQuickAccess.Name = "panelQuickAccess";
-            this.panelQuickAccess.Size = new System.Drawing.Size(223, 642);
+            this.panelQuickAccess.Size = new System.Drawing.Size(223, 644);
             this.panelQuickAccess.TabIndex = 1;
             // 
             // dataGridViewQuickAccessFolders
@@ -174,22 +175,31 @@ namespace FileManager
             // panelFileManager
             // 
             this.panelFileManager.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(22)))), ((int)(((byte)(33)))));
+            this.panelFileManager.Controls.Add(this.panelUnderTextBoxPath);
             this.panelFileManager.Controls.Add(this.pictureBoxSearch);
             this.panelFileManager.Controls.Add(this.pictureBoxStepBack);
             this.panelFileManager.Controls.Add(this.textBoxPath);
             this.panelFileManager.Controls.Add(this.dataGridViewFileManager);
             this.panelFileManager.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelFileManager.Location = new System.Drawing.Point(223, 26);
+            this.panelFileManager.Location = new System.Drawing.Point(223, 24);
             this.panelFileManager.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.panelFileManager.Name = "panelFileManager";
-            this.panelFileManager.Size = new System.Drawing.Size(796, 642);
+            this.panelFileManager.Size = new System.Drawing.Size(796, 644);
             this.panelFileManager.TabIndex = 2;
+            // 
+            // panelUnderTextBoxPath
+            // 
+            this.panelUnderTextBoxPath.BackColor = System.Drawing.Color.White;
+            this.panelUnderTextBoxPath.Location = new System.Drawing.Point(38, 85);
+            this.panelUnderTextBoxPath.Name = "panelUnderTextBoxPath";
+            this.panelUnderTextBoxPath.Size = new System.Drawing.Size(675, 1);
+            this.panelUnderTextBoxPath.TabIndex = 4;
             // 
             // pictureBoxSearch
             // 
             this.pictureBoxSearch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxSearch.Image = global::FileManager.Properties.Resources.searchzoomflat_106031;
-            this.pictureBoxSearch.Location = new System.Drawing.Point(718, 64);
+            this.pictureBoxSearch.Location = new System.Drawing.Point(718, 61);
             this.pictureBoxSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pictureBoxSearch.Name = "pictureBoxSearch";
             this.pictureBoxSearch.Size = new System.Drawing.Size(33, 27);
@@ -202,7 +212,7 @@ namespace FileManager
             // 
             this.pictureBoxStepBack.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxStepBack.Image = global::FileManager.Properties.Resources._1486564726_undo_back_81536;
-            this.pictureBoxStepBack.Location = new System.Drawing.Point(3, 64);
+            this.pictureBoxStepBack.Location = new System.Drawing.Point(3, 61);
             this.pictureBoxStepBack.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pictureBoxStepBack.Name = "pictureBoxStepBack";
             this.pictureBoxStepBack.Size = new System.Drawing.Size(30, 27);
@@ -213,15 +223,17 @@ namespace FileManager
             // 
             // textBoxPath
             // 
-            this.textBoxPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(33)))), ((int)(((byte)(43)))));
-            this.textBoxPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(22)))), ((int)(((byte)(33)))));
+            this.textBoxPath.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxPath.ForeColor = System.Drawing.Color.White;
             this.textBoxPath.Location = new System.Drawing.Point(37, 64);
             this.textBoxPath.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBoxPath.Name = "textBoxPath";
-            this.textBoxPath.Size = new System.Drawing.Size(675, 32);
+            this.textBoxPath.Size = new System.Drawing.Size(675, 25);
             this.textBoxPath.TabIndex = 1;
             this.textBoxPath.TextChanged += new System.EventHandler(this.textBoxPath_TextChanged);
+            this.textBoxPath.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxPath_KeyDown);
+            this.textBoxPath.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxPath_KeyUp);
             // 
             // dataGridViewFileManager
             // 
@@ -375,6 +387,7 @@ namespace FileManager
         private System.Windows.Forms.ToolStripMenuItem RenameToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripQuickAccess;
         private System.Windows.Forms.ToolStripMenuItem DeleteToolStripMenuItem1;
+        private System.Windows.Forms.Panel panelUnderTextBoxPath;
     }
 }
 

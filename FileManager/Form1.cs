@@ -40,7 +40,6 @@ namespace FileManager
             ReloadToolStripMenuItem_Click(null, null);
             dataGridViewVisualise.GetListQuickAccessFoldersFromFile();
             dataGridViewVisualise.PrintQuickAccessFolders();
-
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -81,7 +80,7 @@ namespace FileManager
 
         private void dataGridViewFileManager_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            dataGridViewVisualise.CellDoubleClick(e, ref currentPath);
+            dataGridViewVisualise.CellDoubleClick(e.RowIndex, ref currentPath);
             textBoxPath.Text = currentPath;
         }
 
@@ -112,7 +111,7 @@ namespace FileManager
             if (e.Button == MouseButtons.Right)
             {
                 dataGridViewFileManager.Rows[e.RowIndex].Selected = true;
-                ContextMenuFileManager.VisualiseContextMenuForFileManagerCellClick(e, currentPath, dataGridViewVisualise.GetCollectionPathsToCopiedFoldersAndFiles());
+                ContextMenuFileManager.VisualiseContextMenuForFileManagerCellClick(dataGridViewFileManager,e, currentPath, dataGridViewVisualise.GetCollectionPathsToCopiedFoldersAndFiles());
             }
         }
 
@@ -129,6 +128,12 @@ namespace FileManager
 
         private void pictureBoxSearch_Click(object sender, EventArgs e)
         {
+            if (textBoxPath.Text == "")
+            {
+                dataGridViewVisualise.PrintDisks();
+                currentPath = textBoxPath.Text;
+                return;
+            }
             string tmpCurrentPath = textBoxPath.Text;
             try { dataGridViewVisualise.SearchDirectory(ref tmpCurrentPath); }
             catch { return; }
@@ -192,7 +197,14 @@ namespace FileManager
         {
             //create new folder
             if (dataGridViewFileManager[2, dataGridViewFileManager.SelectedRows[0].Index].Value == null)
+            {
+                if (dataGridViewFileManager[1, dataGridViewFileManager.Rows.Count - 1].Value == null)
+                {
+                    dataGridViewVisualise.PrintFilesAndFolder(ref currentPath);
+                    return;
+                }
                 dataGridViewVisualise.CreateNewFolder(currentPath, dataGridViewFileManager[1, dataGridViewFileManager.Rows.Count - 1].Value.ToString());
+            }
             //rename file of folder
             else
             {
@@ -214,8 +226,8 @@ namespace FileManager
                 e.Handled = true;
                 if (dataGridViewFileManager.SelectedRows.Count == 1)
                 {
-                    //dataGridViewVisualise.CellDoubleClick(e, ref currentPath);
-                    //textBoxPath.Text = currentPath;
+                    dataGridViewVisualise.CellDoubleClick(dataGridViewFileManager.SelectedRows[0].Index, ref currentPath);
+                    textBoxPath.Text = currentPath;
                 }
             }
 
@@ -265,6 +277,18 @@ namespace FileManager
                 }
                 dataGridViewVisualise.PrintFilesAndFolder(ref currentPath);
             }
+        }
+
+        private void textBoxPath_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                pictureBoxSearch_Click(sender, e);
+        }
+
+        private void textBoxPath_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) 
+                e.SuppressKeyPress = true;
         }
     }
 }
