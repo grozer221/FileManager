@@ -26,23 +26,23 @@ namespace MyLibrary
 
         public void PrintDisks()
         {
-            DataGridViewFileManager.DataSource = GetDisksInObj(ref ListVisualisedItems);
+            DataGridViewFileManager.DataSource = GetDisksInListOfObj(ref ListVisualisedItems);
             SetSizeForDataGrid();
             SetReadOnlyForDisks();
             DataGridViewFileManager.SelectedRows[0].Selected = false;
         }
 
-        public void PrintFilesAndFolder(ref string currentPath)
+        public void PrintFilesAndFolder(ref string currentPath, bool showHiddenFilesAndFolders = false)
         {
             try
             {
-                DataGridViewFileManager.DataSource = GetFilesAndFoldersInObj(currentPath, ref ListVisualisedItems);
+                DataGridViewFileManager.DataSource = GetFilesAndFoldersInListOfObj(currentPath, ref ListVisualisedItems, null, showHiddenFilesAndFolders);
             }
-            catch
+            catch(Exception e)
             {
-                MessageBox.Show("Доступ заборонено", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 currentPath = Directory.GetParent(currentPath).ToString();
-                PrintFilesAndFolder(ref currentPath);
+                PrintFilesAndFolder(ref currentPath, showHiddenFilesAndFolders);
             }
             SetSizeForDataGrid();
             SetReadOnlyForFilesAndFolders();
@@ -80,14 +80,14 @@ namespace MyLibrary
             DataGridViewFileManager.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
-        public void CellDoubleClick(int rowIndex, ref string currentPath)
+        public void CellDoubleClick(int rowIndex, ref string currentPath, bool showHiddenFilesAndFolders = false)
         {
             try
             {
                 if (Directory.Exists(ListVisualisedItems[rowIndex - 1]))
                 {
                     currentPath = ListVisualisedItems[rowIndex - 1];
-                    PrintFilesAndFolder(ref currentPath);
+                    PrintFilesAndFolder(ref currentPath, showHiddenFilesAndFolders);
                 }
                 else if (File.Exists(ListVisualisedItems[rowIndex - 1]))
                     Process.Start(ListVisualisedItems[rowIndex - 1]);
@@ -95,7 +95,7 @@ namespace MyLibrary
             catch { }
         }
 
-        public void StepBack(ref string currentPath)
+        public void StepBack(ref string currentPath, bool showHiddenFilesAndFolders = false)
         {
             string currentFolderName = new DirectoryInfo(currentPath).Name;
             try
@@ -128,7 +128,7 @@ namespace MyLibrary
                 DataGridViewQuickAccessFolders.Rows[i].Height = 25;
         }
 
-        public void dataGridQuickAccessCellMouseClick(DataGridViewCellMouseEventArgs e, ref string currentPath)
+        public void dataGridQuickAccessCellMouseClick(DataGridViewCellMouseEventArgs e, ref string currentPath, bool showHiddenFilesAndFolders = false)
         {
             DataGridViewQuickAccessFolders.ClearSelection();
             if (e.RowIndex == 0 || DataGridViewQuickAccessFolders[1, e.RowIndex].Value == null)
@@ -152,10 +152,10 @@ namespace MyLibrary
             }
 
             currentPath = GetListQuickAccessFolders()[e.RowIndex - 1];
-            PrintFilesAndFolder(ref currentPath);
+            PrintFilesAndFolder(ref currentPath, showHiddenFilesAndFolders);
         }
 
-        public void SearchDirectory(ref string currentPath)
+        public void SearchDirectory(ref string currentPath, bool showHiddenFilesAndFolders = false)
         {
             if (Regex.IsMatch(currentPath, @"^[A-Z\|a-z]:$"))
                 throw new Exception();
@@ -165,7 +165,7 @@ namespace MyLibrary
             else if (Directory.Exists(currentPath))
             {
                 currentPath = new DirectoryInfo(currentPath).FullName;
-                PrintFilesAndFolder(ref currentPath);
+                PrintFilesAndFolder(ref currentPath, showHiddenFilesAndFolders);
             }
             else if (File.Exists(currentPath))
             {
@@ -176,28 +176,27 @@ namespace MyLibrary
                 throw new Exception();
         }
 
-        public void AddNewRowForNewFolder(string currentPath)
+        public void AddNewRowForNewFolder(string currentPath, bool showHiddenFilesAndFolders)
         {
-            DataGridViewFileManager.DataSource = GetFilesAndFoldersInObj(currentPath, ref ListVisualisedItems, "CreateNewFolder");
+            DataGridViewFileManager.DataSource = GetFilesAndFoldersInListOfObj(currentPath, ref ListVisualisedItems, "CreateNewFolder", showHiddenFilesAndFolders);
             SetSizeForDataGrid();
            
             DataGridViewFileManager.CurrentCell = DataGridViewFileManager.Rows[DataGridViewFileManager.Rows.Count - 1].Cells[1];
             DataGridViewFileManager.BeginEdit(true);
         }
 
-        public void RenameFileOfFolderInDataGrid(ref string currentPath)
+        public void RenameFileOrFolderInDataGrid(ref string currentPath, DataGridViewCellEventArgs e, bool showHiddenFilesAndFolders = false)
         {
-            if (DataGridViewFileManager[1, DataGridViewFileManager.SelectedRows[0].Index].Value.ToString() == new DirectoryInfo(ListVisualisedItems[DataGridViewFileManager.SelectedRows[0].Index - 1]).Name ||
-               DataGridViewFileManager[1, DataGridViewFileManager.SelectedRows[0].Index].Value.ToString() == new FileInfo(ListVisualisedItems[DataGridViewFileManager.SelectedRows[0].Index - 1]).Name)
+            if (DataGridViewFileManager[1, e.RowIndex].Value.ToString() == new DirectoryInfo(ListVisualisedItems[e.RowIndex - 1]).Name ||
+               DataGridViewFileManager[1, e.RowIndex].Value.ToString() == new FileInfo(ListVisualisedItems[e.RowIndex - 1]).Name)
                 return;
-            if (Directory.Exists(Path.Combine(currentPath, DataGridViewFileManager[1, DataGridViewFileManager.SelectedRows[0].Index].Value.ToString())) || File.Exists(Path.Combine(currentPath, DataGridViewFileManager[1, DataGridViewFileManager.SelectedRows[0].Index].Value.ToString()))) 
+            if (Directory.Exists(Path.Combine(currentPath, DataGridViewFileManager[e.ColumnIndex, e.RowIndex].Value.ToString())) || File.Exists(Path.Combine(currentPath, DataGridViewFileManager[e.ColumnIndex, e.RowIndex].Value.ToString()))) 
             {
-                MessageBox.Show($"Файл або папка з іменем {DataGridViewFileManager[1, DataGridViewFileManager.SelectedRows[0].Index].Value} вже існує", "Попередження", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                PrintFilesAndFolder(ref currentPath);
+                MessageBox.Show($"Файл або папка з іменем {DataGridViewFileManager[e.ColumnIndex, e.RowIndex].Value} вже існує", "Попередження", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                PrintFilesAndFolder(ref currentPath, showHiddenFilesAndFolders);
                 return;
             }
-            RenameFolderOfFile(ListVisualisedItems[DataGridViewFileManager.SelectedRows[0].Index - 1], $@"{currentPath}\{DataGridViewFileManager[1, DataGridViewFileManager.SelectedRows[0].Index].Value}");
-            PrintFilesAndFolder(ref currentPath);
+            RenameFolderOfFile(ListVisualisedItems[e.RowIndex - 1], Path.Combine(currentPath, DataGridViewFileManager[e.ColumnIndex, e.RowIndex].Value.ToString()));
         }
     }
 }

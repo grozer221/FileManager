@@ -22,9 +22,11 @@ namespace FileManager
         }
 
         DataGridViewVisualise dataGridViewVisualise;
-        string currentPath;
-        ContextMenuStripVisualise ContextMenuFileManager;
-        ContextMenuStripVisualise ContextMenuQuickAccess;
+        string currentPath = null;
+        ContextMenuStripVisualise contextMenuFileManager;
+        ContextMenuStripVisualise contextMenuQuickAccess;
+        bool showHiddenFilesAndFolders = false;
+        Point movePoint;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -35,8 +37,8 @@ namespace FileManager
             Console.InputEncoding = Encoding.Unicode;
 
             dataGridViewVisualise = new DataGridViewVisualise(dataGridViewFileManager, dataGridViewQuickAccessFolders);
-            ContextMenuFileManager = new ContextMenuStripVisualise(contextMenuStripFileManager, dataGridViewFileManager);
-            ContextMenuQuickAccess = new ContextMenuStripVisualise(contextMenuStripQuickAccess, dataGridViewQuickAccessFolders);
+            contextMenuFileManager = new ContextMenuStripVisualise(contextMenuStripFileManager, dataGridViewFileManager);
+            contextMenuQuickAccess = new ContextMenuStripVisualise(contextMenuStripQuickAccess, dataGridViewQuickAccessFolders);
             ReloadToolStripMenuItem_Click(null, null);
             textBoxPath_TextChanged(null, null);
             dataGridViewVisualise.GetListQuickAccessFoldersFromFile();
@@ -47,8 +49,6 @@ namespace FileManager
         {
             this.Close();
         }
-
-        Point movePoint;
 
         private void panelTop_MouseDown(object sender, MouseEventArgs e)
         {
@@ -81,7 +81,9 @@ namespace FileManager
 
         private void dataGridViewFileManager_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            dataGridViewVisualise.CellDoubleClick(e.RowIndex, ref currentPath);
+            if (dataGridViewFileManager[1, e.RowIndex].IsInEditMode)
+                return;
+            dataGridViewVisualise.CellDoubleClick(e.RowIndex, ref currentPath, showHiddenFilesAndFolders);
             textBoxPath.Text = currentPath;
             labelEnterTextBoxError.Visible = false;
         }
@@ -96,17 +98,18 @@ namespace FileManager
 
         private void pictureBoxStepBack_Click(object sender, EventArgs e)
         {
-            dataGridViewVisualise.StepBack(ref currentPath);
+            dataGridViewVisualise.StepBack(ref currentPath, showHiddenFilesAndFolders);
             textBoxPath.Text = currentPath;
             labelEnterTextBoxError.Visible = false;
         }
 
         private void dataGridViewFileManager_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-                dataGridViewFileManager.ClearSelection();
-            if(e.Button == MouseButtons.Right)
-                ContextMenuFileManager.VisualiseContextMenuForFileManagerNoneCellClick(currentPath, dataGridViewVisualise.GetCollectionPathsToCopiedFoldersAndFiles());
+            dataGridViewFileManager.EndEdit();
+            dataGridViewFileManager.ClearSelection();
+
+            if (e.Button == MouseButtons.Right)
+                contextMenuFileManager.VisualiseContextMenuForFileManagerNoneCellClick(currentPath, dataGridViewVisualise.GetCollectionPathsToCopiedFoldersAndFiles());
         }
 
         private void dataGridViewFileManager_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
@@ -114,7 +117,7 @@ namespace FileManager
             if (e.Button == MouseButtons.Right)
             {
                 dataGridViewFileManager.Rows[e.RowIndex].Selected = true;
-                ContextMenuFileManager.VisualiseContextMenuForFileManagerCellClick(dataGridViewFileManager,e, currentPath, dataGridViewVisualise.GetCollectionPathsToCopiedFoldersAndFiles());
+                contextMenuFileManager.VisualiseContextMenuForFileManagerCellClick(dataGridViewFileManager,e, currentPath, dataGridViewVisualise.GetCollectionPathsToCopiedFoldersAndFiles());
             }
         }
 
@@ -125,7 +128,7 @@ namespace FileManager
 
         private void dataGridViewQuickAccessFolders_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            dataGridViewVisualise.dataGridQuickAccessCellMouseClick(e, ref currentPath);
+            dataGridViewVisualise.dataGridQuickAccessCellMouseClick(e, ref currentPath, showHiddenFilesAndFolders);
             textBoxPath.Text = currentPath;
             labelEnterTextBoxError.Visible = false;
         }
@@ -142,7 +145,7 @@ namespace FileManager
 
             string tmpCurrentPath = textBoxPath.Text;
             try { 
-                dataGridViewVisualise.SearchDirectory(ref tmpCurrentPath); 
+                dataGridViewVisualise.SearchDirectory(ref tmpCurrentPath, showHiddenFilesAndFolders); 
             }
             catch {
                 labelEnterTextBoxError.Visible = true;
@@ -188,7 +191,7 @@ namespace FileManager
             if (e.Button == MouseButtons.Right)
             {
                 dataGridViewQuickAccessFolders.Rows[e.RowIndex].Selected = true;
-                ContextMenuQuickAccess.VisualiseContextMenuForQuickAccess(e);
+                contextMenuQuickAccess.VisualiseContextMenuForQuickAccess(e);
             }
         }
 
@@ -202,7 +205,7 @@ namespace FileManager
 
         private void NewFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dataGridViewVisualise.AddNewRowForNewFolder(currentPath);
+            dataGridViewVisualise.AddNewRowForNewFolder(currentPath, showHiddenFilesAndFolders);
         }
 
         private void dataGridViewFileManager_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -220,9 +223,9 @@ namespace FileManager
             //rename file of folder
             else
             {
-                dataGridViewVisualise.RenameFileOfFolderInDataGrid(ref currentPath);
+                dataGridViewVisualise.RenameFileOrFolderInDataGrid(ref currentPath, e, showHiddenFilesAndFolders);
             }
-            dataGridViewVisualise.PrintFilesAndFolder(ref currentPath);
+            BeginInvoke(new MethodInvoker(delegate { dataGridViewVisualise.PrintFilesAndFolder(ref currentPath, showHiddenFilesAndFolders); }));
         }
 
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -301,6 +304,17 @@ namespace FileManager
         {
             if (e.KeyCode == Keys.Enter) 
                 e.SuppressKeyPress = true;
+        }
+
+        private void checkBoxShowHiddenFilesAndFolders_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxShowHiddenFilesAndFolders.Checked)
+                showHiddenFilesAndFolders = true;
+            else
+                showHiddenFilesAndFolders = false;
+
+            if (currentPath != null)
+                dataGridViewVisualise.PrintFilesAndFolder(ref currentPath, showHiddenFilesAndFolders);
         }
     }
 }

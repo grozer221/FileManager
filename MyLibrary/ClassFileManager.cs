@@ -14,7 +14,7 @@ namespace MyLibrary
         private List<string> ListQuickAccessFolders = new List<string>();
         private List<string> ListPathsToCopiedFoldersAndFiles;
 
-        public List<StructureTableFileManager> GetDisksInObj(ref List<string> listVisualisedItems)
+        public List<StructureTableFileManager> GetDisksInListOfObj(ref List<string> listVisualisedItems)
         {
             listVisualisedItems.Clear();
             List<StructureTableFileManager> listDisks = new List<StructureTableFileManager>();
@@ -29,7 +29,7 @@ namespace MyLibrary
         }
 
         public List<string> GetCollectionPathsToCopiedFoldersAndFiles() { return ListPathsToCopiedFoldersAndFiles; }
-        public List<StructureTableFileManager> GetFilesAndFoldersInObj(string currentPath, ref List<string> listVisualisedItems,string args = null)
+        public List<StructureTableFileManager> GetFilesAndFoldersInListOfObj(string currentPath, ref List<string> listVisualisedItems, string args = null, bool showHiddenFilesAndFolders = false)
         {
             listVisualisedItems.Clear();
             List<StructureTableFileManager> listFilesAndFolders = new List<StructureTableFileManager>();
@@ -39,11 +39,21 @@ namespace MyLibrary
             listFilesAndFolders.Add(new StructureTableFileManager { Image = GetEmptyImage(Color.FromArgb(14, 22, 33)), Name = "Назва", FormatOrDateLastChanged = "Дата зміни", TotalFreeSpaceOrType = "Тип", TotalSize = "Розмір" });
             foreach (DirectoryInfo dir in dirs)
             {
-                listFilesAndFolders.Add(new StructureTableFileManager { Image = new Bitmap(Properties.Resources.documents_folder_18875, 20, 20), Name = dir.Name, FormatOrDateLastChanged = dir.LastWriteTime.ToString(), TotalFreeSpaceOrType = "Папка", TotalSize = "" });
+                if (!showHiddenFilesAndFolders && dir.Attributes.HasFlag(FileAttributes.Hidden))
+                    continue;
+
+                Bitmap bitmap;
+                if (dir.Attributes.HasFlag(FileAttributes.Hidden))
+                    bitmap = new Bitmap(Properties.Resources.folderWithOpacity, 20, 20);
+                else
+                    bitmap = new Bitmap(Properties.Resources.documents_folder_18875, 20, 20);
+                listFilesAndFolders.Add(new StructureTableFileManager { Image = bitmap, Name = dir.Name, FormatOrDateLastChanged = dir.LastWriteTime.ToString(), TotalFreeSpaceOrType = "Папка", TotalSize = "" });
                 listVisualisedItems.Add(dir.FullName);
             }
             foreach (FileInfo file in files)
             {
+                if (!showHiddenFilesAndFolders && file.Attributes.HasFlag(FileAttributes.Hidden))
+                    continue;
                 listFilesAndFolders.Add(new StructureTableFileManager { Image = new Bitmap(Icon.ExtractAssociatedIcon(file.FullName).ToBitmap(), 20, 20), Name = file.Name, FormatOrDateLastChanged = file.LastWriteTime.ToString(), TotalFreeSpaceOrType = "Файл", TotalSize = GetSizeInPropertyType(file.Length) });
                 listVisualisedItems.Add(file.FullName);
             }
@@ -123,15 +133,12 @@ namespace MyLibrary
 
         public void GetFilesAndFolderForCopyFromDataGrid(string currenPath, DataGridView dataGridView)
         {
-            int selectedRowsCount = dataGridView.SelectedRows.Count;
             ListPathsToCopiedFoldersAndFiles = new List<string>();
-            int j = 0;
-            for (int i = 0; i < selectedRowsCount; i++)
+            for (int i = 0; i < dataGridView.SelectedRows.Count; i++)
             {
-                if (dataGridView.SelectedRows[j].Index == 0)
-                    j++;
-                ListPathsToCopiedFoldersAndFiles.Add(Path.Combine(currenPath, dataGridView[1, dataGridView.SelectedRows[j].Index].Value.ToString()));
-                j++;
+                if (dataGridView.SelectedRows[i].Index == 0)
+                    continue;
+                ListPathsToCopiedFoldersAndFiles.Add(Path.Combine(currenPath, dataGridView[1, dataGridView.SelectedRows[i].Index].Value.ToString()));
             }
         }
 

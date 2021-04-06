@@ -30,8 +30,8 @@ namespace FileManager
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelTop = new System.Windows.Forms.Panel();
             this.buttonHide = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
@@ -54,6 +54,7 @@ namespace FileManager
             this.DeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NewFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RenameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkBoxShowHiddenFilesAndFolders = new System.Windows.Forms.CheckBox();
             this.panelTop.SuspendLayout();
             this.panelQuickAccess.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewQuickAccessFolders)).BeginInit();
@@ -135,14 +136,14 @@ namespace FileManager
             this.dataGridViewQuickAccessFolders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewQuickAccessFolders.ColumnHeadersVisible = false;
             this.dataGridViewQuickAccessFolders.ContextMenuStrip = this.contextMenuStripQuickAccess;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(33)))), ((int)(((byte)(43)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(22)))), ((int)(((byte)(33)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewQuickAccessFolders.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(33)))), ((int)(((byte)(43)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(22)))), ((int)(((byte)(33)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewQuickAccessFolders.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewQuickAccessFolders.Location = new System.Drawing.Point(23, 131);
             this.dataGridViewQuickAccessFolders.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridViewQuickAccessFolders.MultiSelect = false;
@@ -164,18 +165,19 @@ namespace FileManager
             this.contextMenuStripQuickAccess.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.DeleteToolStripMenuItem1});
             this.contextMenuStripQuickAccess.Name = "contextMenuStripQuickAccess";
-            this.contextMenuStripQuickAccess.Size = new System.Drawing.Size(145, 28);
+            this.contextMenuStripQuickAccess.Size = new System.Drawing.Size(127, 26);
             // 
             // DeleteToolStripMenuItem1
             // 
             this.DeleteToolStripMenuItem1.Name = "DeleteToolStripMenuItem1";
-            this.DeleteToolStripMenuItem1.Size = new System.Drawing.Size(144, 24);
+            this.DeleteToolStripMenuItem1.Size = new System.Drawing.Size(126, 22);
             this.DeleteToolStripMenuItem1.Text = "Видалити";
             this.DeleteToolStripMenuItem1.Click += new System.EventHandler(this.DeleteToolStripMenuItem1_Click);
             // 
             // panelFileManager
             // 
             this.panelFileManager.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(22)))), ((int)(((byte)(33)))));
+            this.panelFileManager.Controls.Add(this.checkBoxShowHiddenFilesAndFolders);
             this.panelFileManager.Controls.Add(this.labelEnterTextBoxError);
             this.panelFileManager.Controls.Add(this.panelUnderTextBoxPath);
             this.panelFileManager.Controls.Add(this.pictureBoxSearch);
@@ -194,9 +196,9 @@ namespace FileManager
             this.labelEnterTextBoxError.AutoSize = true;
             this.labelEnterTextBoxError.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelEnterTextBoxError.ForeColor = System.Drawing.Color.Red;
-            this.labelEnterTextBoxError.Location = new System.Drawing.Point(50, 93);
+            this.labelEnterTextBoxError.Location = new System.Drawing.Point(49, 88);
             this.labelEnterTextBoxError.Name = "labelEnterTextBoxError";
-            this.labelEnterTextBoxError.Size = new System.Drawing.Size(169, 18);
+            this.labelEnterTextBoxError.Size = new System.Drawing.Size(143, 14);
             this.labelEnterTextBoxError.TabIndex = 5;
             this.labelEnterTextBoxError.Text = "Директорію не знайдено";
             this.labelEnterTextBoxError.Visible = false;
@@ -243,7 +245,7 @@ namespace FileManager
             this.textBoxPath.Location = new System.Drawing.Point(37, 64);
             this.textBoxPath.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBoxPath.Name = "textBoxPath";
-            this.textBoxPath.Size = new System.Drawing.Size(675, 25);
+            this.textBoxPath.Size = new System.Drawing.Size(675, 20);
             this.textBoxPath.TabIndex = 1;
             this.textBoxPath.TextChanged += new System.EventHandler(this.textBoxPath_TextChanged);
             this.textBoxPath.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxPath_KeyDown);
@@ -262,14 +264,14 @@ namespace FileManager
             this.dataGridViewFileManager.ColumnHeadersVisible = false;
             this.dataGridViewFileManager.ContextMenuStrip = this.contextMenuStripFileManager;
             this.dataGridViewFileManager.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(22)))), ((int)(((byte)(33)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(33)))), ((int)(((byte)(43)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewFileManager.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(22)))), ((int)(((byte)(33)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(33)))), ((int)(((byte)(43)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewFileManager.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewFileManager.Location = new System.Drawing.Point(38, 131);
             this.dataGridViewFileManager.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridViewFileManager.Name = "dataGridViewFileManager";
@@ -299,60 +301,72 @@ namespace FileManager
             this.NewFolderToolStripMenuItem,
             this.RenameToolStripMenuItem});
             this.contextMenuStripFileManager.Name = "contextMenuStripFileManager";
-            this.contextMenuStripFileManager.Size = new System.Drawing.Size(257, 172);
+            this.contextMenuStripFileManager.Size = new System.Drawing.Size(216, 158);
             // 
             // CopyToolStripMenuItem
             // 
             this.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem";
-            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(256, 24);
+            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.CopyToolStripMenuItem.Text = "Копіювати";
             this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             // 
             // PasteToolStripMenuItem
             // 
             this.PasteToolStripMenuItem.Name = "PasteToolStripMenuItem";
-            this.PasteToolStripMenuItem.Size = new System.Drawing.Size(256, 24);
+            this.PasteToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.PasteToolStripMenuItem.Text = "Вставити";
             this.PasteToolStripMenuItem.Click += new System.EventHandler(this.PasteToolStripMenuItem_Click);
             // 
             // AddToQuickAccessToolStripMenuItem
             // 
             this.AddToQuickAccessToolStripMenuItem.Name = "AddToQuickAccessToolStripMenuItem";
-            this.AddToQuickAccessToolStripMenuItem.Size = new System.Drawing.Size(256, 24);
+            this.AddToQuickAccessToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.AddToQuickAccessToolStripMenuItem.Text = "Додати в швидкий доступ";
             this.AddToQuickAccessToolStripMenuItem.Click += new System.EventHandler(this.AddToQuickAccessToolStripMenuItem_Click);
             // 
             // ReloadToolStripMenuItem
             // 
             this.ReloadToolStripMenuItem.Name = "ReloadToolStripMenuItem";
-            this.ReloadToolStripMenuItem.Size = new System.Drawing.Size(256, 24);
+            this.ReloadToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.ReloadToolStripMenuItem.Text = "Оновити";
             this.ReloadToolStripMenuItem.Click += new System.EventHandler(this.ReloadToolStripMenuItem_Click);
             // 
             // DeleteToolStripMenuItem
             // 
             this.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem";
-            this.DeleteToolStripMenuItem.Size = new System.Drawing.Size(256, 24);
+            this.DeleteToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.DeleteToolStripMenuItem.Text = "Видалити";
             this.DeleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolStripMenuItem_Click);
             // 
             // NewFolderToolStripMenuItem
             // 
             this.NewFolderToolStripMenuItem.Name = "NewFolderToolStripMenuItem";
-            this.NewFolderToolStripMenuItem.Size = new System.Drawing.Size(256, 24);
+            this.NewFolderToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.NewFolderToolStripMenuItem.Text = "Нова папка";
             this.NewFolderToolStripMenuItem.Click += new System.EventHandler(this.NewFolderToolStripMenuItem_Click);
             // 
             // RenameToolStripMenuItem
             // 
             this.RenameToolStripMenuItem.Name = "RenameToolStripMenuItem";
-            this.RenameToolStripMenuItem.Size = new System.Drawing.Size(256, 24);
+            this.RenameToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.RenameToolStripMenuItem.Text = "Перейменувати";
             this.RenameToolStripMenuItem.Click += new System.EventHandler(this.RenameToolStripMenuItem_Click);
             // 
+            // checkBoxShowHiddenFilesAndFolders
+            // 
+            this.checkBoxShowHiddenFilesAndFolders.AutoSize = true;
+            this.checkBoxShowHiddenFilesAndFolders.ForeColor = System.Drawing.Color.White;
+            this.checkBoxShowHiddenFilesAndFolders.Location = new System.Drawing.Point(7, 9);
+            this.checkBoxShowHiddenFilesAndFolders.Name = "checkBoxShowHiddenFilesAndFolders";
+            this.checkBoxShowHiddenFilesAndFolders.Size = new System.Drawing.Size(289, 23);
+            this.checkBoxShowHiddenFilesAndFolders.TabIndex = 6;
+            this.checkBoxShowHiddenFilesAndFolders.Text = "Показувати приховані папки та файли";
+            this.checkBoxShowHiddenFilesAndFolders.UseVisualStyleBackColor = true;
+            this.checkBoxShowHiddenFilesAndFolders.CheckedChanged += new System.EventHandler(this.checkBoxShowHiddenFilesAndFolders_CheckedChanged);
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1019, 668);
             this.Controls.Add(this.panelFileManager);
@@ -403,6 +417,7 @@ namespace FileManager
         private System.Windows.Forms.ToolStripMenuItem DeleteToolStripMenuItem1;
         private System.Windows.Forms.Panel panelUnderTextBoxPath;
         private System.Windows.Forms.Label labelEnterTextBoxError;
+        private System.Windows.Forms.CheckBox checkBoxShowHiddenFilesAndFolders;
     }
 }
 

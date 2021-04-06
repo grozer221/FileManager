@@ -51,7 +51,6 @@ namespace MyLibrary
             if (currentPath != null && listPathsToCopiedFoldersAndFiles == null)
                 ContextMenu.Items[menuItem[NumberMenuPaste].Name].Enabled = false;
 
-
             if (currentPath != null)
             {
                 ContextMenu.Items[menuItem[NumberMenuCopy].Name].Enabled = true;
@@ -63,6 +62,14 @@ namespace MyLibrary
             if(dataGridView.SelectedRows.Count > 1)
             {
                 ContextMenu.Items[menuItem[NumberMenuAddQuickAccess].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = false;
+            }
+
+            if (DataGrid.SelectedRows.Count == 1 && dataGridView.SelectedRows[0].Index == 0)
+            {
+                ContextMenu.Items[menuItem[NumberMenuCopy].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuAddQuickAccess].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuDelete].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = false;
             }
         }

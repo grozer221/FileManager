@@ -73,5 +73,8 @@
   <ItemGroup>
     <None Include="Resources\mypc.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folderWithOpacity.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
