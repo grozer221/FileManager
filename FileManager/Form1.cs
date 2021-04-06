@@ -38,6 +38,7 @@ namespace FileManager
             ContextMenuFileManager = new ContextMenuStripVisualise(contextMenuStripFileManager, dataGridViewFileManager);
             ContextMenuQuickAccess = new ContextMenuStripVisualise(contextMenuStripQuickAccess, dataGridViewQuickAccessFolders);
             ReloadToolStripMenuItem_Click(null, null);
+            textBoxPath_TextChanged(null, null);
             dataGridViewVisualise.GetListQuickAccessFoldersFromFile();
             dataGridViewVisualise.PrintQuickAccessFolders();
         }
@@ -82,6 +83,7 @@ namespace FileManager
         {
             dataGridViewVisualise.CellDoubleClick(e.RowIndex, ref currentPath);
             textBoxPath.Text = currentPath;
+            labelEnterTextBoxError.Visible = false;
         }
 
         private void textBoxPath_TextChanged(object sender, EventArgs e)
@@ -96,6 +98,7 @@ namespace FileManager
         {
             dataGridViewVisualise.StepBack(ref currentPath);
             textBoxPath.Text = currentPath;
+            labelEnterTextBoxError.Visible = false;
         }
 
         private void dataGridViewFileManager_MouseDown(object sender, MouseEventArgs e)
@@ -124,6 +127,7 @@ namespace FileManager
         {
             dataGridViewVisualise.dataGridQuickAccessCellMouseClick(e, ref currentPath);
             textBoxPath.Text = currentPath;
+            labelEnterTextBoxError.Visible = false;
         }
 
         private void pictureBoxSearch_Click(object sender, EventArgs e)
@@ -132,12 +136,20 @@ namespace FileManager
             {
                 dataGridViewVisualise.PrintDisks();
                 currentPath = textBoxPath.Text;
+                labelEnterTextBoxError.Visible = false;
                 return;
             }
+
             string tmpCurrentPath = textBoxPath.Text;
-            try { dataGridViewVisualise.SearchDirectory(ref tmpCurrentPath); }
-            catch { return; }
+            try { 
+                dataGridViewVisualise.SearchDirectory(ref tmpCurrentPath); 
+            }
+            catch {
+                labelEnterTextBoxError.Visible = true;
+                return; 
+            }
             currentPath = tmpCurrentPath;
+            labelEnterTextBoxError.Visible = false;
         }
 
         private void CopyToolStripMenuItem_Click(object sender, EventArgs e)

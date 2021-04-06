@@ -30,8 +30,8 @@ namespace FileManager
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelTop = new System.Windows.Forms.Panel();
             this.buttonHide = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
@@ -40,6 +40,7 @@ namespace FileManager
             this.contextMenuStripQuickAccess = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.DeleteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.panelFileManager = new System.Windows.Forms.Panel();
+            this.labelEnterTextBoxError = new System.Windows.Forms.Label();
             this.panelUnderTextBoxPath = new System.Windows.Forms.Panel();
             this.pictureBoxSearch = new System.Windows.Forms.PictureBox();
             this.pictureBoxStepBack = new System.Windows.Forms.PictureBox();
@@ -134,14 +135,14 @@ namespace FileManager
             this.dataGridViewQuickAccessFolders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewQuickAccessFolders.ColumnHeadersVisible = false;
             this.dataGridViewQuickAccessFolders.ContextMenuStrip = this.contextMenuStripQuickAccess;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(33)))), ((int)(((byte)(43)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(22)))), ((int)(((byte)(33)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewQuickAccessFolders.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(33)))), ((int)(((byte)(43)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(22)))), ((int)(((byte)(33)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewQuickAccessFolders.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewQuickAccessFolders.Location = new System.Drawing.Point(23, 131);
             this.dataGridViewQuickAccessFolders.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridViewQuickAccessFolders.MultiSelect = false;
@@ -175,6 +176,7 @@ namespace FileManager
             // panelFileManager
             // 
             this.panelFileManager.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(22)))), ((int)(((byte)(33)))));
+            this.panelFileManager.Controls.Add(this.labelEnterTextBoxError);
             this.panelFileManager.Controls.Add(this.panelUnderTextBoxPath);
             this.panelFileManager.Controls.Add(this.pictureBoxSearch);
             this.panelFileManager.Controls.Add(this.pictureBoxStepBack);
@@ -186,6 +188,18 @@ namespace FileManager
             this.panelFileManager.Name = "panelFileManager";
             this.panelFileManager.Size = new System.Drawing.Size(796, 644);
             this.panelFileManager.TabIndex = 2;
+            // 
+            // labelEnterTextBoxError
+            // 
+            this.labelEnterTextBoxError.AutoSize = true;
+            this.labelEnterTextBoxError.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelEnterTextBoxError.ForeColor = System.Drawing.Color.Red;
+            this.labelEnterTextBoxError.Location = new System.Drawing.Point(50, 93);
+            this.labelEnterTextBoxError.Name = "labelEnterTextBoxError";
+            this.labelEnterTextBoxError.Size = new System.Drawing.Size(169, 18);
+            this.labelEnterTextBoxError.TabIndex = 5;
+            this.labelEnterTextBoxError.Text = "Директорію не знайдено";
+            this.labelEnterTextBoxError.Visible = false;
             // 
             // panelUnderTextBoxPath
             // 
@@ -248,14 +262,14 @@ namespace FileManager
             this.dataGridViewFileManager.ColumnHeadersVisible = false;
             this.dataGridViewFileManager.ContextMenuStrip = this.contextMenuStripFileManager;
             this.dataGridViewFileManager.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(22)))), ((int)(((byte)(33)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(33)))), ((int)(((byte)(43)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewFileManager.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(22)))), ((int)(((byte)(33)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(33)))), ((int)(((byte)(43)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewFileManager.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewFileManager.Location = new System.Drawing.Point(38, 131);
             this.dataGridViewFileManager.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridViewFileManager.Name = "dataGridViewFileManager";
@@ -388,6 +402,7 @@ namespace FileManager
         private System.Windows.Forms.ContextMenuStrip contextMenuStripQuickAccess;
         private System.Windows.Forms.ToolStripMenuItem DeleteToolStripMenuItem1;
         private System.Windows.Forms.Panel panelUnderTextBoxPath;
+        private System.Windows.Forms.Label labelEnterTextBoxError;
     }
 }
 

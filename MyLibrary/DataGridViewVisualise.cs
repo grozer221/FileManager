@@ -157,13 +157,11 @@ namespace MyLibrary
 
         public void SearchDirectory(ref string currentPath)
         {
+            if (Regex.IsMatch(currentPath, @"^[A-Z\|a-z]:$"))
+                throw new Exception();
             if (currentPath == null)
                 PrintDisks();
-            else if (Regex.IsMatch(currentPath, @"^[A-Z\|a-z]:$"))
-            {
-                currentPath = null;
-                PrintDisks();
-            }
+
             else if (Directory.Exists(currentPath))
             {
                 currentPath = new DirectoryInfo(currentPath).FullName;
