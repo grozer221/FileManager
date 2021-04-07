@@ -1,7 +1,7 @@
 ﻿
 namespace FileManager
 {
-    partial class Form1
+    partial class FormFileManager
     {
         /// <summary>
         /// Required designer variable.
@@ -36,6 +36,7 @@ namespace FileManager
             this.buttonHide = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
             this.panelQuickAccess = new System.Windows.Forms.Panel();
+            this.pictureBoxSettings = new System.Windows.Forms.PictureBox();
             this.dataGridViewQuickAccessFolders = new System.Windows.Forms.DataGridView();
             this.contextMenuStripQuickAccess = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.DeleteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,9 +55,10 @@ namespace FileManager
             this.DeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NewFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RenameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkBoxShowHiddenFilesAndFolders = new System.Windows.Forms.CheckBox();
+            this.PropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelTop.SuspendLayout();
             this.panelQuickAccess.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSettings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewQuickAccessFolders)).BeginInit();
             this.contextMenuStripQuickAccess.SuspendLayout();
             this.panelFileManager.SuspendLayout();
@@ -116,6 +118,7 @@ namespace FileManager
             // panelQuickAccess
             // 
             this.panelQuickAccess.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(33)))), ((int)(((byte)(43)))));
+            this.panelQuickAccess.Controls.Add(this.pictureBoxSettings);
             this.panelQuickAccess.Controls.Add(this.dataGridViewQuickAccessFolders);
             this.panelQuickAccess.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelQuickAccess.Location = new System.Drawing.Point(0, 24);
@@ -123,6 +126,18 @@ namespace FileManager
             this.panelQuickAccess.Name = "panelQuickAccess";
             this.panelQuickAccess.Size = new System.Drawing.Size(223, 644);
             this.panelQuickAccess.TabIndex = 1;
+            // 
+            // pictureBoxSettings
+            // 
+            this.pictureBoxSettings.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxSettings.Image = global::FileManager.Properties.Resources.settings;
+            this.pictureBoxSettings.Location = new System.Drawing.Point(5, 5);
+            this.pictureBoxSettings.Name = "pictureBoxSettings";
+            this.pictureBoxSettings.Size = new System.Drawing.Size(25, 25);
+            this.pictureBoxSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxSettings.TabIndex = 1;
+            this.pictureBoxSettings.TabStop = false;
+            this.pictureBoxSettings.Click += new System.EventHandler(this.pictureBoxSettings_Click);
             // 
             // dataGridViewQuickAccessFolders
             // 
@@ -177,7 +192,6 @@ namespace FileManager
             // panelFileManager
             // 
             this.panelFileManager.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(22)))), ((int)(((byte)(33)))));
-            this.panelFileManager.Controls.Add(this.checkBoxShowHiddenFilesAndFolders);
             this.panelFileManager.Controls.Add(this.labelEnterTextBoxError);
             this.panelFileManager.Controls.Add(this.panelUnderTextBoxPath);
             this.panelFileManager.Controls.Add(this.pictureBoxSearch);
@@ -299,9 +313,10 @@ namespace FileManager
             this.ReloadToolStripMenuItem,
             this.DeleteToolStripMenuItem,
             this.NewFolderToolStripMenuItem,
-            this.RenameToolStripMenuItem});
+            this.RenameToolStripMenuItem,
+            this.PropertiesToolStripMenuItem});
             this.contextMenuStripFileManager.Name = "contextMenuStripFileManager";
-            this.contextMenuStripFileManager.Size = new System.Drawing.Size(216, 158);
+            this.contextMenuStripFileManager.Size = new System.Drawing.Size(216, 202);
             // 
             // CopyToolStripMenuItem
             // 
@@ -352,19 +367,14 @@ namespace FileManager
             this.RenameToolStripMenuItem.Text = "Перейменувати";
             this.RenameToolStripMenuItem.Click += new System.EventHandler(this.RenameToolStripMenuItem_Click);
             // 
-            // checkBoxShowHiddenFilesAndFolders
+            // PropertiesToolStripMenuItem
             // 
-            this.checkBoxShowHiddenFilesAndFolders.AutoSize = true;
-            this.checkBoxShowHiddenFilesAndFolders.ForeColor = System.Drawing.Color.White;
-            this.checkBoxShowHiddenFilesAndFolders.Location = new System.Drawing.Point(7, 9);
-            this.checkBoxShowHiddenFilesAndFolders.Name = "checkBoxShowHiddenFilesAndFolders";
-            this.checkBoxShowHiddenFilesAndFolders.Size = new System.Drawing.Size(289, 23);
-            this.checkBoxShowHiddenFilesAndFolders.TabIndex = 6;
-            this.checkBoxShowHiddenFilesAndFolders.Text = "Показувати приховані папки та файли";
-            this.checkBoxShowHiddenFilesAndFolders.UseVisualStyleBackColor = true;
-            this.checkBoxShowHiddenFilesAndFolders.CheckedChanged += new System.EventHandler(this.checkBoxShowHiddenFilesAndFolders_CheckedChanged);
+            this.PropertiesToolStripMenuItem.Name = "PropertiesToolStripMenuItem";
+            this.PropertiesToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.PropertiesToolStripMenuItem.Text = "Властивості";
+            this.PropertiesToolStripMenuItem.Click += new System.EventHandler(this.PropertiesToolStripMenuItem_Click);
             // 
-            // Form1
+            // FormFileManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -375,12 +385,13 @@ namespace FileManager
             this.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.Name = "Form1";
+            this.Name = "FormFileManager";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "File Manager by Grozer";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panelTop.ResumeLayout(false);
             this.panelQuickAccess.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSettings)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewQuickAccessFolders)).EndInit();
             this.contextMenuStripQuickAccess.ResumeLayout(false);
             this.panelFileManager.ResumeLayout(false);
@@ -417,7 +428,8 @@ namespace FileManager
         private System.Windows.Forms.ToolStripMenuItem DeleteToolStripMenuItem1;
         private System.Windows.Forms.Panel panelUnderTextBoxPath;
         private System.Windows.Forms.Label labelEnterTextBoxError;
-        private System.Windows.Forms.CheckBox checkBoxShowHiddenFilesAndFolders;
+        private System.Windows.Forms.PictureBox pictureBoxSettings;
+        private System.Windows.Forms.ToolStripMenuItem PropertiesToolStripMenuItem;
     }
 }
 

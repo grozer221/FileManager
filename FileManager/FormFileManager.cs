@@ -14,9 +14,9 @@ using MyLibrary;
 
 namespace FileManager
 {
-    public partial class Form1 : Form
+    public partial class FormFileManager : Form
     {
-        public Form1()
+        public FormFileManager()
         {
             InitializeComponent();
         }
@@ -152,6 +152,7 @@ namespace FileManager
                 return; 
             }
             currentPath = tmpCurrentPath;
+            textBoxPath.Text = currentPath;
             labelEnterTextBoxError.Visible = false;
         }
 
@@ -306,12 +307,36 @@ namespace FileManager
                 e.SuppressKeyPress = true;
         }
 
-        private void checkBoxShowHiddenFilesAndFolders_CheckedChanged(object sender, EventArgs e)
+        private void pictureBoxSettings_Click(object sender, EventArgs e)
         {
-            if (checkBoxShowHiddenFilesAndFolders.Checked)
+            FormSettings formSettings = new FormSettings();
+            formSettings.checkBoxShowHiddenFilesAndFolders.Checked = showHiddenFilesAndFolders;
+            formSettings.ShowDialog();
+            if (!formSettings.OkOrCancel)
+                return;
+
+            if (formSettings.checkBoxShowHiddenFilesAndFolders.Checked)
                 showHiddenFilesAndFolders = true;
             else
                 showHiddenFilesAndFolders = false;
+
+            if (currentPath != null)
+                dataGridViewVisualise.PrintFilesAndFolder(ref currentPath, showHiddenFilesAndFolders);
+        }
+
+        private void PropertiesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string pathFileOfFolder = dataGridViewVisualise.GetListVisualisedItems()[dataGridViewFileManager.SelectedRows[0].Index - 1];
+            FormProperties formProperties = new FormProperties(pathFileOfFolder);
+            formProperties.ShowDialog();
+
+            if (currentPath == null)
+                return;
+            
+            if (formProperties.ResultCheckBoxHidden)
+                File.SetAttributes(pathFileOfFolder, FileAttributes.Hidden);
+            else
+                File.SetAttributes(pathFileOfFolder, FileAttributes.Normal);
 
             if (currentPath != null)
                 dataGridViewVisualise.PrintFilesAndFolder(ref currentPath, showHiddenFilesAndFolders);

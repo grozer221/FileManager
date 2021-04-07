@@ -22,7 +22,7 @@ namespace MyLibrary
             DriveInfo[] drives = DriveInfo.GetDrives();
             foreach (DriveInfo drive in drives)
             {
-                listDisks.Add(new StructureTableFileManager { Image = new Bitmap(Properties.Resources.hard_drive_29228, 25, 25), Name = drive.Name, FormatOrDateLastChanged = drive.DriveFormat, TotalFreeSpaceOrType = GetSizeInPropertyType(drive.TotalFreeSpace), TotalSize = GetSizeInPropertyType(drive.TotalSize) });
+                listDisks.Add(new StructureTableFileManager { Image = new Bitmap(Properties.Resources.hard_drive_29228, 25, 25), Name = $"Локальний диск ({drive.Name.Substring(0, drive.Name.Length - 1)})", FormatOrDateLastChanged = drive.DriveFormat, TotalFreeSpaceOrType = GetSizeInPropertyType(drive.TotalFreeSpace), TotalSize = GetSizeInPropertyType(drive.TotalSize) });
                 listVisualisedItems.Add(drive.Name);
             }
             return listDisks;
@@ -39,6 +39,9 @@ namespace MyLibrary
             listFilesAndFolders.Add(new StructureTableFileManager { Image = GetEmptyImage(Color.FromArgb(14, 22, 33)), Name = "Назва", FormatOrDateLastChanged = "Дата зміни", TotalFreeSpaceOrType = "Тип", TotalSize = "Розмір" });
             foreach (DirectoryInfo dir in dirs)
             {
+                if (dir.Attributes.HasFlag(FileAttributes.System))
+                    continue;
+
                 if (!showHiddenFilesAndFolders && dir.Attributes.HasFlag(FileAttributes.Hidden))
                     continue;
 
@@ -52,6 +55,9 @@ namespace MyLibrary
             }
             foreach (FileInfo file in files)
             {
+                if (file.Attributes.HasFlag(FileAttributes.System))
+                    continue;
+
                 if (!showHiddenFilesAndFolders && file.Attributes.HasFlag(FileAttributes.Hidden))
                     continue;
                 listFilesAndFolders.Add(new StructureTableFileManager { Image = new Bitmap(Icon.ExtractAssociatedIcon(file.FullName).ToBitmap(), 20, 20), Name = file.Name, FormatOrDateLastChanged = file.LastWriteTime.ToString(), TotalFreeSpaceOrType = "Файл", TotalSize = GetSizeInPropertyType(file.Length) });

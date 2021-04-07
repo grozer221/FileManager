@@ -18,6 +18,7 @@ namespace MyLibrary
         private byte NumberMenuDelete = 4;
         private byte NumberMenuNewFolder = 5;
         private byte NumberMenuRename = 6;
+        private byte NumberMenuProperties = 7;
 
 
         public ContextMenuStripVisualise(ContextMenuStrip ContextMenu, DataGridView DataGrid) 
@@ -29,6 +30,8 @@ namespace MyLibrary
 
         public void VisualiseContextMenuForFileManagerCellClick(DataGridView dataGridView, DataGridViewCellMouseEventArgs e, string currentPath, List<string> listPathsToCopiedFoldersAndFiles)
         {
+            ContextMenu.Items[menuItem[NumberMenuProperties].Name].Enabled = true;
+
             if (currentPath == null)
             {
                 ContextMenu.Items[menuItem[NumberMenuCopy].Name].Enabled = false;
@@ -63,6 +66,7 @@ namespace MyLibrary
             {
                 ContextMenu.Items[menuItem[NumberMenuAddQuickAccess].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuProperties].Name].Enabled = false;
             }
 
             if (DataGrid.SelectedRows.Count == 1 && dataGridView.SelectedRows[0].Index == 0)
@@ -71,11 +75,14 @@ namespace MyLibrary
                 ContextMenu.Items[menuItem[NumberMenuAddQuickAccess].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuDelete].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuProperties].Name].Enabled = false;
             }
         }
 
         public void VisualiseContextMenuForFileManagerNoneCellClick(string currentPath, List<string> listPathsToCopiedFoldersAndFiles)
         {
+            ContextMenu.Items[menuItem[NumberMenuProperties].Name].Enabled = false;
+
             if (currentPath == null)
             {
                 ContextMenu.Items[menuItem[NumberMenuCopy].Name].Enabled = false;
@@ -106,7 +113,7 @@ namespace MyLibrary
                 ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = false;
             }
         }
-        
+
         public void VisualiseContextMenuForQuickAccess(DataGridViewCellMouseEventArgs e)
         {
             if(e.RowIndex == 0 || DataGrid.RowCount - 1 == e.RowIndex || DataGrid.RowCount - 2 == e.RowIndex)
