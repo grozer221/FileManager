@@ -78,7 +78,7 @@ namespace MyLibrary
             return bmp;
         }
 
-        public string GetSizeInPropertyType(long fileLength)
+        public static string GetSizeInPropertyType(long fileLength)
         {
             if (fileLength / 1000000000 > 1)
                 return fileLength / 1000000000 + " ГБ";

@@ -53,7 +53,7 @@ namespace FileManager
             this.textBoxUsingSpace.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(47)))), ((int)(((byte)(61)))));
             this.textBoxUsingSpace.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxUsingSpace.ForeColor = System.Drawing.Color.White;
-            this.textBoxUsingSpace.Location = new System.Drawing.Point(180, 187);
+            this.textBoxUsingSpace.Location = new System.Drawing.Point(180, 178);
             this.textBoxUsingSpace.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxUsingSpace.Name = "textBoxUsingSpace";
             this.textBoxUsingSpace.ReadOnly = true;
@@ -65,7 +65,7 @@ namespace FileManager
             this.textBoxType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(47)))), ((int)(((byte)(61)))));
             this.textBoxType.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxType.ForeColor = System.Drawing.Color.White;
-            this.textBoxType.Location = new System.Drawing.Point(97, 126);
+            this.textBoxType.Location = new System.Drawing.Point(97, 119);
             this.textBoxType.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxType.Name = "textBoxType";
             this.textBoxType.ReadOnly = true;
@@ -76,7 +76,7 @@ namespace FileManager
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(31, 186);
+            this.label3.Location = new System.Drawing.Point(31, 177);
             this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(148, 16);
@@ -87,7 +87,7 @@ namespace FileManager
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(29, 125);
+            this.label1.Location = new System.Drawing.Point(29, 118);
             this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 16);
@@ -97,7 +97,7 @@ namespace FileManager
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Location = new System.Drawing.Point(32, 103);
+            this.panel1.Location = new System.Drawing.Point(32, 98);
             this.panel1.Margin = new System.Windows.Forms.Padding(5);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(272, 1);
@@ -108,7 +108,7 @@ namespace FileManager
             this.textBoxName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(47)))), ((int)(((byte)(61)))));
             this.textBoxName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxName.ForeColor = System.Drawing.Color.White;
-            this.textBoxName.Location = new System.Drawing.Point(119, 59);
+            this.textBoxName.Location = new System.Drawing.Point(119, 62);
             this.textBoxName.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.ReadOnly = true;
@@ -118,7 +118,7 @@ namespace FileManager
             // panelTotalSpace
             // 
             this.panelTotalSpace.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelTotalSpace.Location = new System.Drawing.Point(34, 295);
+            this.panelTotalSpace.Location = new System.Drawing.Point(34, 283);
             this.panelTotalSpace.Name = "panelTotalSpace";
             this.panelTotalSpace.Size = new System.Drawing.Size(269, 18);
             this.panelTotalSpace.TabIndex = 42;
@@ -126,7 +126,7 @@ namespace FileManager
             // panelUsingSpace
             // 
             this.panelUsingSpace.BackColor = System.Drawing.Color.SkyBlue;
-            this.panelUsingSpace.Location = new System.Drawing.Point(31, 295);
+            this.panelUsingSpace.Location = new System.Drawing.Point(31, 283);
             this.panelUsingSpace.Name = "panelUsingSpace";
             this.panelUsingSpace.Size = new System.Drawing.Size(10, 18);
             this.panelUsingSpace.TabIndex = 0;
@@ -135,7 +135,7 @@ namespace FileManager
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(31, 211);
+            this.label2.Location = new System.Drawing.Point(31, 202);
             this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(105, 16);
@@ -147,7 +147,7 @@ namespace FileManager
             this.textBoxTotalFreeSpace.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(47)))), ((int)(((byte)(61)))));
             this.textBoxTotalFreeSpace.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxTotalFreeSpace.ForeColor = System.Drawing.Color.White;
-            this.textBoxTotalFreeSpace.Location = new System.Drawing.Point(180, 212);
+            this.textBoxTotalFreeSpace.Location = new System.Drawing.Point(180, 203);
             this.textBoxTotalFreeSpace.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxTotalFreeSpace.Name = "textBoxTotalFreeSpace";
             this.textBoxTotalFreeSpace.ReadOnly = true;
@@ -158,7 +158,7 @@ namespace FileManager
             // 
             this.panel6.BackColor = System.Drawing.Color.SkyBlue;
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Location = new System.Drawing.Point(20, 190);
+            this.panel6.Location = new System.Drawing.Point(20, 181);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(10, 10);
             this.panel6.TabIndex = 43;
@@ -167,7 +167,7 @@ namespace FileManager
             // 
             this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(47)))), ((int)(((byte)(61)))));
             this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel7.Location = new System.Drawing.Point(20, 214);
+            this.panel7.Location = new System.Drawing.Point(20, 205);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(10, 10);
             this.panel7.TabIndex = 43;
@@ -175,7 +175,7 @@ namespace FileManager
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Location = new System.Drawing.Point(31, 160);
+            this.panel2.Location = new System.Drawing.Point(31, 152);
             this.panel2.Margin = new System.Windows.Forms.Padding(5);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(272, 1);
@@ -183,7 +183,7 @@ namespace FileManager
             // 
             // pictureBoxDisk
             // 
-            this.pictureBoxDisk.Location = new System.Drawing.Point(32, 14);
+            this.pictureBoxDisk.Location = new System.Drawing.Point(32, 17);
             this.pictureBoxDisk.Margin = new System.Windows.Forms.Padding(5);
             this.pictureBoxDisk.Name = "pictureBoxDisk";
             this.pictureBoxDisk.Size = new System.Drawing.Size(71, 60);
@@ -195,7 +195,7 @@ namespace FileManager
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(31, 236);
+            this.label4.Location = new System.Drawing.Point(31, 227);
             this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(93, 16);
@@ -207,7 +207,7 @@ namespace FileManager
             this.textBoxTotalSize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(47)))), ((int)(((byte)(61)))));
             this.textBoxTotalSize.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxTotalSize.ForeColor = System.Drawing.Color.White;
-            this.textBoxTotalSize.Location = new System.Drawing.Point(180, 237);
+            this.textBoxTotalSize.Location = new System.Drawing.Point(180, 228);
             this.textBoxTotalSize.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxTotalSize.Name = "textBoxTotalSize";
             this.textBoxTotalSize.ReadOnly = true;
@@ -219,7 +219,7 @@ namespace FileManager
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(47)))), ((int)(((byte)(61)))));
-            this.ClientSize = new System.Drawing.Size(339, 425);
+            this.ClientSize = new System.Drawing.Size(339, 346);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panelUsingSpace);

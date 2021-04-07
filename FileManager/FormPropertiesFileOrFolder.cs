@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyLibrary;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,7 +31,8 @@ namespace FileManager
                 textBoxName.Text = dirInfo.Name;
                 textBoxType.Text = "Папка";
                 textBoxPath.Text = dirInfo.FullName;
-                textBoxSize.Text = "1";
+                long folderSize = 0;
+                GetFolderSize(dirInfo.FullName, ref folderSize);
                 textBoxLastTimeChanged.Text = dirInfo.LastWriteTime.ToString();
                 textBoxCreated.Text = dirInfo.CreationTime.ToString();
                 checkBoxMakeHidden.Checked = dirInfo.Attributes.HasFlag(FileAttributes.Hidden);
@@ -42,7 +44,7 @@ namespace FileManager
                 textBoxName.Text = fileInfo.Name;
                 textBoxType.Text = "Файл";
                 textBoxPath.Text = fileInfo.FullName;
-                textBoxSize.Text = GetSizeInPropertyType(fileInfo.Length);
+                textBoxSize.Text = ClassFileManager.GetSizeInPropertyType(fileInfo.Length);
                 textBoxLastTimeChanged.Text = fileInfo.LastWriteTime.ToString();
                 textBoxCreated.Text = fileInfo.CreationTime.ToString();
                 checkBoxMakeHidden.Checked = fileInfo.Attributes.HasFlag(FileAttributes.Hidden);
@@ -51,16 +53,28 @@ namespace FileManager
                 MessageBox.Show($"Файла або папки не існує", "Попередження", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
-        private string GetSizeInPropertyType(long fileLength)
+        public void GetFolderSize(string path, ref long folderSize)
         {
-            if (fileLength / 1000000000 > 1)
-                return fileLength / 1000000000 + " ГБ";
-            else if (fileLength / 1000000 > 1)
-                return fileLength / 1000000 + " МБ";
-            else if (fileLength / 1000 > 1)
-                return fileLength / 1000 + " КБ";
-            else
-                return fileLength + " Б";
+            DirectoryInfo dirInfo = new DirectoryInfo(path);
+            DirectoryInfo[] dirs;
+            FileInfo[] files;
+            try
+            {
+                dirs = dirInfo.GetDirectories();
+                files = dirInfo.GetFiles();
+            }
+            catch 
+            {
+                return;
+            }
+           
+            textBoxSize.Text = ClassFileManager.GetSizeInPropertyType(folderSize);
+            foreach (DirectoryInfo dir in dirs)
+                GetFolderSize(dir.FullName, ref folderSize);
+            foreach (FileInfo file in files)
+            {
+                folderSize += file.Length;
+            }
         }
     }
 }

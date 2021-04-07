@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using MyLibrary;
 
 namespace FileManager
 {
@@ -27,22 +28,10 @@ namespace FileManager
             textBoxType.Text = driveInfo.DriveFormat.ToString();
             textBoxName.Text = $"Локальний диск ({driveInfo.Name.Substring(0, driveInfo.Name.Length - 1)})";
             long usingSpace = driveInfo.TotalSize - driveInfo.TotalFreeSpace;
-            textBoxUsingSpace.Text = GetSizeInPropertyType(usingSpace).ToString();
-            textBoxTotalFreeSpace.Text = GetSizeInPropertyType(driveInfo.TotalFreeSpace).ToString();
-            textBoxTotalSize.Text = GetSizeInPropertyType(driveInfo.TotalSize).ToString();
+            textBoxUsingSpace.Text = ClassFileManager.GetSizeInPropertyType(usingSpace).ToString();
+            textBoxTotalFreeSpace.Text = ClassFileManager.GetSizeInPropertyType(driveInfo.TotalFreeSpace).ToString();
+            textBoxTotalSize.Text = ClassFileManager.GetSizeInPropertyType(driveInfo.TotalSize).ToString();
             panelUsingSpace.Width = Convert.ToInt32(panelTotalSpace.Width * usingSpace * Math.Pow(driveInfo.TotalSize, -1));
         }
-        private string GetSizeInPropertyType(long fileLength)
-        {
-            if (fileLength / 1000000000 > 1)
-                return fileLength / 1000000000 + " ГБ";
-            else if (fileLength / 1000000 > 1)
-                return fileLength / 1000000 + " МБ";
-            else if (fileLength / 1000 > 1)
-                return fileLength / 1000 + " КБ";
-            else
-                return fileLength + " Б";
-        }
-
     }
 }

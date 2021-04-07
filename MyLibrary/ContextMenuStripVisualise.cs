@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace MyLibrary
             menuItem = this.ContextMenu.Items;
         }
 
-        public void VisualiseContextMenuForFileManagerCellClick(DataGridView dataGridView, DataGridViewCellMouseEventArgs e, string currentPath, List<string> listPathsToCopiedFoldersAndFiles)
+        public void VisualiseContextMenuForFileManagerCellClick(DataGridView dataGridView, string currentPath, List<string> listPathsToCopiedFoldersAndFiles)
         {
             ContextMenu.Items[menuItem[NumberMenuProperties].Name].Enabled = true;
 
@@ -54,14 +55,6 @@ namespace MyLibrary
             if (currentPath != null && listPathsToCopiedFoldersAndFiles == null)
                 ContextMenu.Items[menuItem[NumberMenuPaste].Name].Enabled = false;
 
-            if (currentPath != null)
-            {
-                ContextMenu.Items[menuItem[NumberMenuCopy].Name].Enabled = true;
-                ContextMenu.Items[menuItem[NumberMenuAddQuickAccess].Name].Enabled = true;
-                ContextMenu.Items[menuItem[NumberMenuDelete].Name].Enabled = true;
-                ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = true;
-            }
-
             if(dataGridView.SelectedRows.Count > 1)
             {
                 ContextMenu.Items[menuItem[NumberMenuAddQuickAccess].Name].Enabled = false;
@@ -77,41 +70,36 @@ namespace MyLibrary
                 ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuProperties].Name].Enabled = false;
             }
+
+            try
+            {
+                if (!Directory.Exists(Path.Combine(currentPath, dataGridView[1, dataGridView.SelectedRows[0].Index].Value.ToString())))
+                    ContextMenu.Items[menuItem[NumberMenuAddQuickAccess].Name].Enabled = false;
+            }
+            catch { }
         }
 
         public void VisualiseContextMenuForFileManagerNoneCellClick(string currentPath, List<string> listPathsToCopiedFoldersAndFiles)
         {
+            ContextMenu.Items[menuItem[NumberMenuCopy].Name].Enabled = false;
+            ContextMenu.Items[menuItem[NumberMenuAddQuickAccess].Name].Enabled = false;
+            ContextMenu.Items[menuItem[NumberMenuDelete].Name].Enabled = false;
+            ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = false;
             ContextMenu.Items[menuItem[NumberMenuProperties].Name].Enabled = false;
 
             if (currentPath == null)
             {
-                ContextMenu.Items[menuItem[NumberMenuCopy].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuPaste].Name].Enabled = false;
-                ContextMenu.Items[menuItem[NumberMenuAddQuickAccess].Name].Enabled = false;
-                ContextMenu.Items[menuItem[NumberMenuDelete].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuNewFolder].Name].Enabled = false;
-                ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = false;
             }
             else
             {
-                ContextMenu.Items[menuItem[NumberMenuCopy].Name].Enabled = true;
                 ContextMenu.Items[menuItem[NumberMenuPaste].Name].Enabled = true;
-                ContextMenu.Items[menuItem[NumberMenuAddQuickAccess].Name].Enabled = true;
-                ContextMenu.Items[menuItem[NumberMenuDelete].Name].Enabled = true;
                 ContextMenu.Items[menuItem[NumberMenuNewFolder].Name].Enabled = true;
-                ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = true;
             }
 
             if (currentPath != null && listPathsToCopiedFoldersAndFiles == null)
                 ContextMenu.Items[menuItem[NumberMenuPaste].Name].Enabled = false;
-
-            if (currentPath != null)
-            {
-                ContextMenu.Items[menuItem[NumberMenuCopy].Name].Enabled = false;
-                ContextMenu.Items[menuItem[NumberMenuAddQuickAccess].Name].Enabled = false;
-                ContextMenu.Items[menuItem[NumberMenuDelete].Name].Enabled = false;
-                ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = false;
-            }
         }
 
         public void VisualiseContextMenuForQuickAccess(DataGridViewCellMouseEventArgs e)

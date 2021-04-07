@@ -44,10 +44,10 @@ namespace FileManager
             // 
             this.checkBoxShowHiddenFilesAndFolders.AutoSize = true;
             this.checkBoxShowHiddenFilesAndFolders.ForeColor = System.Drawing.Color.White;
-            this.checkBoxShowHiddenFilesAndFolders.Location = new System.Drawing.Point(15, 16);
-            this.checkBoxShowHiddenFilesAndFolders.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBoxShowHiddenFilesAndFolders.Location = new System.Drawing.Point(20, 20);
+            this.checkBoxShowHiddenFilesAndFolders.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBoxShowHiddenFilesAndFolders.Name = "checkBoxShowHiddenFilesAndFolders";
-            this.checkBoxShowHiddenFilesAndFolders.Size = new System.Drawing.Size(220, 17);
+            this.checkBoxShowHiddenFilesAndFolders.Size = new System.Drawing.Size(281, 20);
             this.checkBoxShowHiddenFilesAndFolders.TabIndex = 0;
             this.checkBoxShowHiddenFilesAndFolders.Text = "Показувати приховані папки та файли";
             this.checkBoxShowHiddenFilesAndFolders.UseVisualStyleBackColor = true;
@@ -58,9 +58,9 @@ namespace FileManager
             this.panelTop.Controls.Add(this.buttonClose);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
-            this.panelTop.Margin = new System.Windows.Forms.Padding(2);
+            this.panelTop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(302, 20);
+            this.panelTop.Size = new System.Drawing.Size(339, 25);
             this.panelTop.TabIndex = 1;
             this.panelTop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTop_MouseDown);
             this.panelTop.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTop_MouseMove);
@@ -71,10 +71,10 @@ namespace FileManager
             this.buttonClose.FlatAppearance.BorderSize = 0;
             this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonClose.ForeColor = System.Drawing.Color.White;
-            this.buttonClose.Location = new System.Drawing.Point(280, 0);
-            this.buttonClose.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonClose.Location = new System.Drawing.Point(310, 0);
+            this.buttonClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(22, 20);
+            this.buttonClose.Size = new System.Drawing.Size(29, 25);
             this.buttonClose.TabIndex = 0;
             this.buttonClose.Text = "X";
             this.buttonClose.UseVisualStyleBackColor = true;
@@ -89,19 +89,20 @@ namespace FileManager
             this.panelSettings.Controls.Add(this.buttonOK);
             this.panelSettings.Controls.Add(this.checkBoxShowHiddenFilesAndFolders);
             this.panelSettings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSettings.Location = new System.Drawing.Point(0, 20);
-            this.panelSettings.Margin = new System.Windows.Forms.Padding(2);
+            this.panelSettings.Location = new System.Drawing.Point(0, 25);
+            this.panelSettings.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelSettings.Name = "panelSettings";
-            this.panelSettings.Size = new System.Drawing.Size(302, 346);
+            this.panelSettings.Size = new System.Drawing.Size(339, 425);
             this.panelSettings.TabIndex = 2;
             // 
             // buttonCancel
             // 
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCancel.ForeColor = System.Drawing.Color.White;
-            this.buttonCancel.Location = new System.Drawing.Point(213, 311);
+            this.buttonCancel.Location = new System.Drawing.Point(238, 384);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(77, 23);
+            this.buttonCancel.Size = new System.Drawing.Size(88, 28);
             this.buttonCancel.TabIndex = 1;
             this.buttonCancel.Text = "Скасувати";
             this.buttonCancel.UseVisualStyleBackColor = true;
@@ -111,9 +112,10 @@ namespace FileManager
             // 
             this.buttonOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOK.ForeColor = System.Drawing.Color.White;
-            this.buttonOK.Location = new System.Drawing.Point(130, 311);
+            this.buttonOK.Location = new System.Drawing.Point(142, 384);
+            this.buttonOK.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(77, 23);
+            this.buttonOK.Size = new System.Drawing.Size(88, 28);
             this.buttonOK.TabIndex = 1;
             this.buttonOK.Text = "ОК";
             this.buttonOK.UseVisualStyleBackColor = true;
@@ -130,13 +132,14 @@ namespace FileManager
             // 
             // FormSettings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(302, 366);
+            this.ClientSize = new System.Drawing.Size(339, 450);
             this.Controls.Add(this.panelSettings);
             this.Controls.Add(this.panelTop);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormSettings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Налаштування";

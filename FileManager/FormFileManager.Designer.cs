@@ -316,7 +316,7 @@ namespace FileManager
             this.RenameToolStripMenuItem,
             this.PropertiesToolStripMenuItem});
             this.contextMenuStripFileManager.Name = "contextMenuStripFileManager";
-            this.contextMenuStripFileManager.Size = new System.Drawing.Size(216, 202);
+            this.contextMenuStripFileManager.Size = new System.Drawing.Size(216, 180);
             // 
             // CopyToolStripMenuItem
             // 

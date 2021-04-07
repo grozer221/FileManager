@@ -99,6 +99,7 @@ namespace FileManager
         private void pictureBoxStepBack_Click(object sender, EventArgs e)
         {
             dataGridViewVisualise.StepBack(ref currentPath, showHiddenFilesAndFolders);
+            contextMenuFileManager.VisualiseContextMenuForFileManagerNoneCellClick(currentPath, dataGridViewVisualise.GetCollectionPathsToCopiedFoldersAndFiles());
             textBoxPath.Text = currentPath;
             labelEnterTextBoxError.Visible = false;
         }
@@ -106,7 +107,6 @@ namespace FileManager
         private void dataGridViewFileManager_MouseDown(object sender, MouseEventArgs e)
         {
             dataGridViewFileManager.EndEdit();
-            dataGridViewFileManager.ClearSelection();
 
             if (e.Button == MouseButtons.Right)
                 contextMenuFileManager.VisualiseContextMenuForFileManagerNoneCellClick(currentPath, dataGridViewVisualise.GetCollectionPathsToCopiedFoldersAndFiles());
@@ -116,8 +116,11 @@ namespace FileManager
         {
             if (e.Button == MouseButtons.Right)
             {
+                if (!dataGridViewFileManager.Rows[e.RowIndex].Selected)
+                    dataGridViewFileManager.ClearSelection();
                 dataGridViewFileManager.Rows[e.RowIndex].Selected = true;
-                contextMenuFileManager.VisualiseContextMenuForFileManagerCellClick(dataGridViewFileManager,e, currentPath, dataGridViewVisualise.GetCollectionPathsToCopiedFoldersAndFiles());
+
+                contextMenuFileManager.VisualiseContextMenuForFileManagerCellClick(dataGridViewFileManager, currentPath, dataGridViewVisualise.GetCollectionPathsToCopiedFoldersAndFiles());
             }
         }
 
@@ -332,11 +335,20 @@ namespace FileManager
 
             if (currentPath == null)
                 return;
-            
-            if (formProperties.ResultCheckBoxHidden)
-                File.SetAttributes(pathFileOfFolder, FileAttributes.Hidden);
+
+            if (formProperties.ResultCheckBoxHidden) {
+                if (new FileInfo(pathFileOfFolder).Attributes.HasFlag(FileAttributes.Hidden))
+                    return;
+                else
+                    File.SetAttributes(pathFileOfFolder, FileAttributes.Hidden);
+            }
             else
-                File.SetAttributes(pathFileOfFolder, FileAttributes.Normal);
+            {
+                if (new FileInfo(pathFileOfFolder).Attributes.HasFlag(FileAttributes.Hidden))
+                    File.SetAttributes(pathFileOfFolder, FileAttributes.Normal);
+                else
+                    return;
+            }
 
             if (currentPath != null)
                 dataGridViewVisualise.PrintFilesAndFolder(ref currentPath, showHiddenFilesAndFolders);

@@ -76,7 +76,7 @@ namespace FileManager
             this.panelProterties.Location = new System.Drawing.Point(0, 25);
             this.panelProterties.Margin = new System.Windows.Forms.Padding(4);
             this.panelProterties.Name = "panelProterties";
-            this.panelProterties.Size = new System.Drawing.Size(339, 425);
+            this.panelProterties.Size = new System.Drawing.Size(339, 346);
             this.panelProterties.TabIndex = 4;
             // 
             // panelButtons
@@ -85,9 +85,9 @@ namespace FileManager
             this.panelButtons.Controls.Add(this.buttonCancel);
             this.panelButtons.Controls.Add(this.buttonOK);
             this.panelButtons.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelButtons.Location = new System.Drawing.Point(0, 450);
+            this.panelButtons.Location = new System.Drawing.Point(0, 371);
             this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Size = new System.Drawing.Size(339, 48);
+            this.panelButtons.Size = new System.Drawing.Size(339, 52);
             this.panelButtons.TabIndex = 5;
             // 
             // buttonCancel
@@ -120,7 +120,7 @@ namespace FileManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(339, 498);
+            this.ClientSize = new System.Drawing.Size(339, 423);
             this.Controls.Add(this.panelButtons);
             this.Controls.Add(this.panelProterties);
             this.Controls.Add(this.panelTop);
