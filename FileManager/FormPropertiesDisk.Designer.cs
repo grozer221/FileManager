@@ -108,7 +108,7 @@ namespace FileManager
             this.textBoxName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(47)))), ((int)(((byte)(61)))));
             this.textBoxName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxName.ForeColor = System.Drawing.Color.White;
-            this.textBoxName.Location = new System.Drawing.Point(119, 62);
+            this.textBoxName.Location = new System.Drawing.Point(97, 55);
             this.textBoxName.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.ReadOnly = true;
@@ -183,10 +183,10 @@ namespace FileManager
             // 
             // pictureBoxDisk
             // 
-            this.pictureBoxDisk.Location = new System.Drawing.Point(32, 17);
+            this.pictureBoxDisk.Location = new System.Drawing.Point(31, 17);
             this.pictureBoxDisk.Margin = new System.Windows.Forms.Padding(5);
             this.pictureBoxDisk.Name = "pictureBoxDisk";
-            this.pictureBoxDisk.Size = new System.Drawing.Size(71, 60);
+            this.pictureBoxDisk.Size = new System.Drawing.Size(59, 60);
             this.pictureBoxDisk.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxDisk.TabIndex = 25;
             this.pictureBoxDisk.TabStop = false;

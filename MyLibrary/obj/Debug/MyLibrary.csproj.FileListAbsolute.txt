@@ -6,3 +6,12 @@ C:\Users\ki201\Desktop\FileManager\MyLibrary\obj\Debug\MyLibrary.csproj.Generate
 C:\Users\ki201\Desktop\FileManager\MyLibrary\obj\Debug\MyLibrary.csproj.CoreCompileInputs.cache
 C:\Users\ki201\Desktop\FileManager\MyLibrary\obj\Debug\MyLibrary.dll
 C:\Users\ki201\Desktop\FileManager\MyLibrary\obj\Debug\MyLibrary.pdb
+C:\Users\ki201\Desktop\FileManager\MyLibrary\bin\Debug\System.Memory.dll
+C:\Users\ki201\Desktop\FileManager\MyLibrary\bin\Debug\System.Text.Json.dll
+C:\Users\ki201\Desktop\FileManager\MyLibrary\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\ki201\Desktop\FileManager\MyLibrary\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\ki201\Desktop\FileManager\MyLibrary\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\ki201\Desktop\FileManager\MyLibrary\bin\Debug\System.Buffers.dll
+C:\Users\ki201\Desktop\FileManager\MyLibrary\bin\Debug\System.Text.Encodings.Web.dll
+C:\Users\ki201\Desktop\FileManager\MyLibrary\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\ki201\Desktop\FileManager\MyLibrary\obj\Debug\MyLibrary.csproj.CopyComplete

@@ -118,7 +118,7 @@ namespace FileManager
             // 
             // FormProperties
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(339, 423);
             this.Controls.Add(this.panelButtons);
@@ -130,6 +130,8 @@ namespace FileManager
             this.Name = "FormProperties";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormProperties";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormProperties_FormClosing);
+            this.Load += new System.EventHandler(this.FormProperties_Load);
             this.panelTop.ResumeLayout(false);
             this.panelButtons.ResumeLayout(false);
             this.ResumeLayout(false);

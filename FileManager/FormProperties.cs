@@ -17,18 +17,6 @@ namespace FileManager
         {
             InitializeComponent();
             PathFileOrFolder = pathFileOrFolder;
-            if(Directory.GetParent(PathFileOrFolder) != null || File.Exists(PathFileOrFolder))
-            {
-                formPropertiesFileOrFolder = new FormPropertiesFileOrFolder(PathFileOrFolder);
-                openChildForm(formPropertiesFileOrFolder);
-                formPropertiesFileOrFolder.PrintProperties();
-            }
-            else
-            {
-                formPropertiesDisk = new FormPropertiesDisk(PathFileOrFolder);
-                openChildForm(formPropertiesDisk);
-                formPropertiesDisk.PrintProperties();
-            }
         }
 
         FormPropertiesFileOrFolder formPropertiesFileOrFolder;
@@ -94,6 +82,49 @@ namespace FileManager
             try{ ResultCheckBoxHidden = formPropertiesFileOrFolder.checkBoxMakeHidden.Checked; }
             catch { }
             this.Close();
+        }
+
+        private void FormProperties_Load(object sender, EventArgs e)
+        {
+            if (Directory.GetParent(PathFileOrFolder) != null || File.Exists(PathFileOrFolder))
+            {
+                formPropertiesFileOrFolder = new FormPropertiesFileOrFolder(PathFileOrFolder);
+                openChildForm(formPropertiesFileOrFolder);
+                formPropertiesFileOrFolder.PrintProperties();
+                Parallel.Invoke(new Action(() =>
+                {
+                    long folderSize = 0;
+                    formPropertiesFileOrFolder.GetFolderSize(PathFileOrFolder, ref folderSize);
+                }));  
+                
+            }
+            else
+            {
+                formPropertiesDisk = new FormPropertiesDisk(PathFileOrFolder);
+                openChildForm(formPropertiesDisk);
+                formPropertiesDisk.PrintProperties();
+            }
+        }
+
+        private void FormProperties_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (Directory.GetParent(PathFileOrFolder) != null || File.Exists(PathFileOrFolder))
+            {
+                if (ResultCheckBoxHidden)
+                {
+                    if (new FileInfo(PathFileOrFolder).Attributes.HasFlag(FileAttributes.Hidden))
+                        return;
+                    else
+                        File.SetAttributes(PathFileOrFolder, FileAttributes.Hidden);
+                }
+                else
+                {
+                    if (new FileInfo(PathFileOrFolder).Attributes.HasFlag(FileAttributes.Hidden))
+                        File.SetAttributes(PathFileOrFolder, FileAttributes.Normal);
+                    else
+                        return;
+                }
+            }
         }
     }
 }

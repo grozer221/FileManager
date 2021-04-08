@@ -54,11 +54,11 @@ namespace FileManager
             this.textBoxCreated.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(47)))), ((int)(((byte)(61)))));
             this.textBoxCreated.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxCreated.ForeColor = System.Drawing.Color.White;
-            this.textBoxCreated.Location = new System.Drawing.Point(145, 246);
+            this.textBoxCreated.Location = new System.Drawing.Point(114, 246);
             this.textBoxCreated.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxCreated.Name = "textBoxCreated";
             this.textBoxCreated.ReadOnly = true;
-            this.textBoxCreated.Size = new System.Drawing.Size(162, 15);
+            this.textBoxCreated.Size = new System.Drawing.Size(193, 15);
             this.textBoxCreated.TabIndex = 24;
             // 
             // textBoxLastTimeChanged
@@ -66,11 +66,11 @@ namespace FileManager
             this.textBoxLastTimeChanged.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(47)))), ((int)(((byte)(61)))));
             this.textBoxLastTimeChanged.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxLastTimeChanged.ForeColor = System.Drawing.Color.White;
-            this.textBoxLastTimeChanged.Location = new System.Drawing.Point(145, 219);
+            this.textBoxLastTimeChanged.Location = new System.Drawing.Point(114, 219);
             this.textBoxLastTimeChanged.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxLastTimeChanged.Name = "textBoxLastTimeChanged";
             this.textBoxLastTimeChanged.ReadOnly = true;
-            this.textBoxLastTimeChanged.Size = new System.Drawing.Size(162, 15);
+            this.textBoxLastTimeChanged.Size = new System.Drawing.Size(193, 15);
             this.textBoxLastTimeChanged.TabIndex = 23;
             // 
             // textBoxSize
@@ -78,11 +78,11 @@ namespace FileManager
             this.textBoxSize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(47)))), ((int)(((byte)(61)))));
             this.textBoxSize.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxSize.ForeColor = System.Drawing.Color.White;
-            this.textBoxSize.Location = new System.Drawing.Point(145, 165);
+            this.textBoxSize.Location = new System.Drawing.Point(114, 165);
             this.textBoxSize.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxSize.Name = "textBoxSize";
             this.textBoxSize.ReadOnly = true;
-            this.textBoxSize.Size = new System.Drawing.Size(162, 15);
+            this.textBoxSize.Size = new System.Drawing.Size(193, 15);
             this.textBoxSize.TabIndex = 22;
             // 
             // textBoxPath
@@ -90,11 +90,11 @@ namespace FileManager
             this.textBoxPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(47)))), ((int)(((byte)(61)))));
             this.textBoxPath.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxPath.ForeColor = System.Drawing.Color.White;
-            this.textBoxPath.Location = new System.Drawing.Point(145, 139);
+            this.textBoxPath.Location = new System.Drawing.Point(114, 139);
             this.textBoxPath.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxPath.Name = "textBoxPath";
             this.textBoxPath.ReadOnly = true;
-            this.textBoxPath.Size = new System.Drawing.Size(162, 15);
+            this.textBoxPath.Size = new System.Drawing.Size(193, 15);
             this.textBoxPath.TabIndex = 21;
             // 
             // textBoxType
@@ -102,18 +102,18 @@ namespace FileManager
             this.textBoxType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(47)))), ((int)(((byte)(61)))));
             this.textBoxType.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxType.ForeColor = System.Drawing.Color.White;
-            this.textBoxType.Location = new System.Drawing.Point(145, 113);
+            this.textBoxType.Location = new System.Drawing.Point(114, 113);
             this.textBoxType.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxType.Name = "textBoxType";
             this.textBoxType.ReadOnly = true;
-            this.textBoxType.Size = new System.Drawing.Size(162, 15);
+            this.textBoxType.Size = new System.Drawing.Size(193, 15);
             this.textBoxType.TabIndex = 20;
             // 
             // checkBoxMakeHidden
             // 
             this.checkBoxMakeHidden.AutoSize = true;
             this.checkBoxMakeHidden.ForeColor = System.Drawing.Color.White;
-            this.checkBoxMakeHidden.Location = new System.Drawing.Point(157, 308);
+            this.checkBoxMakeHidden.Location = new System.Drawing.Point(114, 308);
             this.checkBoxMakeHidden.Margin = new System.Windows.Forms.Padding(5);
             this.checkBoxMakeHidden.Name = "checkBoxMakeHidden";
             this.checkBoxMakeHidden.Size = new System.Drawing.Size(107, 20);
@@ -219,7 +219,7 @@ namespace FileManager
             this.textBoxName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(47)))), ((int)(((byte)(61)))));
             this.textBoxName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxName.ForeColor = System.Drawing.Color.White;
-            this.textBoxName.Location = new System.Drawing.Point(145, 56);
+            this.textBoxName.Location = new System.Drawing.Point(114, 55);
             this.textBoxName.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.ReadOnly = true;

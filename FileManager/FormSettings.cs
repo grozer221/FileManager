@@ -18,11 +18,10 @@ namespace FileManager
         }
 
         Point movePoint;
-        public bool OkOrCancel;
+        public bool ShowHiddenFilesAndFolders;
 
         private void buttonClose_Click(object sender, EventArgs e)
         {
-            OkOrCancel = false;
             this.Close();
         }
 
@@ -52,7 +51,10 @@ namespace FileManager
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            OkOrCancel = true;
+            if (checkBoxShowHiddenFilesAndFolders.Checked)
+                ShowHiddenFilesAndFolders = true;
+            else
+                ShowHiddenFilesAndFolders = false;
             this.Close();
         }
 

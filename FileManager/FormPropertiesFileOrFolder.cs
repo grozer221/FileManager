@@ -31,8 +31,7 @@ namespace FileManager
                 textBoxName.Text = dirInfo.Name;
                 textBoxType.Text = "Папка";
                 textBoxPath.Text = dirInfo.FullName;
-                long folderSize = 0;
-                GetFolderSize(dirInfo.FullName, ref folderSize);
+                textBoxSize.Text = "0 Б";
                 textBoxLastTimeChanged.Text = dirInfo.LastWriteTime.ToString();
                 textBoxCreated.Text = dirInfo.CreationTime.ToString();
                 checkBoxMakeHidden.Checked = dirInfo.Attributes.HasFlag(FileAttributes.Hidden);
