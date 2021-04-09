@@ -15,6 +15,7 @@ namespace FileManager
     public partial class FormPropertiesFileOrFolder : Form
     {
         public string PathFileOrFolder;
+        public bool IsHideRecursive = false;
 
         public FormPropertiesFileOrFolder(string PathFileOrFolder)
         {
@@ -71,9 +72,14 @@ namespace FileManager
             foreach (DirectoryInfo dir in dirs)
                 GetFolderSize(dir.FullName, ref folderSize);
             foreach (FileInfo file in files)
-            {
                 folderSize += file.Length;
-            }
+        }
+
+        private void checkBoxMakeHidden_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (checkBoxMakeHidden.Checked && Directory.Exists(PathFileOrFolder))
+                if (MessageBox.Show("Приховувати вкладені папки та файли?", "Питання", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    IsHideRecursive = true;
         }
     }
 }

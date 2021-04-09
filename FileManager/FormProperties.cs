@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MyLibrary;
 
 namespace FileManager
 {
@@ -26,6 +27,7 @@ namespace FileManager
         string PathFileOrFolder;
         private Form ActiveForm = null;
         public bool ResultCheckBoxHidden = false;
+        public bool IsHideRecursive = false;
 
         private void openChildForm(Form childForm)
         {
@@ -96,7 +98,6 @@ namespace FileManager
                     long folderSize = 0;
                     formPropertiesFileOrFolder.GetFolderSize(PathFileOrFolder, ref folderSize);
                 }));  
-                
             }
             else
             {
@@ -115,16 +116,18 @@ namespace FileManager
                     if (new FileInfo(PathFileOrFolder).Attributes.HasFlag(FileAttributes.Hidden))
                         return;
                     else
-                        File.SetAttributes(PathFileOrFolder, FileAttributes.Hidden);
+                        ClassFileManager.SetAttributesHidden(PathFileOrFolder, formPropertiesFileOrFolder.IsHideRecursive);
                 }
                 else
                 {
                     if (new FileInfo(PathFileOrFolder).Attributes.HasFlag(FileAttributes.Hidden))
-                        File.SetAttributes(PathFileOrFolder, FileAttributes.Normal);
+                        ClassFileManager.DeleteAttributesHidden(PathFileOrFolder, true);
                     else
                         return;
                 }
             }
         }
+
+        
     }
 }

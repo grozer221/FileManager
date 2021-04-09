@@ -58,7 +58,7 @@ namespace FileManager
             this.textBoxCreated.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxCreated.Name = "textBoxCreated";
             this.textBoxCreated.ReadOnly = true;
-            this.textBoxCreated.Size = new System.Drawing.Size(193, 15);
+            this.textBoxCreated.Size = new System.Drawing.Size(193, 19);
             this.textBoxCreated.TabIndex = 24;
             // 
             // textBoxLastTimeChanged
@@ -70,7 +70,7 @@ namespace FileManager
             this.textBoxLastTimeChanged.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxLastTimeChanged.Name = "textBoxLastTimeChanged";
             this.textBoxLastTimeChanged.ReadOnly = true;
-            this.textBoxLastTimeChanged.Size = new System.Drawing.Size(193, 15);
+            this.textBoxLastTimeChanged.Size = new System.Drawing.Size(193, 19);
             this.textBoxLastTimeChanged.TabIndex = 23;
             // 
             // textBoxSize
@@ -82,7 +82,7 @@ namespace FileManager
             this.textBoxSize.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxSize.Name = "textBoxSize";
             this.textBoxSize.ReadOnly = true;
-            this.textBoxSize.Size = new System.Drawing.Size(193, 15);
+            this.textBoxSize.Size = new System.Drawing.Size(193, 19);
             this.textBoxSize.TabIndex = 22;
             // 
             // textBoxPath
@@ -94,7 +94,7 @@ namespace FileManager
             this.textBoxPath.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxPath.Name = "textBoxPath";
             this.textBoxPath.ReadOnly = true;
-            this.textBoxPath.Size = new System.Drawing.Size(193, 15);
+            this.textBoxPath.Size = new System.Drawing.Size(193, 19);
             this.textBoxPath.TabIndex = 21;
             // 
             // textBoxType
@@ -106,7 +106,7 @@ namespace FileManager
             this.textBoxType.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxType.Name = "textBoxType";
             this.textBoxType.ReadOnly = true;
-            this.textBoxType.Size = new System.Drawing.Size(193, 15);
+            this.textBoxType.Size = new System.Drawing.Size(193, 19);
             this.textBoxType.TabIndex = 20;
             // 
             // checkBoxMakeHidden
@@ -116,10 +116,11 @@ namespace FileManager
             this.checkBoxMakeHidden.Location = new System.Drawing.Point(114, 308);
             this.checkBoxMakeHidden.Margin = new System.Windows.Forms.Padding(5);
             this.checkBoxMakeHidden.Name = "checkBoxMakeHidden";
-            this.checkBoxMakeHidden.Size = new System.Drawing.Size(107, 20);
+            this.checkBoxMakeHidden.Size = new System.Drawing.Size(132, 24);
             this.checkBoxMakeHidden.TabIndex = 19;
             this.checkBoxMakeHidden.Text = "Прихований";
             this.checkBoxMakeHidden.UseVisualStyleBackColor = true;
+            this.checkBoxMakeHidden.MouseClick += new System.Windows.Forms.MouseEventHandler(this.checkBoxMakeHidden_MouseClick);
             // 
             // label7
             // 
@@ -128,7 +129,7 @@ namespace FileManager
             this.label7.Location = new System.Drawing.Point(34, 308);
             this.label7.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(74, 16);
+            this.label7.Size = new System.Drawing.Size(94, 20);
             this.label7.TabIndex = 18;
             this.label7.Text = "Атрибути:";
             // 
@@ -139,7 +140,7 @@ namespace FileManager
             this.label6.Location = new System.Drawing.Point(34, 247);
             this.label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(75, 16);
+            this.label6.Size = new System.Drawing.Size(96, 20);
             this.label6.TabIndex = 17;
             this.label6.Text = "Створено:";
             // 
@@ -150,7 +151,7 @@ namespace FileManager
             this.label5.Location = new System.Drawing.Point(34, 221);
             this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(64, 16);
+            this.label5.Size = new System.Drawing.Size(82, 20);
             this.label5.TabIndex = 16;
             this.label5.Text = "Змінено:";
             // 
@@ -161,7 +162,7 @@ namespace FileManager
             this.label3.Location = new System.Drawing.Point(34, 165);
             this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 16);
+            this.label3.Size = new System.Drawing.Size(70, 20);
             this.label3.TabIndex = 15;
             this.label3.Text = "Розмір:";
             // 
@@ -172,7 +173,7 @@ namespace FileManager
             this.label2.Location = new System.Drawing.Point(34, 139);
             this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 16);
+            this.label2.Size = new System.Drawing.Size(56, 20);
             this.label2.TabIndex = 14;
             this.label2.Text = "Шлях:";
             // 
@@ -183,7 +184,7 @@ namespace FileManager
             this.label1.Location = new System.Drawing.Point(34, 113);
             this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 16);
+            this.label1.Size = new System.Drawing.Size(44, 20);
             this.label1.TabIndex = 13;
             this.label1.Text = "Тип:";
             // 
@@ -223,7 +224,7 @@ namespace FileManager
             this.textBoxName.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.ReadOnly = true;
-            this.textBoxName.Size = new System.Drawing.Size(162, 15);
+            this.textBoxName.Size = new System.Drawing.Size(162, 19);
             this.textBoxName.TabIndex = 9;
             // 
             // pictureBoxFileOrFolder
@@ -238,7 +239,7 @@ namespace FileManager
             // 
             // FormPropertiesFileOrFolder
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(47)))), ((int)(((byte)(61)))));
             this.ClientSize = new System.Drawing.Size(339, 346);

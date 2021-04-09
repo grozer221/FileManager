@@ -21,12 +21,12 @@ namespace FileManager
             InitializeComponent();
         }
 
-        public DataGridViewVisualise dataGridViewVisualise;
-        public string currentPath = null;
-        ContextMenuStripVisualise contextMenuFileManager;
-        ContextMenuStripVisualise contextMenuQuickAccess;
-        bool showHiddenFilesAndFolders = false;
-        Point movePoint;
+        private DataGridViewVisualise dataGridViewVisualise;
+        private string currentPath = null;
+        private ContextMenuStripVisualise contextMenuFileManager;
+        private ContextMenuStripVisualise contextMenuQuickAccess;
+        private bool showHiddenFilesAndFolders = false;
+        private Point movePoint;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -181,7 +181,7 @@ namespace FileManager
             if (currentPath == null)
                 dataGridViewVisualise.PrintDisks();
             else
-                dataGridViewVisualise.PrintFilesAndFolder(ref currentPath);
+                dataGridViewVisualise.PrintFilesAndFolder(ref currentPath, showHiddenFilesAndFolders);
         }
 
         private void DeleteToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -219,7 +219,7 @@ namespace FileManager
             {
                 if (dataGridViewFileManager[1, dataGridViewFileManager.Rows.Count - 1].Value == null)
                 {
-                    dataGridViewVisualise.PrintFilesAndFolder(ref currentPath);
+                    dataGridViewVisualise.PrintFilesAndFolder(ref currentPath, showHiddenFilesAndFolders);
                     return;
                 }
                 dataGridViewVisualise.CreateNewFolder(currentPath, dataGridViewFileManager[1, dataGridViewFileManager.Rows.Count - 1].Value.ToString());
@@ -294,7 +294,7 @@ namespace FileManager
                     else
                         MessageBox.Show("Невідома помилка", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                dataGridViewVisualise.PrintFilesAndFolder(ref currentPath);
+                dataGridViewVisualise.PrintFilesAndFolder(ref currentPath, showHiddenFilesAndFolders);
             }
         }
 

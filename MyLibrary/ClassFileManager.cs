@@ -253,5 +253,53 @@ namespace MyLibrary
             else
                 MessageBox.Show("Невідома помилка", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
+        public static void SetAttributesHidden(string path, bool recursive)
+        {
+            File.SetAttributes(path, FileAttributes.Hidden);
+            if (recursive)
+            {
+                DirectoryInfo dirInfo = new DirectoryInfo(path);
+                DirectoryInfo[] dirs;
+                FileInfo[] files;
+                try
+                {
+                    dirs = dirInfo.GetDirectories();
+                    files = dirInfo.GetFiles();
+                }
+                catch { return; }
+                foreach (DirectoryInfo dir in dirs)
+                {
+                    File.SetAttributes(dir.FullName, FileAttributes.Hidden);
+                    SetAttributesHidden(dir.FullName, recursive);
+                }
+                foreach (FileInfo file in files)
+                    File.SetAttributes(file.FullName, FileAttributes.Hidden);
+            }
+        }
+
+        public static void DeleteAttributesHidden(string path, bool recursive)
+        {
+            File.SetAttributes(path, FileAttributes.Normal);
+            if (recursive)
+            {
+                DirectoryInfo dirInfo = new DirectoryInfo(path);
+                DirectoryInfo[] dirs;
+                FileInfo[] files;
+                try
+                {
+                    dirs = dirInfo.GetDirectories();
+                    files = dirInfo.GetFiles();
+                }
+                catch { return; }
+                foreach (DirectoryInfo dir in dirs)
+                {
+                    File.SetAttributes(dir.FullName, FileAttributes.Normal);
+                    DeleteAttributesHidden(dir.FullName, recursive);
+                }
+                foreach (FileInfo file in files)
+                    File.SetAttributes(file.FullName, FileAttributes.Normal);
+            }
+        }
     }
 }

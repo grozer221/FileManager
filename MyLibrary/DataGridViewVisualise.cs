@@ -106,7 +106,7 @@ namespace MyLibrary
             try
             {
                 currentPath = Directory.GetParent(currentPath).FullName;
-                PrintFilesAndFolder(ref currentPath);
+                PrintFilesAndFolder(ref currentPath, showHiddenFilesAndFolders);
             }
             catch
             {
