@@ -77,5 +77,11 @@
   <ItemGroup>
     <None Include="Resources\folderWithOpacity.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PlumberGame.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PluberGame.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

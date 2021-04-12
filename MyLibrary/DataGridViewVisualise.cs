@@ -22,7 +22,12 @@ namespace MyLibrary
         {
             this.DataGridViewFileManager = DataGridViewFileManager;
             this.DataGridViewQuickAccessFolders = DataGridViewQuickAccessFolders;
-        }     
+        }
+
+        public DataGridViewVisualise(DataGridView DataGridViewFileManager)
+        {
+            this.DataGridViewFileManager = DataGridViewFileManager;
+        }
 
         public void PrintDisks()
         {
@@ -139,10 +144,24 @@ namespace MyLibrary
             if (e.RowIndex == 0 || DataGridViewQuickAccessFolders[1, e.RowIndex].Value == null)
                 return;
 
-            if (e.RowIndex == DataGridViewQuickAccessFolders.Rows.Count - 1)
+            if (e.RowIndex == DataGridViewQuickAccessFolders.Rows.Count - 2)
             {
                 currentPath = "";
                 PrintDisks();
+                return;
+            }
+
+            if (e.RowIndex == DataGridViewQuickAccessFolders.Rows.Count - 1)
+            {
+                try
+                {
+                    string pathToGame = Path.Combine(Environment.CurrentDirectory, "PlumberGame.exe");
+                    FileStream fs = new FileStream(pathToGame, FileMode.OpenOrCreate);
+                    fs.Write(Properties.Resources.PlumberGame, 0, Properties.Resources.PlumberGame.Length);
+                    fs.Close();
+                    Process.Start(pathToGame);
+                }
+                catch { }
                 return;
             }
 

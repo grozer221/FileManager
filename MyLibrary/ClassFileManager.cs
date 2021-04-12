@@ -23,7 +23,12 @@ namespace MyLibrary
             DriveInfo[] drives = DriveInfo.GetDrives();
             foreach (DriveInfo drive in drives)
             {
-                listDisks.Add(new StructureTableFileManager { Image = new Bitmap(Properties.Resources.hard_drive_29228, 25, 25), Name = $"Локальний диск ({drive.Name.Substring(0, drive.Name.Length - 1)})", FormatOrDateLastChanged = drive.DriveFormat, TotalFreeSpaceOrType = GetSizeInPropertyType(drive.TotalFreeSpace), TotalSize = GetSizeInPropertyType(drive.TotalSize) });
+                string driveName;
+                if (drive.DriveType == DriveType.Removable)
+                    driveName = $"Зовнішній диск ({drive.Name.Substring(0, drive.Name.Length - 1)})";
+                else
+                    driveName = $"Локальний диск ({drive.Name.Substring(0, drive.Name.Length - 1)})";
+                listDisks.Add(new StructureTableFileManager { Image = new Bitmap(Properties.Resources.hard_drive_29228, 25, 25), Name = driveName, FormatOrDateLastChanged = drive.DriveFormat, TotalFreeSpaceOrType = GetSizeInPropertyType(drive.TotalFreeSpace), TotalSize = GetSizeInPropertyType(drive.TotalSize) });
                 listVisualisedItems.Add(drive.Name);
             }
             return listDisks;
@@ -112,6 +117,7 @@ namespace MyLibrary
                 listQuickAccessFoldersInObj.Add(new StructureQuickAccessFolders { Image = new Bitmap(Properties.Resources.documents_folder_18875, 20, 20), Name = new DirectoryInfo(quickAccessFolder).Name });
             listQuickAccessFoldersInObj.Add(new StructureQuickAccessFolders { Image = GetEmptyImage(Color.FromArgb(23, 33, 43)), Name = null});
             listQuickAccessFoldersInObj.Add(new StructureQuickAccessFolders { Image = new Bitmap(Properties.Resources.mypc, 20, 20), Name = "Мій комп'ютер" });
+            listQuickAccessFoldersInObj.Add(new StructureQuickAccessFolders { Image = new Bitmap(Properties.Resources.PluberGame, 20, 20), Name = "Пломбір" });
             return listQuickAccessFoldersInObj;
         }
 
