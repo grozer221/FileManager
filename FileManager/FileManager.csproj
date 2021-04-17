@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>file-explorer.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,51 +50,57 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormFileManager.cs">
+    <Compile Include="Controlers\ClassFileManager.cs" />
+    <Compile Include="Controlers\ContextMenuStripVisualise.cs" />
+    <Compile Include="Controlers\DataGridViewVisualise.cs" />
+    <Compile Include="Forms\FormFileManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormFileManager.Designer.cs">
+    <Compile Include="Forms\FormFileManager.Designer.cs">
       <DependentUpon>FormFileManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormProperties.cs">
+    <Compile Include="Forms\FormProperties.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormProperties.Designer.cs">
+    <Compile Include="Forms\FormProperties.Designer.cs">
       <DependentUpon>FormProperties.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormPropertiesDisk.cs">
+    <Compile Include="Forms\FormPropertiesDisk.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormPropertiesDisk.Designer.cs">
+    <Compile Include="Forms\FormPropertiesDisk.Designer.cs">
       <DependentUpon>FormPropertiesDisk.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormPropertiesFileOrFolder.cs">
+    <Compile Include="Forms\FormPropertiesFileOrFolder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormPropertiesFileOrFolder.Designer.cs">
+    <Compile Include="Forms\FormPropertiesFileOrFolder.Designer.cs">
       <DependentUpon>FormPropertiesFileOrFolder.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormSettings.cs">
+    <Compile Include="Forms\FormSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormSettings.Designer.cs">
+    <Compile Include="Forms\FormSettings.Designer.cs">
       <DependentUpon>FormSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModelQuickAccess.cs" />
+    <Compile Include="Models\ModelFileManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormFileManager.resx">
+    <Compile Include="Settings.cs" />
+    <EmbeddedResource Include="Forms\FormFileManager.resx">
       <DependentUpon>FormFileManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormProperties.resx">
+    <EmbeddedResource Include="Forms\FormProperties.resx">
       <DependentUpon>FormProperties.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormPropertiesDisk.resx">
+    <EmbeddedResource Include="Forms\FormPropertiesDisk.resx">
       <DependentUpon>FormPropertiesDisk.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormPropertiesFileOrFolder.resx">
+    <EmbeddedResource Include="Forms\FormPropertiesFileOrFolder.resx">
       <DependentUpon>FormPropertiesFileOrFolder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormSettings.resx">
+    <EmbeddedResource Include="Forms\FormSettings.resx">
       <DependentUpon>FormSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -127,16 +136,31 @@
     <None Include="Resources\searchzoomflat_106031.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MyLibrary\MyLibrary.csproj">
-      <Project>{7472d37a-ec25-4841-a538-bfa934872587}</Project>
-      <Name>MyLibrary</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\settings.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\documents_folder_18875.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folderWithOpacity.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\googledrive.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\hard_drive_29228.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mypc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PluberGame.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\PlumberGame.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="file-explorer.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

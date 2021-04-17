@@ -22,5 +22,17 @@ namespace FileManager.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowHiddenFiles {
+            get {
+                return ((bool)(this["ShowHiddenFiles"]));
+            }
+            set {
+                this["ShowHiddenFiles"] = value;
+            }
+        }
     }
 }
