@@ -34,7 +34,6 @@ namespace FileManager
             contextMenuQuickAccess = new ContextMenuStripVisualise(contextMenuStripQuickAccess, dataGridViewQuickAccessFolders);
             ReloadToolStripMenuItem_Click(null, null);
             textBoxPath_TextChanged(null, null);
-            dataGridViewVisualise.GetListQuickAccessFoldersFromFile();
             dataGridViewVisualise.PrintQuickAccessFolders();
         }
 
@@ -311,6 +310,7 @@ namespace FileManager
             if (formSettings.IsPresedButtonCancel)
                 return;
             Properties.Settings.Default.ShowHiddenFiles = formSettings.ShowHiddenFilesAndFolders;
+            Properties.Settings.Default.Save();
 
             if (currentPath != null)
                 dataGridViewVisualise.PrintFilesAndFolder(ref currentPath, Properties.Settings.Default.ShowHiddenFiles);

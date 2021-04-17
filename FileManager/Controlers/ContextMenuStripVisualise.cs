@@ -100,7 +100,7 @@ namespace MyLibrary
 
         public void VisualiseContextMenuForQuickAccess(DataGridViewCellMouseEventArgs e)
         {
-            if(e.RowIndex == 0 || DataGrid.RowCount - 1 == e.RowIndex || DataGrid.RowCount - 2 == e.RowIndex)
+            if(e.RowIndex == 0 || e.RowIndex >= DataGrid.RowCount - 3)
                 ContextMenu.Items[menuItem[0].Name].Enabled = false;
             else
                 ContextMenu.Items[menuItem[0].Name].Enabled = true;

@@ -34,5 +34,16 @@ namespace FileManager.Properties {
                 this["ShowHiddenFiles"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Generic.List<System.String> ListQuickAccessFolder {
+            get {
+                return ((global::System.Collections.Generic.List<System.String>)(this["ListQuickAccessFolder"]));
+            }
+            set {
+                this["ListQuickAccessFolder"] = value;
+            }
+        }
     }
 }

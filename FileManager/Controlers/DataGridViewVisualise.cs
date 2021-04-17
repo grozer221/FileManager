@@ -161,7 +161,7 @@ namespace MyLibrary
                 return;
             }
 
-            if (!Directory.Exists(GetListQuickAccessFolders()[e.RowIndex - 1]))
+            if (!Directory.Exists(FileManager.Properties.Settings.Default.ListQuickAccessFolder[e.RowIndex - 1]))
             {
                 if (MessageBox.Show("Дана папка була видалена.\nВидалили із швидкого доступу?", "Попередження", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                 {
@@ -171,7 +171,7 @@ namespace MyLibrary
                 return;
             }
 
-            currentPath = GetListQuickAccessFolders()[e.RowIndex - 1];
+            currentPath = FileManager.Properties.Settings.Default.ListQuickAccessFolder[e.RowIndex - 1];
             PrintFilesAndFolder(ref currentPath, showHiddenFilesAndFolders);
         }
 

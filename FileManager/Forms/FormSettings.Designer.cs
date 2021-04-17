@@ -156,8 +156,8 @@ namespace FileManager
         private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Panel panelSettings;
         private System.Windows.Forms.Button buttonClose;
-        private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button buttonCancel;
+        public System.Windows.Forms.Button buttonOK;
     }
 }

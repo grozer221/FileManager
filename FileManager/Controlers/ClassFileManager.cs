@@ -8,7 +8,6 @@ namespace MyLibrary
 {
     public class ClassFileManager
     {
-        private List<string> ListQuickAccessFolders = new List<string>();
         private List<string> ListPathsToCopiedFoldersAndFiles;
 
         public List<ModelFileManager> GetDisksInListOfObj(ref List<string> listVisualisedItems)
@@ -92,25 +91,13 @@ namespace MyLibrary
                 return fileLength + " Б";
         }
 
-        public List<string> GetListQuickAccessFolders()
-        {
-            return ListQuickAccessFolders;
-        }
-
-        public void GetListQuickAccessFoldersFromFile()
-        {
-            using (FileStream fs = new FileStream(Path.Combine(Environment.CurrentDirectory, "ListQuickAccessFolders.txt"), FileMode.OpenOrCreate))
-                using (StreamReader stream = new StreamReader(fs))
-                    while (!stream.EndOfStream)
-                       ListQuickAccessFolders.Add(stream.ReadLine());
-        }
-
         public List<ModelQuickAccess> GetQuickAccessFoldersInObjs()
         {
             List<ModelQuickAccess> listQuickAccessFoldersInObj = new List<ModelQuickAccess>();
             listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = GetEmptyImage(Color.FromArgb(23, 33, 43)), Name = "Швидкий доступ" });
-            foreach (string quickAccessFolder in ListQuickAccessFolders)
-                listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = new Bitmap(FileManager.Properties.Resources.documents_folder_18875, 20, 20), Name = new DirectoryInfo(quickAccessFolder).Name });
+            if(FileManager.Properties.Settings.Default.ListQuickAccessFolder != null)
+                foreach (string quickAccessFolder in FileManager.Properties.Settings.Default.ListQuickAccessFolder)
+                    listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = new Bitmap(FileManager.Properties.Resources.documents_folder_18875, 20, 20), Name = new DirectoryInfo(quickAccessFolder).Name });
             listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = GetEmptyImage(Color.FromArgb(23, 33, 43)), Name = null});
             listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = new Bitmap(FileManager.Properties.Resources.mypc, 20, 20), Name = "Мій комп'ютер" });
             listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = new Bitmap(FileManager.Properties.Resources.PluberGame, 20, 20), Name = "Пломбір" });
@@ -119,25 +106,25 @@ namespace MyLibrary
 
         public void AddQuickAccessFolderToList(string pathSelectedFolder)
         {
-            foreach (string folder in ListQuickAccessFolders)
-            {
-                if (folder == pathSelectedFolder)
+            if (FileManager.Properties.Settings.Default.ListQuickAccessFolder != null)
+                foreach (string folder in FileManager.Properties.Settings.Default.ListQuickAccessFolder)
                 {
-                    MessageBox.Show($"Дана папка в швидкому доступі уже існує", "Попередження", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    if (folder == pathSelectedFolder)
+                    {
+                        MessageBox.Show($"Дана папка в швидкому доступі уже існує", "Попередження", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                 }
-            }
-            using (StreamWriter stream = new StreamWriter(Path.Combine(Environment.CurrentDirectory, "ListQuickAccessFolders.txt"), true))
-                stream.WriteLine(pathSelectedFolder);
-            ListQuickAccessFolders.Add(pathSelectedFolder);
+            else
+                FileManager.Properties.Settings.Default.ListQuickAccessFolder = new List<string>();
+            FileManager.Properties.Settings.Default.ListQuickAccessFolder.Add(pathSelectedFolder);
+            FileManager.Properties.Settings.Default.Save();
         }
 
         public void RemoveQuickAccessFolder(int selectedRowIndex)
         {
-            ListQuickAccessFolders.RemoveAt(selectedRowIndex);
-            using (StreamWriter stream = new StreamWriter(Path.Combine(Environment.CurrentDirectory, "ListQuickAccessFolders.txt"), false))
-                foreach (string folder in ListQuickAccessFolders)
-                    stream.WriteLine(folder);
+            FileManager.Properties.Settings.Default.ListQuickAccessFolder.RemoveAt(selectedRowIndex);
+            FileManager.Properties.Settings.Default.Save();
         }
 
         public void GetFilesAndFolderForCopyFromDataGrid(string currenPath, DataGridView dataGridView)
