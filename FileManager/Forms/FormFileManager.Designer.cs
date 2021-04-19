@@ -37,12 +37,15 @@ namespace FileManager
             this.buttonHide = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
             this.panelQuickAccess = new System.Windows.Forms.Panel();
+            this.pictureBoxSettings = new System.Windows.Forms.PictureBox();
             this.dataGridViewQuickAccessFolders = new System.Windows.Forms.DataGridView();
             this.contextMenuStripQuickAccess = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.DeleteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.panelFileManager = new System.Windows.Forms.Panel();
             this.labelEnterTextBoxError = new System.Windows.Forms.Label();
             this.panelUnderTextBoxPath = new System.Windows.Forms.Panel();
+            this.pictureBoxSearch = new System.Windows.Forms.PictureBox();
+            this.pictureBoxStepBack = new System.Windows.Forms.PictureBox();
             this.textBoxPath = new System.Windows.Forms.TextBox();
             this.dataGridViewFileManager = new System.Windows.Forms.DataGridView();
             this.contextMenuStripFileManager = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -54,25 +57,24 @@ namespace FileManager
             this.NewFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RenameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBoxSearch = new System.Windows.Forms.PictureBox();
-            this.pictureBoxStepBack = new System.Windows.Forms.PictureBox();
-            this.pictureBoxSettings = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             this.panelQuickAccess.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSettings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewQuickAccessFolders)).BeginInit();
             this.contextMenuStripQuickAccess.SuspendLayout();
             this.panelFileManager.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFileManager)).BeginInit();
-            this.contextMenuStripFileManager.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSearch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStepBack)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSettings)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFileManager)).BeginInit();
+            this.contextMenuStripFileManager.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTop
             // 
             this.panelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(41)))), ((int)(((byte)(54)))));
             this.panelTop.Controls.Add(this.buttonHide);
+            this.panelTop.Controls.Add(this.label1);
             this.panelTop.Controls.Add(this.buttonClose);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -127,6 +129,18 @@ namespace FileManager
             this.panelQuickAccess.Name = "panelQuickAccess";
             this.panelQuickAccess.Size = new System.Drawing.Size(223, 644);
             this.panelQuickAccess.TabIndex = 1;
+            // 
+            // pictureBoxSettings
+            // 
+            this.pictureBoxSettings.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxSettings.Image = global::FileManager.Properties.Resources.settings;
+            this.pictureBoxSettings.Location = new System.Drawing.Point(9, 606);
+            this.pictureBoxSettings.Name = "pictureBoxSettings";
+            this.pictureBoxSettings.Size = new System.Drawing.Size(32, 29);
+            this.pictureBoxSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxSettings.TabIndex = 1;
+            this.pictureBoxSettings.TabStop = false;
+            this.pictureBoxSettings.Click += new System.EventHandler(this.pictureBoxSettings_Click);
             // 
             // dataGridViewQuickAccessFolders
             // 
@@ -213,6 +227,32 @@ namespace FileManager
             this.panelUnderTextBoxPath.Name = "panelUnderTextBoxPath";
             this.panelUnderTextBoxPath.Size = new System.Drawing.Size(675, 1);
             this.panelUnderTextBoxPath.TabIndex = 4;
+            // 
+            // pictureBoxSearch
+            // 
+            this.pictureBoxSearch.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxSearch.Image = global::FileManager.Properties.Resources.searchzoomflat_106031;
+            this.pictureBoxSearch.Location = new System.Drawing.Point(718, 61);
+            this.pictureBoxSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pictureBoxSearch.Name = "pictureBoxSearch";
+            this.pictureBoxSearch.Size = new System.Drawing.Size(33, 27);
+            this.pictureBoxSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxSearch.TabIndex = 3;
+            this.pictureBoxSearch.TabStop = false;
+            this.pictureBoxSearch.Click += new System.EventHandler(this.pictureBoxSearch_Click);
+            // 
+            // pictureBoxStepBack
+            // 
+            this.pictureBoxStepBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxStepBack.Image = global::FileManager.Properties.Resources._1486564726_undo_back_81536;
+            this.pictureBoxStepBack.Location = new System.Drawing.Point(3, 61);
+            this.pictureBoxStepBack.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pictureBoxStepBack.Name = "pictureBoxStepBack";
+            this.pictureBoxStepBack.Size = new System.Drawing.Size(30, 27);
+            this.pictureBoxStepBack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxStepBack.TabIndex = 2;
+            this.pictureBoxStepBack.TabStop = false;
+            this.pictureBoxStepBack.Click += new System.EventHandler(this.pictureBoxStepBack_Click);
             // 
             // textBoxPath
             // 
@@ -337,43 +377,16 @@ namespace FileManager
             this.PropertiesToolStripMenuItem.Text = "Властивості";
             this.PropertiesToolStripMenuItem.Click += new System.EventHandler(this.PropertiesToolStripMenuItem_Click);
             // 
-            // pictureBoxSearch
+            // label1
             // 
-            this.pictureBoxSearch.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxSearch.Image = global::FileManager.Properties.Resources.searchzoomflat_106031;
-            this.pictureBoxSearch.Location = new System.Drawing.Point(718, 61);
-            this.pictureBoxSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.pictureBoxSearch.Name = "pictureBoxSearch";
-            this.pictureBoxSearch.Size = new System.Drawing.Size(33, 27);
-            this.pictureBoxSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxSearch.TabIndex = 3;
-            this.pictureBoxSearch.TabStop = false;
-            this.pictureBoxSearch.Click += new System.EventHandler(this.pictureBoxSearch_Click);
-            // 
-            // pictureBoxStepBack
-            // 
-            this.pictureBoxStepBack.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxStepBack.Image = global::FileManager.Properties.Resources._1486564726_undo_back_81536;
-            this.pictureBoxStepBack.Location = new System.Drawing.Point(3, 61);
-            this.pictureBoxStepBack.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.pictureBoxStepBack.Name = "pictureBoxStepBack";
-            this.pictureBoxStepBack.Size = new System.Drawing.Size(30, 27);
-            this.pictureBoxStepBack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxStepBack.TabIndex = 2;
-            this.pictureBoxStepBack.TabStop = false;
-            this.pictureBoxStepBack.Click += new System.EventHandler(this.pictureBoxStepBack_Click);
-            // 
-            // pictureBoxSettings
-            // 
-            this.pictureBoxSettings.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxSettings.Image = global::FileManager.Properties.Resources.settings;
-            this.pictureBoxSettings.Location = new System.Drawing.Point(5, 5);
-            this.pictureBoxSettings.Name = "pictureBoxSettings";
-            this.pictureBoxSettings.Size = new System.Drawing.Size(25, 25);
-            this.pictureBoxSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxSettings.TabIndex = 1;
-            this.pictureBoxSettings.TabStop = false;
-            this.pictureBoxSettings.Click += new System.EventHandler(this.pictureBoxSettings_Click);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(3, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(86, 17);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "FileManager";
             // 
             // FormFileManager
             // 
@@ -392,16 +405,17 @@ namespace FileManager
             this.Text = "File Manager by Grozer";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panelTop.ResumeLayout(false);
+            this.panelTop.PerformLayout();
             this.panelQuickAccess.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSettings)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewQuickAccessFolders)).EndInit();
             this.contextMenuStripQuickAccess.ResumeLayout(false);
             this.panelFileManager.ResumeLayout(false);
             this.panelFileManager.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFileManager)).EndInit();
-            this.contextMenuStripFileManager.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSearch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStepBack)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSettings)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFileManager)).EndInit();
+            this.contextMenuStripFileManager.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -432,6 +446,7 @@ namespace FileManager
         private System.Windows.Forms.Label labelEnterTextBoxError;
         private System.Windows.Forms.PictureBox pictureBoxSettings;
         private System.Windows.Forms.ToolStripMenuItem PropertiesToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
     }
 }
 

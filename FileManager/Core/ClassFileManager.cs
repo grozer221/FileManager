@@ -61,7 +61,13 @@ namespace MyLibrary
 
                 if (!showHiddenFilesAndFolders && file.Attributes.HasFlag(FileAttributes.Hidden))
                     continue;
-                listFilesAndFolders.Add(new ModelFileManager { Image = new Bitmap(Icon.ExtractAssociatedIcon(file.FullName).ToBitmap(), 20, 20), Name = file.Name, FormatOrDateLastChanged = file.LastWriteTime.ToString(), TotalFreeSpaceOrType = "Файл", TotalSize = GetSizeInPropertyType(file.Length) });
+
+                Bitmap bitmap;
+                if (file.Attributes.HasFlag(FileAttributes.Hidden))
+                    bitmap = ToDarkerColor(new Bitmap(Icon.ExtractAssociatedIcon(file.FullName).ToBitmap(), 20, 20));
+                else
+                    bitmap = new Bitmap(Icon.ExtractAssociatedIcon(file.FullName).ToBitmap(), 20, 20);
+                listFilesAndFolders.Add(new ModelFileManager { Image = bitmap, Name = file.Name, FormatOrDateLastChanged = file.LastWriteTime.ToString(), TotalFreeSpaceOrType = "Файл", TotalSize = GetSizeInPropertyType(file.Length) });
                 listVisualisedItems.Add(file.FullName);
             }
 
@@ -69,6 +75,17 @@ namespace MyLibrary
                 listFilesAndFolders.Add(new ModelFileManager { Image = new Bitmap(FileManager.Properties.Resources.documents_folder_18875, 20, 20) });
 
             return listFilesAndFolders;
+        }
+
+        public Bitmap ToDarkerColor(Bitmap bitmap)
+        {
+            for (int y = 0; y < bitmap.Height; y++)
+                for (int x = 0; x < bitmap.Width; x++)
+                {
+                    var pixel = bitmap.GetPixel(x, y);
+                    bitmap.SetPixel(x, y, Color.FromArgb(pixel.A, pixel.R > 60 ? pixel.R - 60 : 0, pixel.G > 60 ? pixel.G - 60 : 0, pixel.B > 60 ? pixel.B - 60 : 0));
+                }
+            return bitmap;
         }
 
         public Bitmap GetEmptyImage(Color color)

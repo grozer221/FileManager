@@ -50,9 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controlers\ClassFileManager.cs" />
-    <Compile Include="Controlers\ContextMenuStripVisualise.cs" />
-    <Compile Include="Controlers\DataGridViewVisualise.cs" />
+    <Compile Include="Core\ClassFileManager.cs" />
+    <Compile Include="Core\ContextMenuStripVisualise.cs" />
+    <Compile Include="Core\DataGridViewVisualise.cs" />
     <Compile Include="Forms\FormFileManager.cs">
       <SubType>Form</SubType>
     </Compile>
