@@ -88,11 +88,6 @@ namespace FileManager
                 formPropertiesFileOrFolder = new FormPropertiesFileOrFolder(PathFileOrFolder);
                 openChildForm(formPropertiesFileOrFolder);
                 formPropertiesFileOrFolder.PrintProperties();
-                Parallel.Invoke(new Action(() =>
-                {
-                    long folderSize = 0;
-                    formPropertiesFileOrFolder.GetFolderSize(PathFileOrFolder, ref folderSize);
-                }));  
             }
             else
             {

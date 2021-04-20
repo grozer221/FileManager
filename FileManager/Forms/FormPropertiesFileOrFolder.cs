@@ -1,6 +1,9 @@
 ﻿using MyLibrary;
+using System;
 using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace FileManager
@@ -26,6 +29,13 @@ namespace FileManager
                 textBoxType.Text = "Папка";
                 textBoxPath.Text = dirInfo.FullName;
                 textBoxSize.Text = "0 Б";
+                Thread thread = new Thread(() =>
+                {
+                    GetDirectorySizeAndPrintInTxtBox(dirInfo.FullName);
+                    textBoxSize.Text = ClassFileManager.GetSizeInPropertyType(DirectorySize);
+                });
+                thread.IsBackground = true;
+                thread.Start();
                 textBoxLastTimeChanged.Text = dirInfo.LastWriteTime.ToString();
                 textBoxCreated.Text = dirInfo.CreationTime.ToString();
                 checkBoxMakeHidden.Checked = dirInfo.Attributes.HasFlag(FileAttributes.Hidden);
@@ -46,7 +56,8 @@ namespace FileManager
                 MessageBox.Show($"Файла або папки не існує", "Попередження", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
-        public void GetFolderSize(string path, ref long folderSize)
+        private long DirectorySize = 0;
+        public void GetDirectorySizeAndPrintInTxtBox(string path)
         {
             DirectoryInfo dirInfo = new DirectoryInfo(path);
             DirectoryInfo[] dirs;
@@ -56,16 +67,16 @@ namespace FileManager
                 dirs = dirInfo.GetDirectories();
                 files = dirInfo.GetFiles();
             }
-            catch 
-            {
-                return;
-            }
-           
-            textBoxSize.Text = ClassFileManager.GetSizeInPropertyType(folderSize);
+            catch { return; }
+
             foreach (DirectoryInfo dir in dirs)
-                GetFolderSize(dir.FullName, ref folderSize);
+                GetDirectorySizeAndPrintInTxtBox(dir.FullName);
             foreach (FileInfo file in files)
-                folderSize += file.Length;
+                DirectorySize += file.Length;
+
+            textBoxSize.Invoke(new Action(() => {
+                textBoxSize.Text = ClassFileManager.GetSizeInPropertyType(DirectorySize);
+            }));
         }
 
         private void checkBoxMakeHidden_MouseClick(object sender, MouseEventArgs e)
