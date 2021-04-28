@@ -221,7 +221,7 @@ namespace FileManager
             {
                 dataGridViewVisualise.RenameFileOrFolderInDataGrid(ref currentPath, e, Properties.Settings.Default.ShowHiddenFiles);
             }
-            BeginInvoke(new MethodInvoker(delegate { dataGridViewVisualise.PrintFilesAndFolder(ref currentPath, Properties.Settings.Default.ShowHiddenFiles); }));
+            dataGridViewVisualise.PrintFilesAndFolder(ref currentPath, Properties.Settings.Default.ShowHiddenFiles);
         }
 
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
