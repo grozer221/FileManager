@@ -1,5 +1,6 @@
 ﻿using MyLibrary;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text;
@@ -20,6 +21,8 @@ namespace FileManager
         private ContextMenuStripVisualise contextMenuFileManager;
         private ContextMenuStripVisualise contextMenuQuickAccess;
         private Point movePoint;
+        private List<string> ListPathsToCopiedFoldersAndFiles;
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -91,7 +94,7 @@ namespace FileManager
         private void pictureBoxStepBack_Click(object sender, EventArgs e)
         {
             dataGridViewVisualise.StepBack(ref currentPath, Properties.Settings.Default.ShowHiddenFiles);
-            contextMenuFileManager.VisualiseContextMenuForFileManagerNoneCellClick(currentPath, dataGridViewVisualise.GetCollectionPathsToCopiedFoldersAndFiles());
+            contextMenuFileManager.VisualiseContextMenuForFileManagerNoneCellClick(dataGridViewFileManager, currentPath, ListPathsToCopiedFoldersAndFiles);
             textBoxPath.Text = currentPath;
             labelEnterTextBoxError.Visible = false;
         }
@@ -101,7 +104,7 @@ namespace FileManager
             dataGridViewFileManager.EndEdit();
 
             if (e.Button == MouseButtons.Right)
-                contextMenuFileManager.VisualiseContextMenuForFileManagerNoneCellClick(currentPath, dataGridViewVisualise.GetCollectionPathsToCopiedFoldersAndFiles());
+                contextMenuFileManager.VisualiseContextMenuForFileManagerNoneCellClick(dataGridViewFileManager, currentPath, ListPathsToCopiedFoldersAndFiles);
         }
 
         private void dataGridViewFileManager_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
@@ -112,7 +115,7 @@ namespace FileManager
                     dataGridViewFileManager.ClearSelection();
                 dataGridViewFileManager.Rows[e.RowIndex].Selected = true;
 
-                contextMenuFileManager.VisualiseContextMenuForFileManagerCellClick(dataGridViewFileManager, currentPath, dataGridViewVisualise.GetCollectionPathsToCopiedFoldersAndFiles());
+                contextMenuFileManager.VisualiseContextMenuForFileManagerCellClick(dataGridViewFileManager, currentPath, ListPathsToCopiedFoldersAndFiles);
             }
         }
 
@@ -153,12 +156,12 @@ namespace FileManager
 
         private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dataGridViewVisualise.GetFilesAndFolderForCopyFromDataGrid(currentPath, dataGridViewFileManager);
+            ListPathsToCopiedFoldersAndFiles = dataGridViewVisualise.GetSelectedFilesInDataGrid(currentPath, dataGridViewFileManager);
         }
 
         private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dataGridViewVisualise.PasteCopiedFoldersAndFile(currentPath);
+            dataGridViewVisualise.PasteCopiedFoldersAndFile(currentPath, ListPathsToCopiedFoldersAndFiles);
             ReloadToolStripMenuItem_Click(null, null);
         }
 
@@ -251,7 +254,7 @@ namespace FileManager
 
             if (e.Control && e.KeyCode == Keys.V)
             {
-                if (dataGridViewVisualise.GetCollectionPathsToCopiedFoldersAndFiles() == null)
+                if (ListPathsToCopiedFoldersAndFiles == null)
                     return;
                 if (currentPath != null)
                     PasteToolStripMenuItem_Click(sender, e);
@@ -324,6 +327,34 @@ namespace FileManager
 
             if (currentPath != null)
                 dataGridViewVisualise.PrintFilesAndFolder(ref currentPath, Properties.Settings.Default.ShowHiddenFiles);
+        }
+
+        private void ArchivateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<string> ListSelectedFile = dataGridViewVisualise.GetSelectedFilesInDataGrid(currentPath, dataGridViewFileManager);
+            FormCreateArchive formCreateArchive = new FormCreateArchive(ListSelectedFile.Count == 1 ? File.Exists(ListSelectedFile[0]) ? new FileInfo(ListSelectedFile[0]).Name : new DirectoryInfo(ListSelectedFile[0]).Name : null);
+            formCreateArchive.ShowDialog();
+            if (!formCreateArchive.OkOrCancel)
+                return;
+            string archiveName = Directory.GetParent(ListSelectedFile[0]).FullName + "\\" + formCreateArchive.textBoxArchiveName.Text + ".rar";
+            Thread thread = new Thread(() =>
+            {
+                ClassFileManager.CompressFiles(ListSelectedFile, archiveName);
+                ReloadToolStripMenuItem_Click(null, null);
+            });
+            thread.IsBackground = true;
+            thread.Start();
+        }
+
+        private void UnArchivateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Thread thread = new Thread(() =>
+            {
+                ClassFileManager.DecompressFiles(dataGridViewVisualise.ListVisualisedItems[dataGridViewFileManager.SelectedRows[0].Index - 1], dataGridViewFileManager);
+                dataGridViewFileManager.Invoke(new Action(() => ReloadToolStripMenuItem_Click(null, null)));
+            });
+            thread.IsBackground = true;
+            thread.Start();
         }
     }
 }

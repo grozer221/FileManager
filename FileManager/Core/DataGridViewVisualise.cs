@@ -12,7 +12,7 @@ namespace MyLibrary
 
         private DataGridView DataGridViewFileManager;
         private DataGridView DataGridViewQuickAccessFolders;
-        private List<string> ListVisualisedItems = new List<string>();
+        public List<string> ListVisualisedItems = new List<string>();
 
         public DataGridViewVisualise(DataGridView DataGridViewFileManager, DataGridView DataGridViewQuickAccessFolders)
         {
@@ -42,7 +42,8 @@ namespace MyLibrary
             catch(Exception e)
             {
                 MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                currentPath = Directory.GetParent(currentPath).ToString();
+                try { currentPath = Directory.GetParent(currentPath).ToString(); }
+                catch { return; }
                 PrintFilesAndFolder(ref currentPath, showHiddenFilesAndFolders);
             }
             SetSizeForDataGrid();
@@ -217,6 +218,18 @@ namespace MyLibrary
                 return;
             }
             RenameFolderOfFile(ListVisualisedItems[e.RowIndex - 1], Path.Combine(currentPath, DataGridViewFileManager[e.ColumnIndex, e.RowIndex].Value.ToString()));
+        }
+
+        public List<string> GetSelectedFilesInDataGrid(string currenPath, DataGridView dataGridView)
+        {
+            List<string> ListPathsToCopiedFoldersAndFiles = new List<string>();
+            for (int i = 0; i < dataGridView.SelectedRows.Count; i++)
+            {
+                if (dataGridView.SelectedRows[i].Index == 0)
+                    continue;
+                ListPathsToCopiedFoldersAndFiles.Add(Path.Combine(currenPath, dataGridView[1, dataGridView.SelectedRows[i].Index].Value.ToString()));
+            }
+            return ListPathsToCopiedFoldersAndFiles;
         }
     }
 }

@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
+using Ionic.Zip;
 
 namespace MyLibrary
 {
     public class ClassFileManager
     {
-        private List<string> ListPathsToCopiedFoldersAndFiles;
 
         public List<ModelFileManager> GetDisksInListOfObj(ref List<string> listVisualisedItems)
         {
@@ -29,7 +30,6 @@ namespace MyLibrary
             return listDisks;
         }
 
-        public List<string> GetCollectionPathsToCopiedFoldersAndFiles() { return ListPathsToCopiedFoldersAndFiles; }
         public List<ModelFileManager> GetFilesAndFoldersInListOfObj(string currentPath, ref List<string> listVisualisedItems, string args = null, bool showHiddenFilesAndFolders = false)
         {
             listVisualisedItems.Clear();
@@ -71,7 +71,7 @@ namespace MyLibrary
                 listVisualisedItems.Add(file.FullName);
             }
 
-            if(args == "CreateNewFolder")
+            if (args == "CreateNewFolder")
                 listFilesAndFolders.Add(new ModelFileManager { Image = new Bitmap(FileManager.Properties.Resources.documents_folder_18875, 20, 20) });
 
             return listFilesAndFolders;
@@ -112,10 +112,10 @@ namespace MyLibrary
         {
             List<ModelQuickAccess> listQuickAccessFoldersInObj = new List<ModelQuickAccess>();
             listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = GetEmptyImage(Color.FromArgb(23, 33, 43)), Name = "Швидкий доступ" });
-            if(FileManager.Properties.Settings.Default.ListQuickAccessFolder != null)
+            if (FileManager.Properties.Settings.Default.ListQuickAccessFolder != null)
                 foreach (string quickAccessFolder in FileManager.Properties.Settings.Default.ListQuickAccessFolder)
                     listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = new Bitmap(FileManager.Properties.Resources.documents_folder_18875, 20, 20), Name = new DirectoryInfo(quickAccessFolder).Name });
-            listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = GetEmptyImage(Color.FromArgb(23, 33, 43)), Name = null});
+            listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = GetEmptyImage(Color.FromArgb(23, 33, 43)), Name = null });
             listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = new Bitmap(FileManager.Properties.Resources.mypc, 20, 20), Name = "Мій комп'ютер" });
             listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = new Bitmap(FileManager.Properties.Resources.PluberGame, 20, 20), Name = "Пломбір" });
             return listQuickAccessFoldersInObj;
@@ -144,18 +144,7 @@ namespace MyLibrary
             FileManager.Properties.Settings.Default.Save();
         }
 
-        public void GetFilesAndFolderForCopyFromDataGrid(string currenPath, DataGridView dataGridView)
-        {
-            ListPathsToCopiedFoldersAndFiles = new List<string>();
-            for (int i = 0; i < dataGridView.SelectedRows.Count; i++)
-            {
-                if (dataGridView.SelectedRows[i].Index == 0)
-                    continue;
-                ListPathsToCopiedFoldersAndFiles.Add(Path.Combine(currenPath, dataGridView[1, dataGridView.SelectedRows[i].Index].Value.ToString()));
-            }
-        }
-
-        public void PasteCopiedFoldersAndFile(string currentPath)
+        public void PasteCopiedFoldersAndFile(string currentPath, List<string> ListPathsToCopiedFoldersAndFiles)
         {
             for (int i = 0; i < ListPathsToCopiedFoldersAndFiles.Count; i++)
             {
@@ -305,6 +294,36 @@ namespace MyLibrary
                 }
                 foreach (FileInfo file in files)
                     File.SetAttributes(file.FullName, FileAttributes.Normal);
+            }
+        }
+
+        public static void CompressFiles(List<string> listSourceFiles, string archivePath)
+        {
+            using (ZipFile zip = new ZipFile())
+            {
+                zip.AlternateEncodingUsage = ZipOption.Always;
+                zip.AlternateEncoding = Encoding.UTF8;
+                foreach (string file in listSourceFiles)
+                {
+                    if (File.Exists(file))
+                        zip.AddFile(file, "");
+                    else
+                        zip.AddDirectory(file, new DirectoryInfo(file).Name);
+                }
+                zip.Save(archivePath);
+            }
+        } 
+        
+        public static void DecompressFiles(string archivePath, DataGridView dataGridView)
+        {
+            using (ZipFile zip = ZipFile.Read(archivePath))
+            {
+                foreach (ZipEntry e in zip)
+                {
+                    if (dataGridView.SelectedRows[0].Index == 0)
+                        continue;
+                    e.Extract(Directory.GetParent(archivePath).FullName, ExtractExistingFileAction.OverwriteSilently);
+                }
             }
         }
     }

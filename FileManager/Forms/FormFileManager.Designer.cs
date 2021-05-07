@@ -55,6 +55,8 @@ namespace FileManager
             this.AddToQuickAccessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ArchivateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.UnArchivateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NewFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RenameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -108,7 +110,7 @@ namespace FileManager
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(3, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(113, 21);
+            this.label1.Size = new System.Drawing.Size(86, 17);
             this.label1.TabIndex = 2;
             this.label1.Text = "FileManager";
             // 
@@ -194,12 +196,12 @@ namespace FileManager
             this.contextMenuStripQuickAccess.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.DeleteToolStripMenuItem1});
             this.contextMenuStripQuickAccess.Name = "contextMenuStripQuickAccess";
-            this.contextMenuStripQuickAccess.Size = new System.Drawing.Size(145, 28);
+            this.contextMenuStripQuickAccess.Size = new System.Drawing.Size(127, 26);
             // 
             // DeleteToolStripMenuItem1
             // 
             this.DeleteToolStripMenuItem1.Name = "DeleteToolStripMenuItem1";
-            this.DeleteToolStripMenuItem1.Size = new System.Drawing.Size(144, 24);
+            this.DeleteToolStripMenuItem1.Size = new System.Drawing.Size(126, 22);
             this.DeleteToolStripMenuItem1.Text = "Видалити";
             this.DeleteToolStripMenuItem1.Click += new System.EventHandler(this.DeleteToolStripMenuItem1_Click);
             // 
@@ -226,7 +228,7 @@ namespace FileManager
             this.labelEnterTextBoxError.ForeColor = System.Drawing.Color.Red;
             this.labelEnterTextBoxError.Location = new System.Drawing.Point(49, 88);
             this.labelEnterTextBoxError.Name = "labelEnterTextBoxError";
-            this.labelEnterTextBoxError.Size = new System.Drawing.Size(169, 18);
+            this.labelEnterTextBoxError.Size = new System.Drawing.Size(143, 14);
             this.labelEnterTextBoxError.TabIndex = 5;
             this.labelEnterTextBoxError.Text = "Директорію не знайдено";
             this.labelEnterTextBoxError.Visible = false;
@@ -273,7 +275,7 @@ namespace FileManager
             this.textBoxPath.Location = new System.Drawing.Point(37, 64);
             this.textBoxPath.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBoxPath.Name = "textBoxPath";
-            this.textBoxPath.Size = new System.Drawing.Size(675, 25);
+            this.textBoxPath.Size = new System.Drawing.Size(675, 20);
             this.textBoxPath.TabIndex = 1;
             this.textBoxPath.TextChanged += new System.EventHandler(this.textBoxPath_TextChanged);
             this.textBoxPath.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxPath_KeyDown);
@@ -326,71 +328,87 @@ namespace FileManager
             this.AddToQuickAccessToolStripMenuItem,
             this.ReloadToolStripMenuItem,
             this.DeleteToolStripMenuItem,
+            this.ArchivateToolStripMenuItem,
+            this.UnArchivateToolStripMenuItem,
             this.NewFolderToolStripMenuItem,
             this.RenameToolStripMenuItem,
             this.PropertiesToolStripMenuItem});
             this.contextMenuStripFileManager.Name = "contextMenuStripFileManager";
-            this.contextMenuStripFileManager.Size = new System.Drawing.Size(257, 196);
+            this.contextMenuStripFileManager.Size = new System.Drawing.Size(216, 246);
             // 
             // CopyToolStripMenuItem
             // 
             this.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem";
-            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(256, 24);
+            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.CopyToolStripMenuItem.Text = "Копіювати";
             this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             // 
             // PasteToolStripMenuItem
             // 
             this.PasteToolStripMenuItem.Name = "PasteToolStripMenuItem";
-            this.PasteToolStripMenuItem.Size = new System.Drawing.Size(256, 24);
+            this.PasteToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.PasteToolStripMenuItem.Text = "Вставити";
             this.PasteToolStripMenuItem.Click += new System.EventHandler(this.PasteToolStripMenuItem_Click);
             // 
             // AddToQuickAccessToolStripMenuItem
             // 
             this.AddToQuickAccessToolStripMenuItem.Name = "AddToQuickAccessToolStripMenuItem";
-            this.AddToQuickAccessToolStripMenuItem.Size = new System.Drawing.Size(256, 24);
+            this.AddToQuickAccessToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.AddToQuickAccessToolStripMenuItem.Text = "Додати в швидкий доступ";
             this.AddToQuickAccessToolStripMenuItem.Click += new System.EventHandler(this.AddToQuickAccessToolStripMenuItem_Click);
             // 
             // ReloadToolStripMenuItem
             // 
             this.ReloadToolStripMenuItem.Name = "ReloadToolStripMenuItem";
-            this.ReloadToolStripMenuItem.Size = new System.Drawing.Size(256, 24);
+            this.ReloadToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.ReloadToolStripMenuItem.Text = "Оновити";
             this.ReloadToolStripMenuItem.Click += new System.EventHandler(this.ReloadToolStripMenuItem_Click);
             // 
             // DeleteToolStripMenuItem
             // 
             this.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem";
-            this.DeleteToolStripMenuItem.Size = new System.Drawing.Size(256, 24);
+            this.DeleteToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.DeleteToolStripMenuItem.Text = "Видалити";
             this.DeleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolStripMenuItem_Click);
+            // 
+            // ArchivateToolStripMenuItem
+            // 
+            this.ArchivateToolStripMenuItem.Name = "ArchivateToolStripMenuItem";
+            this.ArchivateToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.ArchivateToolStripMenuItem.Text = "Архівувати";
+            this.ArchivateToolStripMenuItem.Click += new System.EventHandler(this.ArchivateToolStripMenuItem_Click);
+            // 
+            // UnArchivateToolStripMenuItem
+            // 
+            this.UnArchivateToolStripMenuItem.Name = "UnArchivateToolStripMenuItem";
+            this.UnArchivateToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.UnArchivateToolStripMenuItem.Text = "Розархівувати";
+            this.UnArchivateToolStripMenuItem.Click += new System.EventHandler(this.UnArchivateToolStripMenuItem_Click);
             // 
             // NewFolderToolStripMenuItem
             // 
             this.NewFolderToolStripMenuItem.Name = "NewFolderToolStripMenuItem";
-            this.NewFolderToolStripMenuItem.Size = new System.Drawing.Size(256, 24);
+            this.NewFolderToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.NewFolderToolStripMenuItem.Text = "Нова папка";
             this.NewFolderToolStripMenuItem.Click += new System.EventHandler(this.NewFolderToolStripMenuItem_Click);
             // 
             // RenameToolStripMenuItem
             // 
             this.RenameToolStripMenuItem.Name = "RenameToolStripMenuItem";
-            this.RenameToolStripMenuItem.Size = new System.Drawing.Size(256, 24);
+            this.RenameToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.RenameToolStripMenuItem.Text = "Перейменувати";
             this.RenameToolStripMenuItem.Click += new System.EventHandler(this.RenameToolStripMenuItem_Click);
             // 
             // PropertiesToolStripMenuItem
             // 
             this.PropertiesToolStripMenuItem.Name = "PropertiesToolStripMenuItem";
-            this.PropertiesToolStripMenuItem.Size = new System.Drawing.Size(256, 24);
+            this.PropertiesToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.PropertiesToolStripMenuItem.Text = "Властивості";
             this.PropertiesToolStripMenuItem.Click += new System.EventHandler(this.PropertiesToolStripMenuItem_Click);
             // 
             // FormFileManager
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1019, 668);
             this.Controls.Add(this.panelFileManager);
@@ -434,7 +452,6 @@ namespace FileManager
         private System.Windows.Forms.PictureBox pictureBoxStepBack;
         private System.Windows.Forms.TextBox textBoxPath;
         private System.Windows.Forms.DataGridView dataGridViewFileManager;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStripFileManager;
         private System.Windows.Forms.ToolStripMenuItem CopyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem PasteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AddToQuickAccessToolStripMenuItem;
@@ -449,6 +466,9 @@ namespace FileManager
         private System.Windows.Forms.PictureBox pictureBoxSettings;
         private System.Windows.Forms.ToolStripMenuItem PropertiesToolStripMenuItem;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripFileManager;
+        private System.Windows.Forms.ToolStripMenuItem ArchivateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem UnArchivateToolStripMenuItem;
     }
 }
 

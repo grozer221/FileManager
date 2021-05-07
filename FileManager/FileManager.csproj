@@ -35,10 +35,19 @@
   <PropertyGroup>
     <ApplicationIcon>file-explorer.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Ionic.Zip.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,6 +57,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\ClassFileManager.cs" />
@@ -58,6 +68,12 @@
     </Compile>
     <Compile Include="Forms\FormFileManager.Designer.cs">
       <DependentUpon>FormFileManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormCreateArchive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormCreateArchive.Designer.cs">
+      <DependentUpon>FormCreateArchive.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormProperties.cs">
       <SubType>Form</SubType>
@@ -91,6 +107,9 @@
     <EmbeddedResource Include="Forms\FormFileManager.resx">
       <DependentUpon>FormFileManager.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCreateArchive.resx">
+      <DependentUpon>FormCreateArchive.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormProperties.resx">
       <DependentUpon>FormProperties.cs</DependentUpon>
     </EmbeddedResource>
@@ -113,6 +132,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.manifest" />
     <None Include="ClassDiagram.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

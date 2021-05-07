@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using FileManager;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 
@@ -13,9 +14,11 @@ namespace MyLibrary
         private byte NumberMenuPaste = 1;
         private byte NumberMenuAddQuickAccess = 2;
         private byte NumberMenuDelete = 4;
-        private byte NumberMenuNewFolder = 5;
-        private byte NumberMenuRename = 6;
-        private byte NumberMenuProperties = 7;
+        private byte NumberMenuArchivate = 5;
+        private byte NumberMenuUnArchivate = 6;
+        private byte NumberMenuNewFolder = 7;
+        private byte NumberMenuRename = 8;
+        private byte NumberMenuProperties = 9;
 
 
         public ContextMenuStripVisualise(ContextMenuStrip ContextMenu, DataGridView DataGrid) 
@@ -35,6 +38,8 @@ namespace MyLibrary
                 ContextMenu.Items[menuItem[NumberMenuPaste].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuAddQuickAccess].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuDelete].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuArchivate].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuUnArchivate].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuNewFolder].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = false;
             }
@@ -44,6 +49,8 @@ namespace MyLibrary
                 ContextMenu.Items[menuItem[NumberMenuPaste].Name].Enabled = true;
                 ContextMenu.Items[menuItem[NumberMenuAddQuickAccess].Name].Enabled = true;
                 ContextMenu.Items[menuItem[NumberMenuDelete].Name].Enabled = true;
+                ContextMenu.Items[menuItem[NumberMenuArchivate].Name].Enabled = true;
+                ContextMenu.Items[menuItem[NumberMenuUnArchivate].Name].Enabled = true;
                 ContextMenu.Items[menuItem[NumberMenuNewFolder].Name].Enabled = true;
                 ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = true;
             }
@@ -55,6 +62,7 @@ namespace MyLibrary
             {
                 ContextMenu.Items[menuItem[NumberMenuAddQuickAccess].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuUnArchivate].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuProperties].Name].Enabled = false;
             }
 
@@ -63,9 +71,19 @@ namespace MyLibrary
                 ContextMenu.Items[menuItem[NumberMenuCopy].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuAddQuickAccess].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuDelete].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuArchivate].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuUnArchivate].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuProperties].Name].Enabled = false;
             }
+
+            try
+            {
+                string extension = new FileInfo(currentPath + "\\" + dataGridView[1, dataGridView.SelectedRows[0].Index].Value).Extension;
+                if (extension != ".rar" && extension != ".zip")
+                    ContextMenu.Items[menuItem[NumberMenuUnArchivate].Name].Enabled = false;
+            }
+            catch { }
 
             try
             {
@@ -75,7 +93,7 @@ namespace MyLibrary
             catch { }
         }
 
-        public void VisualiseContextMenuForFileManagerNoneCellClick(string currentPath, List<string> listPathsToCopiedFoldersAndFiles)
+        public void VisualiseContextMenuForFileManagerNoneCellClick(DataGridView dataGridView, string currentPath, List<string> listPathsToCopiedFoldersAndFiles)
         {
             ContextMenu.Items[menuItem[NumberMenuCopy].Name].Enabled = false;
             ContextMenu.Items[menuItem[NumberMenuAddQuickAccess].Name].Enabled = false;
@@ -87,15 +105,25 @@ namespace MyLibrary
             {
                 ContextMenu.Items[menuItem[NumberMenuPaste].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuNewFolder].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuArchivate].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuUnArchivate].Name].Enabled = false;
             }
             else
             {
                 ContextMenu.Items[menuItem[NumberMenuPaste].Name].Enabled = true;
                 ContextMenu.Items[menuItem[NumberMenuNewFolder].Name].Enabled = true;
+                ContextMenu.Items[menuItem[NumberMenuArchivate].Name].Enabled = true;
+                ContextMenu.Items[menuItem[NumberMenuUnArchivate].Name].Enabled = true;
             }
 
             if (currentPath != null && listPathsToCopiedFoldersAndFiles == null)
                 ContextMenu.Items[menuItem[NumberMenuPaste].Name].Enabled = false;
+
+            if (dataGridView.SelectedRows.Count == 0)
+            {
+                ContextMenu.Items[menuItem[NumberMenuArchivate].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuUnArchivate].Name].Enabled = false;
+            }
         }
 
         public void VisualiseContextMenuForQuickAccess(DataGridViewCellMouseEventArgs e)
