@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -156,7 +157,7 @@ namespace FileManager
 
         private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ListPathsToCopiedFoldersAndFiles = dataGridViewVisualise.GetSelectedFilesInDataGrid(currentPath, dataGridViewFileManager);
+            ListPathsToCopiedFoldersAndFiles = dataGridViewVisualise.GetSelectedFilesInDataGrid(currentPath);
         }
 
         private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -198,7 +199,8 @@ namespace FileManager
         {
             if (MessageBox.Show($"Ви впевнені, що хочете видалити ?", "Попередження", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
                 return;
-            dataGridViewVisualise.DeleteDirectoryOrFileFromDataGrid(currentPath, dataGridViewFileManager);
+            List<string> listSelectedFiles = dataGridViewVisualise.GetSelectedFilesInDataGrid(currentPath);
+            ClassFileManager.DeleteFiles(listSelectedFiles);
             ReloadToolStripMenuItem_Click(null, null);
         }
 
@@ -331,7 +333,7 @@ namespace FileManager
 
         private void ArchivateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            List<string> ListSelectedFile = dataGridViewVisualise.GetSelectedFilesInDataGrid(currentPath, dataGridViewFileManager);
+            List<string> ListSelectedFile = dataGridViewVisualise.GetSelectedFilesInDataGrid(currentPath);
             FormCreateArchive formCreateArchive = new FormCreateArchive(ListSelectedFile.Count == 1 ? File.Exists(ListSelectedFile[0]) ? new FileInfo(ListSelectedFile[0]).Name : new DirectoryInfo(ListSelectedFile[0]).Name : null);
             formCreateArchive.ShowDialog();
             if (!formCreateArchive.OkOrCancel)
@@ -350,11 +352,57 @@ namespace FileManager
         {
             Thread thread = new Thread(() =>
             {
-                ClassFileManager.DecompressFiles(dataGridViewVisualise.ListVisualisedItems[dataGridViewFileManager.SelectedRows[0].Index - 1], dataGridViewFileManager);
+                ClassFileManager.DecompressFiles(dataGridViewVisualise.ListVisualisedItems[dataGridViewFileManager.SelectedRows[0].Index - 1]);
                 dataGridViewFileManager.Invoke(new Action(() => ReloadToolStripMenuItem_Click(null, null)));
             });
             thread.IsBackground = true;
             thread.Start();
+        }
+
+        private void EncryptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<string> listSelectedFiles = dataGridViewVisualise.GetSelectedFilesInDataGrid(currentPath);
+            foreach(string file in listSelectedFiles)
+            {
+                if (Directory.Exists(file))
+                {
+                    MessageBox.Show("Диреторію шифрувати не можливо", "Попередження", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    continue;
+                }
+                if(new Regex(@"\.crypt").IsMatch(file))
+                {
+                    MessageBox.Show($"Файл {new FileInfo(file).Name} зашифрований");
+                    continue;
+                }
+                if(File.Exists(file + ".crypt"))
+                    if (MessageBox.Show($"Файл {new FileInfo(file + ".crypt").Name} в данній директорії уже існує" + Environment.NewLine + "Замінити?", "Питання", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                        continue;
+                ClassFileManager.EncryptFile(file, "HR$2pIjHR$2pIj12");
+            }
+            ReloadToolStripMenuItem_Click(null, null);
+        }
+
+        private void DecryptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<string> listSelectedFiles = dataGridViewVisualise.GetSelectedFilesInDataGrid(currentPath);
+            foreach (string file in listSelectedFiles)
+            {
+                if (Directory.Exists(file))
+                {
+                    MessageBox.Show("Диреторію розшифрувати не можливо", "Попередження", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    continue;
+                }
+                if (!new Regex(@"\.crypt").IsMatch(file))
+                {
+                    MessageBox.Show($"Файл {new FileInfo(file).Name} не зашифрований");
+                    continue;
+                }
+                if (File.Exists(file.Replace(".crypt", "")))
+                    if (MessageBox.Show($"Файл {new FileInfo(file.Replace(".crypt", "")).Name} в данній директорії уже існує" + Environment.NewLine + "Замінити?", "Питання", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                        continue;
+                ClassFileManager.DecryptFile(file, "HR$2pIjHR$2pIj12");
+            }
+            ReloadToolStripMenuItem_Click(null, null);
         }
     }
 }

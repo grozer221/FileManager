@@ -220,14 +220,14 @@ namespace MyLibrary
             RenameFolderOfFile(ListVisualisedItems[e.RowIndex - 1], Path.Combine(currentPath, DataGridViewFileManager[e.ColumnIndex, e.RowIndex].Value.ToString()));
         }
 
-        public List<string> GetSelectedFilesInDataGrid(string currenPath, DataGridView dataGridView)
+        public List<string> GetSelectedFilesInDataGrid(string currenPath)
         {
             List<string> ListPathsToCopiedFoldersAndFiles = new List<string>();
-            for (int i = 0; i < dataGridView.SelectedRows.Count; i++)
+            for (int i = 0; i < DataGridViewFileManager.SelectedRows.Count; i++)
             {
-                if (dataGridView.SelectedRows[i].Index == 0)
+                if (DataGridViewFileManager.SelectedRows[i].Index == 0)
                     continue;
-                ListPathsToCopiedFoldersAndFiles.Add(Path.Combine(currenPath, dataGridView[1, dataGridView.SelectedRows[i].Index].Value.ToString()));
+                ListPathsToCopiedFoldersAndFiles.Add(Path.Combine(currenPath, DataGridViewFileManager[1, DataGridViewFileManager.SelectedRows[i].Index].Value.ToString()));
             }
             return ListPathsToCopiedFoldersAndFiles;
         }

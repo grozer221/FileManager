@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using Ionic.Zip;
@@ -206,20 +207,20 @@ namespace MyLibrary
             }
         }
 
-        public void DeleteDirectoryOrFileFromDataGrid(string currentPath, DataGridView dataGridView)
+        public static void DeleteFiles(List<string> listFiles)
         {
-            for (int i = 0; i < dataGridView.SelectedRows.Count; i++)
+            foreach(string file in listFiles)
             {
                 try
                 {
-                    if (File.Exists($@"{currentPath}\{dataGridView[1, dataGridView.SelectedRows[i].Index].Value}"))
-                        File.Delete($@"{currentPath}\{dataGridView[1, dataGridView.SelectedRows[i].Index].Value}");
-                    else if (Directory.Exists($@"{currentPath}\{dataGridView[1, dataGridView.SelectedRows[i].Index].Value}"))
-                        Directory.Delete($@"{currentPath}\{dataGridView[1, dataGridView.SelectedRows[i].Index].Value}", true);
+                    if (File.Exists(file))
+                        File.Delete(file);
+                    else if (Directory.Exists(file))
+                        Directory.Delete(file, true);
                 }
                 catch
                 {
-                    MessageBox.Show($"Недостатньо прав для " + Path.GetFileName($@"{currentPath}\{dataGridView[1, dataGridView.SelectedRows[i].Index].Value}"), "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Недостатньо прав для " + Path.GetFileName(file), "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -312,19 +313,65 @@ namespace MyLibrary
                 }
                 zip.Save(archivePath);
             }
-        } 
-        
-        public static void DecompressFiles(string archivePath, DataGridView dataGridView)
+        }
+
+        public static void DecompressFiles(string archivePath)
         {
             using (ZipFile zip = ZipFile.Read(archivePath))
             {
                 foreach (ZipEntry e in zip)
                 {
-                    if (dataGridView.SelectedRows[0].Index == 0)
-                        continue;
+                    string filePath = Directory.GetParent(archivePath) + "\\" + e.FileName;
+                    if (File.Exists(filePath) || Directory.Exists(filePath))
+                        if (MessageBox.Show($"Файл {e.FileName} в даній директорії вже існує. {Environment.NewLine}Замінити?", "Попередження", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                            continue;
                     e.Extract(Directory.GetParent(archivePath).FullName, ExtractExistingFileAction.OverwriteSilently);
                 }
             }
+        }
+
+        public static void EncryptFile(string path, string skey)
+        {
+            try
+            {
+                using (RijndaelManaged aes = new RijndaelManaged())
+                {
+                    byte[] key = ASCIIEncoding.UTF8.GetBytes(skey);
+                    byte[] IV = ASCIIEncoding.UTF8.GetBytes(skey);
+                    using (FileStream fsCrypt = new FileStream(path + ".crypt", FileMode.Create))
+                        using (ICryptoTransform encryptor = aes.CreateEncryptor(key, IV))
+                            using (CryptoStream cs = new CryptoStream(fsCrypt, encryptor, CryptoStreamMode.Write))
+                                using (FileStream fsIn = new FileStream(path, FileMode.Open))
+                                {
+                                    int data;
+                                    while ((data = fsIn.ReadByte()) != -1)
+                                        cs.WriteByte((byte)data);
+                                }
+                }
+            }
+            catch (Exception ex){ MessageBox.Show(ex.Message); }
+        }
+
+        public static void DecryptFile(string path, string skey)
+        {
+            try
+            {
+                using (RijndaelManaged aes = new RijndaelManaged())
+                {
+                    byte[] key = ASCIIEncoding.UTF8.GetBytes(skey);
+                    byte[] IV = ASCIIEncoding.UTF8.GetBytes(skey);
+                    using (FileStream fsCrypt = new FileStream(path, FileMode.Open))
+                        using (FileStream fsOut = new FileStream(path.Replace(".crypt", ""), FileMode.Create))
+                            using (ICryptoTransform decryptor = aes.CreateDecryptor(key, IV))
+                                using (CryptoStream cs = new CryptoStream(fsCrypt, decryptor, CryptoStreamMode.Read))
+                                {
+                                    int data;
+                                    while ((data = cs.ReadByte()) != -1)
+                                        fsOut.WriteByte((byte)data);
+                                }
+                }
+            }
+            catch (Exception ex){ MessageBox.Show(ex.Message); }
         }
     }
 }

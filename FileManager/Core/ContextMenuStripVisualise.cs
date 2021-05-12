@@ -16,9 +16,11 @@ namespace MyLibrary
         private byte NumberMenuDelete = 4;
         private byte NumberMenuArchivate = 5;
         private byte NumberMenuUnArchivate = 6;
-        private byte NumberMenuNewFolder = 7;
-        private byte NumberMenuRename = 8;
-        private byte NumberMenuProperties = 9;
+        private byte NumberMenuEncrypt = 7;
+        private byte NumberMenuDecrypt = 8;
+        private byte NumberMenuNewFolder = 9;
+        private byte NumberMenuRename = 10;
+        private byte NumberMenuProperties = 11;
 
 
         public ContextMenuStripVisualise(ContextMenuStrip ContextMenu, DataGridView DataGrid) 
@@ -40,6 +42,8 @@ namespace MyLibrary
                 ContextMenu.Items[menuItem[NumberMenuDelete].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuArchivate].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuUnArchivate].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuEncrypt].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuDecrypt].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuNewFolder].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = false;
             }
@@ -51,6 +55,8 @@ namespace MyLibrary
                 ContextMenu.Items[menuItem[NumberMenuDelete].Name].Enabled = true;
                 ContextMenu.Items[menuItem[NumberMenuArchivate].Name].Enabled = true;
                 ContextMenu.Items[menuItem[NumberMenuUnArchivate].Name].Enabled = true;
+                ContextMenu.Items[menuItem[NumberMenuEncrypt].Name].Enabled = true;
+                ContextMenu.Items[menuItem[NumberMenuDecrypt].Name].Enabled = true;
                 ContextMenu.Items[menuItem[NumberMenuNewFolder].Name].Enabled = true;
                 ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = true;
             }
@@ -73,6 +79,8 @@ namespace MyLibrary
                 ContextMenu.Items[menuItem[NumberMenuDelete].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuArchivate].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuUnArchivate].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuEncrypt].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuDecrypt].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuProperties].Name].Enabled = false;
             }

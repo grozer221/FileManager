@@ -148,9 +148,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\1486564726-undo-back_81536.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\folder.png" />
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +179,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="file-explorer.ico" />
+    <None Include="Resources\crypt.png" />
+    <None Include="Resources\1486564726-undo-back_81536.png" />
+    <None Include="Resources\undo.png" />
+    <None Include="Resources\rename.png" />
+    <None Include="Resources\properties.png" />
+    <None Include="Resources\refresh.png" />
+    <None Include="Resources\paste.png" />
+    <None Include="Resources\delete.png" />
+    <None Include="Resources\copy.png" />
+    <None Include="Resources\winrar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
