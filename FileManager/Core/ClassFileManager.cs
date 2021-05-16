@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using Ionic.Zip;
+using IWshRuntimeLibrary;
 
 namespace MyLibrary
 {
@@ -170,15 +171,15 @@ namespace MyLibrary
             while (Directory.Exists(destPath))
                 destPath += " - Copy";
 
-            while (File.Exists(destPath))
+            while (System.IO.File.Exists(destPath))
             {
                 FileInfo fileinfo = new FileInfo(destPath);
                 destPath = destPath.Replace(fileinfo.Extension, "");
                 destPath += $" - Copy{fileinfo.Extension}";
             }
 
-            if (File.Exists(sourcePath))
-                File.Copy(sourcePath, destPath, true);
+            if (System.IO.File.Exists(sourcePath))
+                System.IO.File.Copy(sourcePath, destPath, true);
             else if (Directory.Exists(sourcePath))
             {
                 Directory.CreateDirectory(destPath);
@@ -203,7 +204,7 @@ namespace MyLibrary
             foreach (string file in Directory.GetFiles(sourceFileName))
             {
                 string fileName = file.Substring(file.LastIndexOf('\\'), file.Length - file.LastIndexOf('\\'));
-                File.Copy(file, destFileName + fileName, true);
+                System.IO.File.Copy(file, destFileName + fileName, true);
             }
         }
 
@@ -213,8 +214,8 @@ namespace MyLibrary
             {
                 try
                 {
-                    if (File.Exists(file))
-                        File.Delete(file);
+                    if (System.IO.File.Exists(file))
+                        System.IO.File.Delete(file);
                     else if (Directory.Exists(file))
                         Directory.Delete(file, true);
                 }
@@ -244,15 +245,15 @@ namespace MyLibrary
 
             if (Directory.Exists(pathFolderOrFile))
                 Directory.Move(pathFolderOrFile, pathNewFolderOrFile);
-            else if (File.Exists(pathFolderOrFile))
-                File.Move(pathFolderOrFile, pathNewFolderOrFile);
+            else if (System.IO.File.Exists(pathFolderOrFile))
+                System.IO.File.Move(pathFolderOrFile, pathNewFolderOrFile);
             else
                 MessageBox.Show("Невідома помилка", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         public static void SetAttributesHidden(string path, bool recursive)
         {
-            File.SetAttributes(path, FileAttributes.Hidden);
+            System.IO.File.SetAttributes(path, FileAttributes.Hidden);
             if (recursive)
             {
                 DirectoryInfo dirInfo = new DirectoryInfo(path);
@@ -266,17 +267,17 @@ namespace MyLibrary
                 catch { return; }
                 foreach (DirectoryInfo dir in dirs)
                 {
-                    File.SetAttributes(dir.FullName, FileAttributes.Hidden);
+                    System.IO.File.SetAttributes(dir.FullName, FileAttributes.Hidden);
                     SetAttributesHidden(dir.FullName, recursive);
                 }
                 foreach (FileInfo file in files)
-                    File.SetAttributes(file.FullName, FileAttributes.Hidden);
+                    System.IO.File.SetAttributes(file.FullName, FileAttributes.Hidden);
             }
         }
 
         public static void DeleteAttributesHidden(string path, bool recursive)
         {
-            File.SetAttributes(path, FileAttributes.Normal);
+            System.IO.File.SetAttributes(path, FileAttributes.Normal);
             if (recursive)
             {
                 DirectoryInfo dirInfo = new DirectoryInfo(path);
@@ -290,11 +291,11 @@ namespace MyLibrary
                 catch { return; }
                 foreach (DirectoryInfo dir in dirs)
                 {
-                    File.SetAttributes(dir.FullName, FileAttributes.Normal);
+                    System.IO.File.SetAttributes(dir.FullName, FileAttributes.Normal);
                     DeleteAttributesHidden(dir.FullName, recursive);
                 }
                 foreach (FileInfo file in files)
-                    File.SetAttributes(file.FullName, FileAttributes.Normal);
+                    System.IO.File.SetAttributes(file.FullName, FileAttributes.Normal);
             }
         }
 
@@ -306,7 +307,7 @@ namespace MyLibrary
                 zip.AlternateEncoding = Encoding.UTF8;
                 foreach (string file in listSourceFiles)
                 {
-                    if (File.Exists(file))
+                    if (System.IO.File.Exists(file))
                         zip.AddFile(file, "");
                     else
                         zip.AddDirectory(file, new DirectoryInfo(file).Name);
@@ -322,7 +323,7 @@ namespace MyLibrary
                 foreach (ZipEntry e in zip)
                 {
                     string filePath = Directory.GetParent(archivePath) + "\\" + e.FileName;
-                    if (File.Exists(filePath) || Directory.Exists(filePath))
+                    if (System.IO.File.Exists(filePath) || Directory.Exists(filePath))
                         if (MessageBox.Show($"Файл {e.FileName} в даній директорії вже існує. {Environment.NewLine}Замінити?", "Попередження", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                             continue;
                     e.Extract(Directory.GetParent(archivePath).FullName, ExtractExistingFileAction.OverwriteSilently);
@@ -372,6 +373,14 @@ namespace MyLibrary
                 }
             }
             catch (Exception ex){ MessageBox.Show(ex.Message); }
+        }
+
+        public static void CreateShortcut(string filePath, string shortcutPath)
+        {
+            WshShell shell = new WshShell();
+            IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutPath);
+            shortcut.TargetPath = filePath;
+            shortcut.Save();
         }
     }
 }

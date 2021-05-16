@@ -323,7 +323,7 @@ namespace FileManager
 
         private void PropertiesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string pathFileOfFolder = dataGridViewVisualise.GetListVisualisedItems()[dataGridViewFileManager.SelectedRows[0].Index - 1];
+            string pathFileOfFolder = dataGridViewVisualise.ListVisualisedItems[dataGridViewFileManager.SelectedRows[0].Index - 1];
             FormProperties formProperties = new FormProperties(pathFileOfFolder);
             formProperties.ShowDialog();
 
@@ -401,6 +401,22 @@ namespace FileManager
                     if (MessageBox.Show($"Файл {new FileInfo(file.Replace(".crypt", "")).Name} в данній директорії уже існує" + Environment.NewLine + "Замінити?", "Питання", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                         continue;
                 ClassFileManager.DecryptFile(file, "HR$2pIjHR$2pIj12");
+            }
+            ReloadToolStripMenuItem_Click(null, null);
+        }
+
+        private void CreateShortcutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<string> listSelectedFiles = dataGridViewVisualise.GetSelectedFilesInDataGrid(currentPath);
+            foreach(string file in listSelectedFiles)
+            {
+                try {
+                    if (File.Exists(file))
+                        ClassFileManager.CreateShortcut(file, file.Replace(new FileInfo(file).Extension, "") + ".lnk"); 
+                    else
+                        ClassFileManager.CreateShortcut(file, file + ".lnk");
+                }
+                catch { MessageBox.Show("Невідома помилка при створенні ярлика", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             }
             ReloadToolStripMenuItem_Click(null, null);
         }

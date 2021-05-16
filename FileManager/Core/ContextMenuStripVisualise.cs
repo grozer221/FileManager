@@ -18,9 +18,10 @@ namespace MyLibrary
         private byte NumberMenuUnArchivate = 6;
         private byte NumberMenuEncrypt = 7;
         private byte NumberMenuDecrypt = 8;
-        private byte NumberMenuNewFolder = 9;
-        private byte NumberMenuRename = 10;
-        private byte NumberMenuProperties = 11;
+        private byte NumberMenuCreateShortcut = 9;
+        private byte NumberMenuNewFolder = 10;
+        private byte NumberMenuRename = 11;
+        private byte NumberMenuProperties = 12;
 
 
         public ContextMenuStripVisualise(ContextMenuStrip ContextMenu, DataGridView DataGrid) 
@@ -44,6 +45,7 @@ namespace MyLibrary
                 ContextMenu.Items[menuItem[NumberMenuUnArchivate].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuEncrypt].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuDecrypt].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuCreateShortcut].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuNewFolder].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = false;
             }
@@ -57,6 +59,7 @@ namespace MyLibrary
                 ContextMenu.Items[menuItem[NumberMenuUnArchivate].Name].Enabled = true;
                 ContextMenu.Items[menuItem[NumberMenuEncrypt].Name].Enabled = true;
                 ContextMenu.Items[menuItem[NumberMenuDecrypt].Name].Enabled = true;
+                ContextMenu.Items[menuItem[NumberMenuCreateShortcut].Name].Enabled = true;
                 ContextMenu.Items[menuItem[NumberMenuNewFolder].Name].Enabled = true;
                 ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = true;
             }
@@ -106,6 +109,7 @@ namespace MyLibrary
             ContextMenu.Items[menuItem[NumberMenuCopy].Name].Enabled = false;
             ContextMenu.Items[menuItem[NumberMenuAddQuickAccess].Name].Enabled = false;
             ContextMenu.Items[menuItem[NumberMenuDelete].Name].Enabled = false;
+            ContextMenu.Items[menuItem[NumberMenuCreateShortcut].Name].Enabled = false;
             ContextMenu.Items[menuItem[NumberMenuRename].Name].Enabled = false;
             ContextMenu.Items[menuItem[NumberMenuProperties].Name].Enabled = false;
 

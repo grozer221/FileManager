@@ -82,11 +82,6 @@ namespace MyLibrary
             DataGridViewFileManager.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
-        public List<string> GetListVisualisedItems()
-        {
-            return ListVisualisedItems;
-        }
-
         public void CellDoubleClick(int rowIndex, ref string currentPath, bool showHiddenFilesAndFolders = false)
         {
             try

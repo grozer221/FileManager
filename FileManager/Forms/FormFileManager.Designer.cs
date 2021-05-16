@@ -59,6 +59,7 @@ namespace FileManager
             this.UnArchivateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EncryptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DecryptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CreateShortcutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NewFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RenameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -334,11 +335,12 @@ namespace FileManager
             this.UnArchivateToolStripMenuItem,
             this.EncryptToolStripMenuItem,
             this.DecryptToolStripMenuItem,
+            this.CreateShortcutToolStripMenuItem,
             this.NewFolderToolStripMenuItem,
             this.RenameToolStripMenuItem,
             this.PropertiesToolStripMenuItem});
             this.contextMenuStripFileManager.Name = "contextMenuStripFileManager";
-            this.contextMenuStripFileManager.Size = new System.Drawing.Size(261, 316);
+            this.contextMenuStripFileManager.Size = new System.Drawing.Size(261, 370);
             // 
             // CopyToolStripMenuItem
             // 
@@ -411,6 +413,14 @@ namespace FileManager
             this.DecryptToolStripMenuItem.Size = new System.Drawing.Size(260, 26);
             this.DecryptToolStripMenuItem.Text = "Розшифрувати";
             this.DecryptToolStripMenuItem.Click += new System.EventHandler(this.DecryptToolStripMenuItem_Click);
+            // 
+            // CreateShortcutToolStripMenuItem
+            // 
+            this.CreateShortcutToolStripMenuItem.Image = global::FileManager.Properties.Resources.shortcut;
+            this.CreateShortcutToolStripMenuItem.Name = "CreateShortcutToolStripMenuItem";
+            this.CreateShortcutToolStripMenuItem.Size = new System.Drawing.Size(260, 26);
+            this.CreateShortcutToolStripMenuItem.Text = "Створити ярлик";
+            this.CreateShortcutToolStripMenuItem.Click += new System.EventHandler(this.CreateShortcutToolStripMenuItem_Click);
             // 
             // NewFolderToolStripMenuItem
             // 
@@ -501,6 +511,7 @@ namespace FileManager
         private System.Windows.Forms.ToolStripMenuItem UnArchivateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem EncryptToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DecryptToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CreateShortcutToolStripMenuItem;
     }
 }
 
