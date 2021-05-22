@@ -340,7 +340,7 @@ namespace FileManager
             this.RenameToolStripMenuItem,
             this.PropertiesToolStripMenuItem});
             this.contextMenuStripFileManager.Name = "contextMenuStripFileManager";
-            this.contextMenuStripFileManager.Size = new System.Drawing.Size(261, 370);
+            this.contextMenuStripFileManager.Size = new System.Drawing.Size(261, 342);
             // 
             // CopyToolStripMenuItem
             // 

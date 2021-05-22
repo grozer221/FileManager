@@ -194,10 +194,8 @@ namespace MyLibrary
             DirectoryInfo dirInfo = new DirectoryInfo(sourceFileName);
             foreach (DirectoryInfo dir in dirInfo.GetDirectories())
             {
-                if (Directory.Exists(destFileName + "\\" + dir.Name) != true)
-                {
+                if (!Directory.Exists(destFileName + "\\" + dir.Name))
                     Directory.CreateDirectory(destFileName + "\\" + dir.Name);
-                }
                 //Рекурсия (перебираем вложенные папки и делаем для них то-же самое).
                 CopyDirectory(dir.FullName, destFileName + "\\" + dir.Name);
             }

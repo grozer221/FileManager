@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\FileManager"
+    "\\FileManager",
+    "\\FileManager\\Forms"
   ],
-  "SelectedNode": "\\FileManager\\Forms",
+  "SelectedNode": "\\FileManager\\Forms\\FormFileManager.Designer.cs",
   "PreviewInSolutionExplorer": false
 }

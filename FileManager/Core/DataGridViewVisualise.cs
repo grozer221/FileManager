@@ -138,7 +138,7 @@ namespace MyLibrary
 
             if (e.RowIndex == DataGridViewQuickAccessFolders.Rows.Count - 2)
             {
-                currentPath = "";
+                currentPath = null;
                 PrintDisks();
                 return;
             }
