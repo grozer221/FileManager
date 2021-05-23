@@ -184,6 +184,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="file-explorer.ico" />
+    <None Include="Resources\cross.png" />
+    <None Include="Resources\arrow.png" />
     <None Include="Resources\shortcut.png" />
     <None Include="Resources\crypt.png" />
     <None Include="Resources\1486564726-undo-back_81536.png" />

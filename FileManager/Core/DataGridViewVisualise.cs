@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MyLibrary
@@ -13,6 +16,7 @@ namespace MyLibrary
         private DataGridView DataGridViewFileManager;
         private DataGridView DataGridViewQuickAccessFolders;
         public List<string> ListVisualisedItems = new List<string>();
+        public bool IsEnableSearchMode = false;
 
         public DataGridViewVisualise(DataGridView DataGridViewFileManager, DataGridView DataGridViewQuickAccessFolders)
         {
@@ -23,6 +27,17 @@ namespace MyLibrary
         public DataGridViewVisualise(DataGridView DataGridViewFileManager)
         {
             this.DataGridViewFileManager = DataGridViewFileManager;
+        }
+
+        public void ClearDataGridView()
+        {
+            if (DataGridViewFileManager.DataSource == null)
+            {
+                DataGridViewFileManager.Rows.Clear();
+                DataGridViewFileManager.Columns.Clear();
+            }
+            else
+                DataGridViewFileManager.DataSource = null;
         }
 
         public void PrintDisks()
@@ -37,6 +52,11 @@ namespace MyLibrary
         {
             try
             {
+                if(DataGridViewFileManager.DataSource == null)
+                {
+                    DataGridViewFileManager.Rows.Clear();
+                    DataGridViewFileManager.Columns.Clear();
+                }
                 DataGridViewFileManager.DataSource = GetFilesAndFoldersInListOfObj(currentPath, ref ListVisualisedItems, null, showHiddenFilesAndFolders);
             }
             catch(Exception e)
@@ -139,6 +159,8 @@ namespace MyLibrary
             if (e.RowIndex == DataGridViewQuickAccessFolders.Rows.Count - 2)
             {
                 currentPath = null;
+                StopPrintSearchedFiles();
+                ClearDataGridView();
                 PrintDisks();
                 return;
             }
@@ -226,5 +248,112 @@ namespace MyLibrary
             }
             return ListPathsToCopiedFoldersAndFiles;
         }
+
+
+        private static CancellationTokenSource cts;
+        private static CancellationToken token;
+
+        public void StopPrintSearchedFiles()
+        {
+            try { cts.Cancel(); }
+            catch { }
+        }
+
+        public async void PrintSearchedFilesAsync(string currentPath, string nameSearchedFile, bool showHiddenFilesAndFolders = false)
+        {
+            cts = new CancellationTokenSource();
+            token = cts.Token;
+            if (token.IsCancellationRequested)
+                return;
+            IsEnableSearchMode = true;
+            DataGridViewFileManager.Columns.Add(new DataGridViewImageColumn());
+            for(int i = 0; i < 4; i++)
+                DataGridViewFileManager.Columns.Add(new DataGridViewTextBoxColumn());
+            SetSizeForDataGrid();
+            DataGridViewFileManager.Rows.Add(new Bitmap(GetEmptyImage(Color.FromArgb(14, 22, 33)), 25, 25), "Назва", "Шлях", "Тип", "Розмір");
+            ListVisualisedItems.Clear();
+            await Task.Run(() => PrintSearchedFiles(currentPath, nameSearchedFile, showHiddenFilesAndFolders));
+        }
+
+        public void PrintSearchedFiles(string currentPath, string nameSearchedFile, bool showHiddenFilesAndFolders = false)
+        {
+            if (token.IsCancellationRequested)
+                return;
+
+            if(currentPath == null)
+            {
+                DriveInfo[] drives = DriveInfo.GetDrives();
+                foreach (DriveInfo drive in drives)
+                    PrintSearchedFiles(drive.Name, nameSearchedFile, showHiddenFilesAndFolders);
+                return;
+            }
+
+            DirectoryInfo dirInfo = new DirectoryInfo(currentPath);
+            try
+            {
+                DirectoryInfo[] dirs = dirInfo.GetDirectories();
+                foreach (DirectoryInfo dir in dirs)
+                {
+                    if (dir.Attributes.HasFlag(FileAttributes.System))
+                        continue;
+
+                    if (!showHiddenFilesAndFolders && dir.Attributes.HasFlag(FileAttributes.Hidden))
+                        continue;
+
+                    PrintSearchedFiles(dir.FullName, nameSearchedFile, showHiddenFilesAndFolders);
+
+                    Regex regex = new Regex($@"(.*)({nameSearchedFile})(.*)", RegexOptions.IgnoreCase);
+                    if (regex.IsMatch(dir.Name))
+                    {
+                        DataGridViewFileManager.Invoke(new Action(() => {
+                            Bitmap bitmap;
+                            if (dir.Attributes.HasFlag(FileAttributes.Hidden))
+                                bitmap = new Bitmap(FileManager.Properties.Resources.folderWithOpacity, 20, 20);
+                            else
+                                bitmap = new Bitmap(FileManager.Properties.Resources.documents_folder_18875, 20, 20);
+
+                            Match match = regex.Match(dir.Name);
+                            string dirName = match.Groups[1].Value + "\'" + match.Groups[2].Value + "\'" + match.Groups[3].Value;
+                            DataGridViewFileManager.Rows.Add(bitmap, dirName, dir.FullName, "Папка", "");
+                            ListVisualisedItems.Add(dir.FullName);
+                        }));
+                    }
+                }
+            }
+            catch { }
+            try
+            {
+                FileInfo[] files = dirInfo.GetFiles();
+                foreach (FileInfo file in files)
+                {
+                    if (file.Attributes.HasFlag(FileAttributes.System))
+                        continue;
+
+                    if (!showHiddenFilesAndFolders && file.Attributes.HasFlag(FileAttributes.Hidden))
+                        continue;
+
+                    Regex regex = new Regex($@"(.*)({nameSearchedFile})(.*)", RegexOptions.IgnoreCase);
+                    if (regex.IsMatch(file.Name))
+                    {
+                        DataGridViewFileManager.Invoke(new Action(() =>
+                        {
+                            Bitmap bitmap;
+                            if (file.Attributes.HasFlag(FileAttributes.Hidden))
+                                bitmap = ToDarkerColor(new Bitmap(Icon.ExtractAssociatedIcon(file.FullName).ToBitmap(), 20, 20));
+                            else
+                                bitmap = new Bitmap(Icon.ExtractAssociatedIcon(file.FullName).ToBitmap(), 20, 20);
+
+                            Match match = regex.Match(file.Name);
+                            string fileName = match.Groups[1].Value + "\'" + match.Groups[2].Value + "\'" + match.Groups[3].Value;
+
+                            DataGridViewFileManager.Rows.Add(bitmap, fileName, file.FullName, "Файл", GetSizeInPropertyType(file.Length));
+                            ListVisualisedItems.Add(file.FullName);
+                        }));
+                    }
+                }
+            }
+            catch { }
+        }
+
     }
 }

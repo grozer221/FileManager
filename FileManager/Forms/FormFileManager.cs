@@ -24,7 +24,6 @@ namespace FileManager
         private Point movePoint;
         private List<string> ListPathsToCopiedFoldersAndFiles;
 
-
         private void Form1_Load(object sender, EventArgs e)
         {
             System.Globalization.CultureInfo customCulture = (System.Globalization.CultureInfo)Thread.CurrentThread.CurrentCulture.Clone();
@@ -86,6 +85,7 @@ namespace FileManager
 
         private void textBoxPath_TextChanged(object sender, EventArgs e)
         {
+            dataGridViewVisualise.IsEnableSearchMode = false;
             if (currentPath != null)
                 pictureBoxStepBack.Enabled = true;
             if (currentPath == null)
@@ -94,8 +94,43 @@ namespace FileManager
 
         private void pictureBoxStepBack_Click(object sender, EventArgs e)
         {
+            pictureBoxStopSearchFiles_Click(null, null);
+            if (dataGridViewVisualise.IsEnableSearchMode)
+            {
+                dataGridViewVisualise.IsEnableSearchMode = false;
+                if (currentPath == null)
+                    dataGridViewVisualise.PrintDisks();
+                else
+                    dataGridViewVisualise.PrintFilesAndFolder(ref currentPath, Properties.Settings.Default.ShowHiddenFiles);
+                return;
+            }
             dataGridViewVisualise.StepBack(ref currentPath, Properties.Settings.Default.ShowHiddenFiles);
-            contextMenuFileManager.VisualiseContextMenuForFileManagerNoneCellClick(dataGridViewFileManager, currentPath, ListPathsToCopiedFoldersAndFiles);
+            contextMenuFileManager.VisualiseContextMenuForFileManagerNoneCellClick(dataGridViewFileManager, currentPath, ListPathsToCopiedFoldersAndFiles, dataGridViewVisualise.IsEnableSearchMode);
+            textBoxPath.Text = currentPath;
+            labelEnterTextBoxError.Visible = false;
+        }
+
+        private void pictureBoxOpenByPath_Click(object sender, EventArgs e)
+        {
+            if (textBoxPath.Text == "")
+            {
+                dataGridViewVisualise.PrintDisks();
+                currentPath = textBoxPath.Text;
+                labelEnterTextBoxError.Visible = false;
+                return;
+            }
+
+            string tmpCurrentPath = textBoxPath.Text;
+            try
+            {
+                dataGridViewVisualise.SearchDirectory(ref tmpCurrentPath, Properties.Settings.Default.ShowHiddenFiles);
+            }
+            catch
+            {
+                labelEnterTextBoxError.Visible = true;
+                return;
+            }
+            currentPath = tmpCurrentPath;
             textBoxPath.Text = currentPath;
             labelEnterTextBoxError.Visible = false;
         }
@@ -105,7 +140,7 @@ namespace FileManager
             dataGridViewFileManager.EndEdit();
 
             if (e.Button == MouseButtons.Right)
-                contextMenuFileManager.VisualiseContextMenuForFileManagerNoneCellClick(dataGridViewFileManager, currentPath, ListPathsToCopiedFoldersAndFiles);
+                contextMenuFileManager.VisualiseContextMenuForFileManagerNoneCellClick(dataGridViewFileManager, currentPath, ListPathsToCopiedFoldersAndFiles, dataGridViewVisualise.IsEnableSearchMode);
         }
 
         private void dataGridViewFileManager_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
@@ -116,7 +151,7 @@ namespace FileManager
                     dataGridViewFileManager.ClearSelection();
                 dataGridViewFileManager.Rows[e.RowIndex].Selected = true;
 
-                contextMenuFileManager.VisualiseContextMenuForFileManagerCellClick(dataGridViewFileManager, currentPath, ListPathsToCopiedFoldersAndFiles);
+                contextMenuFileManager.VisualiseContextMenuForFileManagerCellClick(dataGridViewFileManager, currentPath, ListPathsToCopiedFoldersAndFiles, dataGridViewVisualise.IsEnableSearchMode);
             }
         }
 
@@ -128,29 +163,6 @@ namespace FileManager
         private void dataGridViewQuickAccessFolders_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             dataGridViewVisualise.dataGridQuickAccessCellMouseClick(e, ref currentPath, Properties.Settings.Default.ShowHiddenFiles);
-            textBoxPath.Text = currentPath;
-            labelEnterTextBoxError.Visible = false;
-        }
-
-        private void pictureBoxSearch_Click(object sender, EventArgs e)
-        {
-            if (textBoxPath.Text == "")
-            {
-                dataGridViewVisualise.PrintDisks();
-                currentPath = textBoxPath.Text;
-                labelEnterTextBoxError.Visible = false;
-                return;
-            }
-
-            string tmpCurrentPath = textBoxPath.Text;
-            try { 
-                dataGridViewVisualise.SearchDirectory(ref tmpCurrentPath, Properties.Settings.Default.ShowHiddenFiles); 
-            }
-            catch {
-                labelEnterTextBoxError.Visible = true;
-                return; 
-            }
-            currentPath = tmpCurrentPath;
             textBoxPath.Text = currentPath;
             labelEnterTextBoxError.Visible = false;
         }
@@ -174,6 +186,11 @@ namespace FileManager
 
         private void ReloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if(dataGridViewVisualise.IsEnableSearchMode)
+                pictureBoxStopSearchFiles_Click(null, null);
+
+            dataGridViewVisualise.ClearDataGridView();
+
             if (currentPath == null)
                 dataGridViewVisualise.PrintDisks();
             else
@@ -298,7 +315,7 @@ namespace FileManager
         private void textBoxPath_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                pictureBoxSearch_Click(sender, e);
+                pictureBoxOpenByPath_Click(sender, e);
         }
 
         private void textBoxPath_KeyDown(object sender, KeyEventArgs e)
@@ -419,6 +436,27 @@ namespace FileManager
                 catch { MessageBox.Show("Невідома помилка при створенні ярлика", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             }
             ReloadToolStripMenuItem_Click(null, null);
+        }
+
+        private void pictureBoxSearchFiles_Click(object sender, EventArgs e)
+        {
+            if (textBoxSearchFiles.Text == "" || textBoxSearchFiles.Text == null)
+                return;
+
+            dataGridViewVisualise.ClearDataGridView();
+            dataGridViewVisualise.PrintSearchedFilesAsync(currentPath, textBoxSearchFiles.Text, Properties.Settings.Default.ShowHiddenFiles);
+        }
+
+        private void pictureBoxStopSearchFiles_Click(object sender, EventArgs e)
+        {
+            dataGridViewVisualise.StopPrintSearchedFiles();
+            textBoxSearchFiles.Text = null;
+        }
+
+        private void textBoxSearchFiles_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                pictureBoxSearchFiles_Click(null, null);
         }
     }
 }

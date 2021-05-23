@@ -31,7 +31,7 @@ namespace MyLibrary
             menuItem = this.ContextMenu.Items;
         }
 
-        public void VisualiseContextMenuForFileManagerCellClick(DataGridView dataGridView, string currentPath, List<string> listPathsToCopiedFoldersAndFiles)
+        public void VisualiseContextMenuForFileManagerCellClick(DataGridView dataGridView, string currentPath, List<string> listPathsToCopiedFoldersAndFiles, bool isEnableSearchMode)
         {
             ContextMenu.Items[menuItem[NumberMenuProperties].Name].Enabled = true;
 
@@ -102,9 +102,21 @@ namespace MyLibrary
                     ContextMenu.Items[menuItem[NumberMenuAddQuickAccess].Name].Enabled = false;
             }
             catch { }
+
+            if (isEnableSearchMode)
+            {
+                ContextMenu.Items[menuItem[NumberMenuPaste].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuArchivate].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuUnArchivate].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuEncrypt].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuDecrypt].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuCreateShortcut].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuNewFolder].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuProperties].Name].Enabled = false;
+            }
         }
 
-        public void VisualiseContextMenuForFileManagerNoneCellClick(DataGridView dataGridView, string currentPath, List<string> listPathsToCopiedFoldersAndFiles)
+        public void VisualiseContextMenuForFileManagerNoneCellClick(DataGridView dataGridView, string currentPath, List<string> listPathsToCopiedFoldersAndFiles, bool isEnableSearchMode)
         {
             ContextMenu.Items[menuItem[NumberMenuCopy].Name].Enabled = false;
             ContextMenu.Items[menuItem[NumberMenuAddQuickAccess].Name].Enabled = false;
@@ -135,6 +147,18 @@ namespace MyLibrary
             {
                 ContextMenu.Items[menuItem[NumberMenuArchivate].Name].Enabled = false;
                 ContextMenu.Items[menuItem[NumberMenuUnArchivate].Name].Enabled = false;
+            }
+
+            if (isEnableSearchMode)
+            {
+                ContextMenu.Items[menuItem[NumberMenuPaste].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuArchivate].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuUnArchivate].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuEncrypt].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuDecrypt].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuCreateShortcut].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuNewFolder].Name].Enabled = false;
+                ContextMenu.Items[menuItem[NumberMenuProperties].Name].Enabled = false;
             }
         }
 
