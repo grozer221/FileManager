@@ -35,6 +35,10 @@ namespace FileManager
             dataGridViewVisualise = new DataGridViewVisualise(dataGridViewFileManager, dataGridViewQuickAccessFolders);
             contextMenuFileManager = new ContextMenuStripVisualise(contextMenuStripFileManager, dataGridViewFileManager);
             contextMenuQuickAccess = new ContextMenuStripVisualise(contextMenuStripQuickAccess, dataGridViewQuickAccessFolders);
+
+            PaintFormFileManagerFromChoseTheme();
+            dataGridViewVisualise.EnabledNightMode = Properties.Settings.Default.EnabledNightMode;
+
             ReloadToolStripMenuItem_Click(null, null);
             textBoxPath_TextChanged(null, null);
             dataGridViewVisualise.PrintQuickAccessFolders();
@@ -94,12 +98,15 @@ namespace FileManager
 
         private void pictureBoxStepBack_Click(object sender, EventArgs e)
         {
+            dataGridViewVisualise.ClearDataGridView();
             pictureBoxStopSearchFiles_Click(null, null);
             if (dataGridViewVisualise.IsEnableSearchMode)
             {
                 dataGridViewVisualise.IsEnableSearchMode = false;
-                if (currentPath == null)
+                if (currentPath == null) { 
                     dataGridViewVisualise.PrintDisks();
+                    pictureBoxStepBack.Enabled = false;
+                }
                 else
                     dataGridViewVisualise.PrintFilesAndFolder(ref currentPath, Properties.Settings.Default.ShowHiddenFiles);
                 return;
@@ -328,20 +335,36 @@ namespace FileManager
         {
             FormSettings formSettings = new FormSettings();
             formSettings.checkBoxShowHiddenFilesAndFolders.Checked = Properties.Settings.Default.ShowHiddenFiles;
+            formSettings.checkBoxNightMode.Checked = Properties.Settings.Default.EnabledNightMode;
+            if (formSettings.checkBoxNightMode.Checked)
+                formSettings.PaintInDarkTheme();
+            else
+                formSettings.PaintInLightTheme();
             formSettings.ShowDialog();
             if (formSettings.IsPresedButtonCancel)
                 return;
-            Properties.Settings.Default.ShowHiddenFiles = formSettings.ShowHiddenFilesAndFolders;
+            Properties.Settings.Default.ShowHiddenFiles = formSettings.checkBoxShowHiddenFilesAndFolders.Checked;
+            Properties.Settings.Default.EnabledNightMode = formSettings.checkBoxNightMode.Checked;
             Properties.Settings.Default.Save();
+            PaintFormFileManagerFromChoseTheme();
+            dataGridViewVisualise.EnabledNightMode = Properties.Settings.Default.EnabledNightMode;
 
-            if (currentPath != null)
+            if (currentPath == null)
+                dataGridViewVisualise.PrintDisks();
+            else
                 dataGridViewVisualise.PrintFilesAndFolder(ref currentPath, Properties.Settings.Default.ShowHiddenFiles);
+            dataGridViewVisualise.PrintQuickAccessFolders();
         }
 
         private void PropertiesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string pathFileOfFolder = dataGridViewVisualise.ListVisualisedItems[dataGridViewFileManager.SelectedRows[0].Index - 1];
             FormProperties formProperties = new FormProperties(pathFileOfFolder);
+            formProperties.EnabledNightMode = Properties.Settings.Default.EnabledNightMode;
+            if (formProperties.EnabledNightMode)
+                formProperties.PaintInDarkTheme();
+            else
+                formProperties.PaintInLightTheme();
             formProperties.ShowDialog();
 
             if (currentPath != null)
@@ -445,6 +468,7 @@ namespace FileManager
 
             dataGridViewVisualise.ClearDataGridView();
             dataGridViewVisualise.PrintSearchedFilesAsync(currentPath, textBoxSearchFiles.Text, Properties.Settings.Default.ShowHiddenFiles);
+            pictureBoxStepBack.Enabled = true;
         }
 
         private void pictureBoxStopSearchFiles_Click(object sender, EventArgs e)
@@ -457,6 +481,78 @@ namespace FileManager
         {
             if (e.KeyCode == Keys.Enter)
                 pictureBoxSearchFiles_Click(null, null);
+        }
+
+        private void textBoxSearchFiles_TextChanged(object sender, EventArgs e)
+        {
+            if (textBoxSearchFiles.Text == "")
+                pictureBoxSearchFiles.Enabled = false;
+            else
+                pictureBoxSearchFiles.Enabled = true;
+        }
+
+        private void PaintFormFileManagerFromChoseTheme()
+        {
+            if (Properties.Settings.Default.EnabledNightMode)//balck theme
+            {
+                panelTop.BackColor = Color.FromArgb(31, 41, 54);
+                panelFileManager.BackColor = Color.FromArgb(14, 22, 33);
+                textBoxPath.BackColor = Color.FromArgb(14, 22, 33);
+                textBoxPath.ForeColor = Color.White;
+
+                dataGridViewFileManager.BackgroundColor = Color.FromArgb(14, 22, 33);
+                dataGridViewFileManager.DefaultCellStyle.BackColor = Color.FromArgb(14, 22, 33);
+                dataGridViewFileManager.DefaultCellStyle.ForeColor = Color.White;
+                dataGridViewFileManager.DefaultCellStyle.SelectionBackColor = Color.FromArgb(23, 33, 43);
+                dataGridViewFileManager.DefaultCellStyle.SelectionForeColor = Color.White;
+
+                panelQuickAccess.BackColor = Color.FromArgb(23, 33, 43);
+                textBoxSearchFiles.BackColor = Color.FromArgb(23, 33, 43);
+                textBoxSearchFiles.ForeColor = Color.White;
+
+                dataGridViewQuickAccessFolders.BackgroundColor = Color.FromArgb(23, 33, 43);
+                dataGridViewQuickAccessFolders.DefaultCellStyle.BackColor = Color.FromArgb(23, 33, 43);
+                dataGridViewQuickAccessFolders.DefaultCellStyle.ForeColor = Color.White;
+                dataGridViewQuickAccessFolders.DefaultCellStyle.SelectionBackColor = Color.FromArgb(14, 22, 33);
+                dataGridViewQuickAccessFolders.DefaultCellStyle.SelectionForeColor = Color.White;
+
+                panelUndertextBoxSearchFiles.BackColor = Color.White;
+                panelUnderTextBoxPath.BackColor = Color.White;
+
+                buttonClose.ForeColor = Color.White;
+                buttonHide.ForeColor = Color.White;
+                labelTitle.ForeColor = Color.White;
+            }
+            else//white theme
+            {
+                panelTop.BackColor = Color.FromArgb(241, 241, 241);
+                panelFileManager.BackColor = Color.FromArgb(230, 230, 230);
+                textBoxPath.BackColor = Color.FromArgb(230, 230, 230);
+                textBoxPath.ForeColor = Color.Black;
+
+                dataGridViewFileManager.BackgroundColor = Color.FromArgb(230, 230, 230);
+                dataGridViewFileManager.DefaultCellStyle.BackColor = Color.FromArgb(230, 230, 230);
+                dataGridViewFileManager.DefaultCellStyle.ForeColor = Color.Black;
+                dataGridViewFileManager.DefaultCellStyle.SelectionBackColor = Color.White;
+                dataGridViewFileManager.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+                panelQuickAccess.BackColor = Color.White;
+                textBoxSearchFiles.BackColor = Color.White;
+                textBoxSearchFiles.ForeColor = Color.Black;
+
+                dataGridViewQuickAccessFolders.BackgroundColor = Color.White;
+                dataGridViewQuickAccessFolders.DefaultCellStyle.BackColor = Color.White;
+                dataGridViewQuickAccessFolders.DefaultCellStyle.ForeColor = Color.Black;
+                dataGridViewQuickAccessFolders.DefaultCellStyle.SelectionBackColor = Color.FromArgb(240, 240, 240);
+                dataGridViewQuickAccessFolders.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+                panelUndertextBoxSearchFiles.BackColor = Color.Black;
+                panelUnderTextBoxPath.BackColor = Color.Black;
+
+                buttonClose.ForeColor = Color.Black;
+                buttonHide.ForeColor = Color.Black;
+                labelTitle.ForeColor = Color.Black;
+            }
         }
     }
 }

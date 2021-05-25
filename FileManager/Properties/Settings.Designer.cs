@@ -45,5 +45,17 @@ namespace FileManager.Properties {
                 this["ListQuickAccessFolder"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EnabledNightMode {
+            get {
+                return ((bool)(this["EnabledNightMode"]));
+            }
+            set {
+                this["EnabledNightMode"] = value;
+            }
+        }
     }
 }

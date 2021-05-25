@@ -35,12 +35,12 @@ namespace FileManager
             this.textBoxPath = new System.Windows.Forms.TextBox();
             this.textBoxType = new System.Windows.Forms.TextBox();
             this.checkBoxMakeHidden = new System.Windows.Forms.CheckBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelMakeHidden = new System.Windows.Forms.Label();
+            this.labelCreated = new System.Windows.Forms.Label();
+            this.labelLastTimeChanged = new System.Windows.Forms.Label();
+            this.labelSize = new System.Windows.Forms.Label();
+            this.labelPath = new System.Windows.Forms.Label();
+            this.labelType = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -122,71 +122,71 @@ namespace FileManager
             this.checkBoxMakeHidden.UseVisualStyleBackColor = true;
             this.checkBoxMakeHidden.MouseClick += new System.Windows.Forms.MouseEventHandler(this.checkBoxMakeHidden_MouseClick);
             // 
-            // label7
+            // labelMakeHidden
             // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(34, 308);
-            this.label7.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(94, 20);
-            this.label7.TabIndex = 18;
-            this.label7.Text = "Атрибути:";
+            this.labelMakeHidden.AutoSize = true;
+            this.labelMakeHidden.ForeColor = System.Drawing.Color.White;
+            this.labelMakeHidden.Location = new System.Drawing.Point(34, 308);
+            this.labelMakeHidden.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.labelMakeHidden.Name = "labelMakeHidden";
+            this.labelMakeHidden.Size = new System.Drawing.Size(94, 20);
+            this.labelMakeHidden.TabIndex = 18;
+            this.labelMakeHidden.Text = "Атрибути:";
             // 
-            // label6
+            // labelCreated
             // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(34, 247);
-            this.label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(96, 20);
-            this.label6.TabIndex = 17;
-            this.label6.Text = "Створено:";
+            this.labelCreated.AutoSize = true;
+            this.labelCreated.ForeColor = System.Drawing.Color.White;
+            this.labelCreated.Location = new System.Drawing.Point(34, 247);
+            this.labelCreated.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.labelCreated.Name = "labelCreated";
+            this.labelCreated.Size = new System.Drawing.Size(96, 20);
+            this.labelCreated.TabIndex = 17;
+            this.labelCreated.Text = "Створено:";
             // 
-            // label5
+            // labelLastTimeChanged
             // 
-            this.label5.AutoSize = true;
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(34, 221);
-            this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(82, 20);
-            this.label5.TabIndex = 16;
-            this.label5.Text = "Змінено:";
+            this.labelLastTimeChanged.AutoSize = true;
+            this.labelLastTimeChanged.ForeColor = System.Drawing.Color.White;
+            this.labelLastTimeChanged.Location = new System.Drawing.Point(34, 221);
+            this.labelLastTimeChanged.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.labelLastTimeChanged.Name = "labelLastTimeChanged";
+            this.labelLastTimeChanged.Size = new System.Drawing.Size(82, 20);
+            this.labelLastTimeChanged.TabIndex = 16;
+            this.labelLastTimeChanged.Text = "Змінено:";
             // 
-            // label3
+            // labelSize
             // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(34, 165);
-            this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(70, 20);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "Розмір:";
+            this.labelSize.AutoSize = true;
+            this.labelSize.ForeColor = System.Drawing.Color.White;
+            this.labelSize.Location = new System.Drawing.Point(34, 165);
+            this.labelSize.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.labelSize.Name = "labelSize";
+            this.labelSize.Size = new System.Drawing.Size(70, 20);
+            this.labelSize.TabIndex = 15;
+            this.labelSize.Text = "Розмір:";
             // 
-            // label2
+            // labelPath
             // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(34, 139);
-            this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 20);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Шлях:";
+            this.labelPath.AutoSize = true;
+            this.labelPath.ForeColor = System.Drawing.Color.White;
+            this.labelPath.Location = new System.Drawing.Point(34, 139);
+            this.labelPath.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.labelPath.Name = "labelPath";
+            this.labelPath.Size = new System.Drawing.Size(56, 20);
+            this.labelPath.TabIndex = 14;
+            this.labelPath.Text = "Шлях:";
             // 
-            // label1
+            // labelType
             // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(34, 113);
-            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 20);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Тип:";
+            this.labelType.AutoSize = true;
+            this.labelType.ForeColor = System.Drawing.Color.White;
+            this.labelType.Location = new System.Drawing.Point(34, 113);
+            this.labelType.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.labelType.Name = "labelType";
+            this.labelType.Size = new System.Drawing.Size(44, 20);
+            this.labelType.TabIndex = 13;
+            this.labelType.Text = "Тип:";
             // 
             // panel3
             // 
@@ -249,12 +249,12 @@ namespace FileManager
             this.Controls.Add(this.textBoxPath);
             this.Controls.Add(this.textBoxType);
             this.Controls.Add(this.checkBoxMakeHidden);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelMakeHidden);
+            this.Controls.Add(this.labelCreated);
+            this.Controls.Add(this.labelLastTimeChanged);
+            this.Controls.Add(this.labelSize);
+            this.Controls.Add(this.labelPath);
+            this.Controls.Add(this.labelType);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -277,12 +277,12 @@ namespace FileManager
         private System.Windows.Forms.TextBox textBoxSize;
         private System.Windows.Forms.TextBox textBoxPath;
         private System.Windows.Forms.TextBox textBoxType;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelMakeHidden;
+        private System.Windows.Forms.Label labelCreated;
+        private System.Windows.Forms.Label labelLastTimeChanged;
+        private System.Windows.Forms.Label labelSize;
+        private System.Windows.Forms.Label labelPath;
+        private System.Windows.Forms.Label labelType;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;

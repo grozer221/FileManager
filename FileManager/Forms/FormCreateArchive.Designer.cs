@@ -89,7 +89,7 @@ namespace FileManager
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Location = new System.Drawing.Point(136, 56);
+            this.panel1.Location = new System.Drawing.Point(142, 58);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(169, 1);
             this.panel1.TabIndex = 2;
@@ -99,18 +99,18 @@ namespace FileManager
             this.textBoxArchiveName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(47)))), ((int)(((byte)(61)))));
             this.textBoxArchiveName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxArchiveName.ForeColor = System.Drawing.Color.White;
-            this.textBoxArchiveName.Location = new System.Drawing.Point(136, 40);
+            this.textBoxArchiveName.Location = new System.Drawing.Point(142, 40);
             this.textBoxArchiveName.Name = "textBoxArchiveName";
-            this.textBoxArchiveName.Size = new System.Drawing.Size(169, 15);
+            this.textBoxArchiveName.Size = new System.Drawing.Size(169, 19);
             this.textBoxArchiveName.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(33, 39);
+            this.label1.Location = new System.Drawing.Point(18, 39);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 16);
+            this.label1.Size = new System.Drawing.Size(121, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Назва архіву:";
             // 
@@ -153,7 +153,7 @@ namespace FileManager
             // 
             // FormCreateArchive
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(339, 164);
             this.Controls.Add(this.panelButtons);

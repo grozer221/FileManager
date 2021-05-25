@@ -12,7 +12,6 @@ namespace FileManager
         }
 
         Point movePoint;
-        public bool ShowHiddenFilesAndFolders;
         public bool IsPresedButtonCancel = false;
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -47,16 +46,44 @@ namespace FileManager
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            if (checkBoxShowHiddenFilesAndFolders.Checked)
-                ShowHiddenFilesAndFolders = true;
-            else
-                ShowHiddenFilesAndFolders = false;
             this.Close();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             buttonClose_Click(sender, e);
+        }
+
+        public void PaintInDarkTheme()
+        {
+            panelTop.BackColor = Color.FromArgb(36, 47, 61);
+            panelSettings.BackColor = Color.FromArgb(36, 47, 61);
+            buttonCancel.BackColor = Color.FromArgb(36, 47, 61);
+            buttonCancel.ForeColor = Color.White;
+            buttonCancel.FlatAppearance.BorderColor = Color.White;
+            buttonOK.BackColor = Color.FromArgb(36, 47, 61);
+            buttonOK.ForeColor = Color.White;
+            buttonOK.FlatAppearance.BorderColor = Color.White;
+            buttonClose.BackColor = Color.FromArgb(36, 47, 61);
+            buttonClose.ForeColor = Color.White;
+            checkBoxNightMode.ForeColor = Color.White;
+            checkBoxShowHiddenFilesAndFolders.ForeColor = Color.White;
+        }
+        
+        public void PaintInLightTheme()
+        {
+            panelTop.BackColor = Color.FromArgb(235, 235, 235);
+            panelSettings.BackColor = Color.FromArgb(235, 235, 235);
+            buttonCancel.BackColor = Color.FromArgb(235, 235, 235);
+            buttonCancel.ForeColor = Color.Black;
+            buttonCancel.FlatAppearance.BorderColor = Color.Black;
+            buttonOK.BackColor = Color.FromArgb(235, 235, 235);
+            buttonOK.ForeColor = Color.Black;
+            buttonOK.FlatAppearance.BorderColor = Color.Black;
+            buttonClose.BackColor = Color.FromArgb(235, 235, 235);
+            buttonClose.ForeColor = Color.Black;
+            checkBoxNightMode.ForeColor = Color.Black;
+            checkBoxShowHiddenFilesAndFolders.ForeColor = Color.Black;
         }
     }
 }

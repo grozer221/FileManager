@@ -33,6 +33,7 @@ namespace FileManager
             this.panelTop = new System.Windows.Forms.Panel();
             this.buttonClose = new System.Windows.Forms.Button();
             this.panelSettings = new System.Windows.Forms.Panel();
+            this.checkBoxNightMode = new System.Windows.Forms.CheckBox();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -44,12 +45,12 @@ namespace FileManager
             // 
             this.checkBoxShowHiddenFilesAndFolders.AutoSize = true;
             this.checkBoxShowHiddenFilesAndFolders.ForeColor = System.Drawing.Color.White;
-            this.checkBoxShowHiddenFilesAndFolders.Location = new System.Drawing.Point(20, 20);
+            this.checkBoxShowHiddenFilesAndFolders.Location = new System.Drawing.Point(20, 52);
             this.checkBoxShowHiddenFilesAndFolders.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBoxShowHiddenFilesAndFolders.Name = "checkBoxShowHiddenFilesAndFolders";
-            this.checkBoxShowHiddenFilesAndFolders.Size = new System.Drawing.Size(281, 20);
+            this.checkBoxShowHiddenFilesAndFolders.Size = new System.Drawing.Size(271, 24);
             this.checkBoxShowHiddenFilesAndFolders.TabIndex = 0;
-            this.checkBoxShowHiddenFilesAndFolders.Text = "Показувати приховані папки та файли";
+            this.checkBoxShowHiddenFilesAndFolders.Text = "Показувати приховані папки";
             this.checkBoxShowHiddenFilesAndFolders.UseVisualStyleBackColor = true;
             // 
             // panelTop
@@ -85,6 +86,7 @@ namespace FileManager
             // panelSettings
             // 
             this.panelSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(47)))), ((int)(((byte)(61)))));
+            this.panelSettings.Controls.Add(this.checkBoxNightMode);
             this.panelSettings.Controls.Add(this.buttonCancel);
             this.panelSettings.Controls.Add(this.buttonOK);
             this.panelSettings.Controls.Add(this.checkBoxShowHiddenFilesAndFolders);
@@ -94,6 +96,17 @@ namespace FileManager
             this.panelSettings.Name = "panelSettings";
             this.panelSettings.Size = new System.Drawing.Size(339, 425);
             this.panelSettings.TabIndex = 2;
+            // 
+            // checkBoxNightMode
+            // 
+            this.checkBoxNightMode.AutoSize = true;
+            this.checkBoxNightMode.ForeColor = System.Drawing.Color.White;
+            this.checkBoxNightMode.Location = new System.Drawing.Point(20, 23);
+            this.checkBoxNightMode.Name = "checkBoxNightMode";
+            this.checkBoxNightMode.Size = new System.Drawing.Size(147, 24);
+            this.checkBoxNightMode.TabIndex = 2;
+            this.checkBoxNightMode.Text = "Нічний режим";
+            this.checkBoxNightMode.UseVisualStyleBackColor = true;
             // 
             // buttonCancel
             // 
@@ -132,7 +145,7 @@ namespace FileManager
             // 
             // FormSettings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(339, 450);
             this.Controls.Add(this.panelSettings);
@@ -159,5 +172,6 @@ namespace FileManager
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button buttonCancel;
         public System.Windows.Forms.Button buttonOK;
+        public System.Windows.Forms.CheckBox checkBoxNightMode;
     }
 }

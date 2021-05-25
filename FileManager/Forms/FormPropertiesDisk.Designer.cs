@@ -31,19 +31,19 @@ namespace FileManager
         {
             this.textBoxUsingSpace = new System.Windows.Forms.TextBox();
             this.textBoxType = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelUsingSpace = new System.Windows.Forms.Label();
+            this.labelFormat = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.panelTotalSpace = new System.Windows.Forms.Panel();
             this.panelUsingSpace = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelTotalFreeSpace = new System.Windows.Forms.Label();
             this.textBoxTotalFreeSpace = new System.Windows.Forms.TextBox();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
+            this.panelSmallSquad = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBoxDisk = new System.Windows.Forms.PictureBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.labelTotalSize = new System.Windows.Forms.Label();
             this.textBoxTotalSize = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDisk)).BeginInit();
             this.SuspendLayout();
@@ -57,7 +57,7 @@ namespace FileManager
             this.textBoxUsingSpace.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxUsingSpace.Name = "textBoxUsingSpace";
             this.textBoxUsingSpace.ReadOnly = true;
-            this.textBoxUsingSpace.Size = new System.Drawing.Size(123, 15);
+            this.textBoxUsingSpace.Size = new System.Drawing.Size(123, 19);
             this.textBoxUsingSpace.TabIndex = 39;
             // 
             // textBoxType
@@ -65,34 +65,34 @@ namespace FileManager
             this.textBoxType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(47)))), ((int)(((byte)(61)))));
             this.textBoxType.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxType.ForeColor = System.Drawing.Color.White;
-            this.textBoxType.Location = new System.Drawing.Point(97, 119);
+            this.textBoxType.Location = new System.Drawing.Point(114, 118);
             this.textBoxType.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxType.Name = "textBoxType";
             this.textBoxType.ReadOnly = true;
-            this.textBoxType.Size = new System.Drawing.Size(207, 15);
+            this.textBoxType.Size = new System.Drawing.Size(186, 19);
             this.textBoxType.TabIndex = 37;
             // 
-            // label3
+            // labelUsingSpace
             // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(31, 177);
-            this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(148, 16);
-            this.label3.TabIndex = 32;
-            this.label3.Text = "Використаного місця:";
+            this.labelUsingSpace.AutoSize = true;
+            this.labelUsingSpace.ForeColor = System.Drawing.Color.White;
+            this.labelUsingSpace.Location = new System.Drawing.Point(31, 177);
+            this.labelUsingSpace.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.labelUsingSpace.Name = "labelUsingSpace";
+            this.labelUsingSpace.Size = new System.Drawing.Size(192, 20);
+            this.labelUsingSpace.TabIndex = 32;
+            this.labelUsingSpace.Text = "Використаного місця:";
             // 
-            // label1
+            // labelFormat
             // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(29, 118);
-            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 16);
-            this.label1.TabIndex = 30;
-            this.label1.Text = "Формат:";
+            this.labelFormat.AutoSize = true;
+            this.labelFormat.ForeColor = System.Drawing.Color.White;
+            this.labelFormat.Location = new System.Drawing.Point(29, 118);
+            this.labelFormat.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.labelFormat.Name = "labelFormat";
+            this.labelFormat.Size = new System.Drawing.Size(82, 20);
+            this.labelFormat.TabIndex = 30;
+            this.labelFormat.Text = "Формат:";
             // 
             // panel1
             // 
@@ -112,7 +112,7 @@ namespace FileManager
             this.textBoxName.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.ReadOnly = true;
-            this.textBoxName.Size = new System.Drawing.Size(162, 15);
+            this.textBoxName.Size = new System.Drawing.Size(162, 19);
             this.textBoxName.TabIndex = 26;
             // 
             // panelTotalSpace
@@ -131,16 +131,16 @@ namespace FileManager
             this.panelUsingSpace.Size = new System.Drawing.Size(10, 18);
             this.panelUsingSpace.TabIndex = 0;
             // 
-            // label2
+            // labelTotalFreeSpace
             // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(31, 202);
-            this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(105, 16);
-            this.label2.TabIndex = 32;
-            this.label2.Text = "Вільного місця:";
+            this.labelTotalFreeSpace.AutoSize = true;
+            this.labelTotalFreeSpace.ForeColor = System.Drawing.Color.White;
+            this.labelTotalFreeSpace.Location = new System.Drawing.Point(31, 202);
+            this.labelTotalFreeSpace.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.labelTotalFreeSpace.Name = "labelTotalFreeSpace";
+            this.labelTotalFreeSpace.Size = new System.Drawing.Size(138, 20);
+            this.labelTotalFreeSpace.TabIndex = 32;
+            this.labelTotalFreeSpace.Text = "Вільного місця:";
             // 
             // textBoxTotalFreeSpace
             // 
@@ -151,7 +151,7 @@ namespace FileManager
             this.textBoxTotalFreeSpace.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxTotalFreeSpace.Name = "textBoxTotalFreeSpace";
             this.textBoxTotalFreeSpace.ReadOnly = true;
-            this.textBoxTotalFreeSpace.Size = new System.Drawing.Size(123, 15);
+            this.textBoxTotalFreeSpace.Size = new System.Drawing.Size(123, 19);
             this.textBoxTotalFreeSpace.TabIndex = 39;
             // 
             // panel6
@@ -163,14 +163,14 @@ namespace FileManager
             this.panel6.Size = new System.Drawing.Size(10, 10);
             this.panel6.TabIndex = 43;
             // 
-            // panel7
+            // panelSmallSquad
             // 
-            this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(47)))), ((int)(((byte)(61)))));
-            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel7.Location = new System.Drawing.Point(20, 205);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(10, 10);
-            this.panel7.TabIndex = 43;
+            this.panelSmallSquad.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(47)))), ((int)(((byte)(61)))));
+            this.panelSmallSquad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelSmallSquad.Location = new System.Drawing.Point(20, 205);
+            this.panelSmallSquad.Name = "panelSmallSquad";
+            this.panelSmallSquad.Size = new System.Drawing.Size(10, 10);
+            this.panelSmallSquad.TabIndex = 43;
             // 
             // panel2
             // 
@@ -191,16 +191,16 @@ namespace FileManager
             this.pictureBoxDisk.TabIndex = 25;
             this.pictureBoxDisk.TabStop = false;
             // 
-            // label4
+            // labelTotalSize
             // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(31, 227);
-            this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(93, 16);
-            this.label4.TabIndex = 32;
-            this.label4.Text = "Всього місця:";
+            this.labelTotalSize.AutoSize = true;
+            this.labelTotalSize.ForeColor = System.Drawing.Color.White;
+            this.labelTotalSize.Location = new System.Drawing.Point(31, 227);
+            this.labelTotalSize.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.labelTotalSize.Name = "labelTotalSize";
+            this.labelTotalSize.Size = new System.Drawing.Size(123, 20);
+            this.labelTotalSize.TabIndex = 32;
+            this.labelTotalSize.Text = "Всього місця:";
             // 
             // textBoxTotalSize
             // 
@@ -211,27 +211,27 @@ namespace FileManager
             this.textBoxTotalSize.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxTotalSize.Name = "textBoxTotalSize";
             this.textBoxTotalSize.ReadOnly = true;
-            this.textBoxTotalSize.Size = new System.Drawing.Size(123, 15);
+            this.textBoxTotalSize.Size = new System.Drawing.Size(123, 19);
             this.textBoxTotalSize.TabIndex = 39;
             // 
             // FormPropertiesDisk
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(47)))), ((int)(((byte)(61)))));
             this.ClientSize = new System.Drawing.Size(339, 346);
-            this.Controls.Add(this.panel7);
+            this.Controls.Add(this.panelSmallSquad);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panelUsingSpace);
             this.Controls.Add(this.panelTotalSpace);
             this.Controls.Add(this.textBoxTotalSize);
             this.Controls.Add(this.textBoxTotalFreeSpace);
             this.Controls.Add(this.textBoxUsingSpace);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.labelTotalSize);
             this.Controls.Add(this.textBoxType);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelTotalFreeSpace);
+            this.Controls.Add(this.labelUsingSpace);
+            this.Controls.Add(this.labelFormat);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.textBoxName);
@@ -250,19 +250,19 @@ namespace FileManager
         #endregion
         private System.Windows.Forms.TextBox textBoxUsingSpace;
         private System.Windows.Forms.TextBox textBoxType;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelUsingSpace;
+        private System.Windows.Forms.Label labelFormat;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.PictureBox pictureBoxDisk;
         private System.Windows.Forms.Panel panelTotalSpace;
         private System.Windows.Forms.Panel panelUsingSpace;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelTotalFreeSpace;
         private System.Windows.Forms.TextBox textBoxTotalFreeSpace;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Panel panelSmallSquad;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelTotalSize;
         private System.Windows.Forms.TextBox textBoxTotalSize;
     }
 }

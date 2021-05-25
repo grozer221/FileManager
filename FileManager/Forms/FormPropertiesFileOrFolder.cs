@@ -85,5 +85,71 @@ namespace FileManager
                 if (MessageBox.Show("Приховувати вкладені папки та файли?", "Питання", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     IsHideRecursive = true;
         }
+
+        public void PaintInDarkTheme()
+        {
+            this.BackColor = Color.FromArgb(36, 47, 61);
+            textBoxName.BackColor = Color.FromArgb(36, 47, 61);
+            panel1.BackColor = Color.White;
+            panel2.BackColor = Color.White;
+            panel3.BackColor = Color.White;
+            textBoxType.BackColor = Color.FromArgb(36, 47, 61);
+            labelType.BackColor = Color.FromArgb(36, 47, 61);
+            textBoxPath.BackColor = Color.FromArgb(36, 47, 61);
+            labelPath.BackColor = Color.FromArgb(36, 47, 61);
+            textBoxSize.BackColor = Color.FromArgb(36, 47, 61);
+            labelSize.BackColor = Color.FromArgb(36, 47, 61);
+            labelLastTimeChanged.BackColor = Color.FromArgb(36, 47, 61);
+            textBoxLastTimeChanged.BackColor = Color.FromArgb(36, 47, 61);
+            textBoxCreated.BackColor = Color.FromArgb(36, 47, 61);
+            labelCreated.BackColor = Color.FromArgb(36, 47, 61);
+
+            textBoxName.ForeColor = Color.White;
+            textBoxType.ForeColor = Color.White;
+            labelType.ForeColor = Color.White;
+            textBoxPath.ForeColor = Color.White;
+            labelPath.ForeColor = Color.White;
+            textBoxSize.ForeColor = Color.White;
+            labelSize.ForeColor = Color.White;
+            labelLastTimeChanged.ForeColor = Color.White;
+            textBoxLastTimeChanged.ForeColor = Color.White;
+            textBoxCreated.ForeColor = Color.White;
+            labelCreated.ForeColor = Color.White;
+            checkBoxMakeHidden.ForeColor = Color.White;
+            labelMakeHidden.ForeColor = Color.White;
+        }
+
+        public void PaintInLightTheme()
+        {
+            this.BackColor = Color.FromArgb(235, 235, 235);
+            textBoxName.BackColor = Color.FromArgb(235, 235, 235);
+            panel1.BackColor = Color.Black;
+            panel2.BackColor = Color.Black;
+            panel3.BackColor = Color.Black;
+            textBoxType.BackColor = Color.FromArgb(235, 235, 235);
+            labelType.BackColor = Color.FromArgb(235, 235, 235);
+            textBoxPath.BackColor = Color.FromArgb(235, 235, 235);
+            labelPath.BackColor = Color.FromArgb(235, 235, 235);
+            textBoxSize.BackColor = Color.FromArgb(235, 235, 235);
+            labelSize.BackColor = Color.FromArgb(235, 235, 235);
+            labelLastTimeChanged.BackColor = Color.FromArgb(235, 235, 235);
+            textBoxLastTimeChanged.BackColor = Color.FromArgb(235, 235, 235);
+            textBoxCreated.BackColor = Color.FromArgb(235, 235, 235);
+            labelCreated.BackColor = Color.FromArgb(235, 235, 235);
+
+            textBoxName.ForeColor = Color.Black;
+            textBoxType.ForeColor = Color.Black;
+            labelType.ForeColor = Color.Black;
+            textBoxPath.ForeColor = Color.Black;
+            labelPath.ForeColor = Color.Black;
+            textBoxSize.ForeColor = Color.Black;
+            labelSize.ForeColor = Color.Black;
+            labelLastTimeChanged.ForeColor = Color.Black;
+            textBoxLastTimeChanged.ForeColor = Color.Black;
+            textBoxCreated.ForeColor = Color.Black;
+            labelCreated.ForeColor = Color.Black;
+            checkBoxMakeHidden.ForeColor = Color.Black;
+            labelMakeHidden.ForeColor = Color.Black;
+        }
     }
 }

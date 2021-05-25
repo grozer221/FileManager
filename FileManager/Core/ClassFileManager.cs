@@ -12,12 +12,13 @@ namespace MyLibrary
 {
     public class ClassFileManager
     {
+        public bool EnabledNightMode;
 
         public List<ModelFileManager> GetDisksInListOfObj(ref List<string> listVisualisedItems)
         {
             listVisualisedItems.Clear();
             List<ModelFileManager> listDisks = new List<ModelFileManager>();
-            listDisks.Add(new ModelFileManager { Image = GetEmptyImage(Color.FromArgb(14, 22, 33)), Name = "Назва", FormatOrDateLastChanged = "Формат", TotalFreeSpaceOrType = "Вільного місця", TotalSize = "Повний об`єм" });
+            listDisks.Add(new ModelFileManager { Image = GetEmptyImage(EnabledNightMode ? Color.FromArgb(14, 22, 33) : Color.FromArgb(230, 230, 230)), Name = "Назва", FormatOrDateLastChanged = "Формат", TotalFreeSpaceOrType = "Вільного місця", TotalSize = "Повний об`єм" });
             DriveInfo[] drives = DriveInfo.GetDrives();
             foreach (DriveInfo drive in drives)
             {
@@ -39,7 +40,7 @@ namespace MyLibrary
             DirectoryInfo dirInfo = new DirectoryInfo(currentPath);
             DirectoryInfo[] dirs = dirInfo.GetDirectories();
             FileInfo[] files = dirInfo.GetFiles();
-            listFilesAndFolders.Add(new ModelFileManager { Image = GetEmptyImage(Color.FromArgb(14, 22, 33)), Name = "Назва", FormatOrDateLastChanged = "Дата зміни", TotalFreeSpaceOrType = "Тип", TotalSize = "Розмір" });
+            listFilesAndFolders.Add(new ModelFileManager { Image = GetEmptyImage(EnabledNightMode ? Color.FromArgb(14, 22, 33) : Color.FromArgb(230, 230, 230)), Name = "Назва", FormatOrDateLastChanged = "Дата зміни", TotalFreeSpaceOrType = "Тип", TotalSize = "Розмір" });
             foreach (DirectoryInfo dir in dirs)
             {
                 if (dir.Attributes.HasFlag(FileAttributes.System))
@@ -113,11 +114,11 @@ namespace MyLibrary
         public List<ModelQuickAccess> GetQuickAccessFoldersInObjs()
         {
             List<ModelQuickAccess> listQuickAccessFoldersInObj = new List<ModelQuickAccess>();
-            listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = GetEmptyImage(Color.FromArgb(23, 33, 43)), Name = "Швидкий доступ" });
+            listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = GetEmptyImage(EnabledNightMode ? Color.FromArgb(23, 33, 43) : Color.White), Name = "Швидкий доступ" });
             if (FileManager.Properties.Settings.Default.ListQuickAccessFolder != null)
                 foreach (string quickAccessFolder in FileManager.Properties.Settings.Default.ListQuickAccessFolder)
                     listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = new Bitmap(FileManager.Properties.Resources.documents_folder_18875, 20, 20), Name = new DirectoryInfo(quickAccessFolder).Name });
-            listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = GetEmptyImage(Color.FromArgb(23, 33, 43)), Name = null });
+            listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = GetEmptyImage(EnabledNightMode ? Color.FromArgb(23, 33, 43) : Color.White), Name = null });
             listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = new Bitmap(FileManager.Properties.Resources.mypc, 20, 20), Name = "Мій комп'ютер" });
             listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = new Bitmap(FileManager.Properties.Resources.PluberGame, 20, 20), Name = "Пломбір" });
             return listQuickAccessFoldersInObj;

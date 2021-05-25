@@ -270,7 +270,7 @@ namespace MyLibrary
             for(int i = 0; i < 4; i++)
                 DataGridViewFileManager.Columns.Add(new DataGridViewTextBoxColumn());
             SetSizeForDataGrid();
-            DataGridViewFileManager.Rows.Add(new Bitmap(GetEmptyImage(Color.FromArgb(14, 22, 33)), 25, 25), "Назва", "Шлях", "Тип", "Розмір");
+            DataGridViewFileManager.Rows.Add(new Bitmap(GetEmptyImage(EnabledNightMode ? Color.FromArgb(14, 22, 33) : Color.FromArgb(230, 230, 230)), 25, 25), "Назва", "Шлях", "Тип", "Розмір");
             ListVisualisedItems.Clear();
             await Task.Run(() => PrintSearchedFiles(currentPath, nameSearchedFile, showHiddenFilesAndFolders));
         }
@@ -313,7 +313,7 @@ namespace MyLibrary
                                 bitmap = new Bitmap(FileManager.Properties.Resources.documents_folder_18875, 20, 20);
 
                             Match match = regex.Match(dir.Name);
-                            string dirName = match.Groups[1].Value + "\'" + match.Groups[2].Value + "\'" + match.Groups[3].Value;
+                            string dirName = match.Groups[1].Value + "(" + match.Groups[2].Value + ")" + match.Groups[3].Value;
                             DataGridViewFileManager.Rows.Add(bitmap, dirName, dir.FullName, "Папка", "");
                             ListVisualisedItems.Add(dir.FullName);
                         }));
@@ -344,7 +344,7 @@ namespace MyLibrary
                                 bitmap = new Bitmap(Icon.ExtractAssociatedIcon(file.FullName).ToBitmap(), 20, 20);
 
                             Match match = regex.Match(file.Name);
-                            string fileName = match.Groups[1].Value + "\'" + match.Groups[2].Value + "\'" + match.Groups[3].Value;
+                            string fileName = match.Groups[1].Value + "(" + match.Groups[2].Value + ")" + match.Groups[3].Value;
 
                             DataGridViewFileManager.Rows.Add(bitmap, fileName, file.FullName, "Файл", GetSizeInPropertyType(file.Length));
                             ListVisualisedItems.Add(file.FullName);
@@ -354,6 +354,5 @@ namespace MyLibrary
             }
             catch { }
         }
-
     }
 }

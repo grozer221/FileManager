@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MyLibrary;
 
@@ -23,6 +22,7 @@ namespace FileManager
         private Form ActiveForm = null;
         public bool ResultCheckBoxHidden = false;
         public bool IsHideRecursive = false;
+        public bool EnabledNightMode;
 
         private void openChildForm(Form childForm)
         {
@@ -88,12 +88,20 @@ namespace FileManager
                 formPropertiesFileOrFolder = new FormPropertiesFileOrFolder(PathFileOrFolder);
                 openChildForm(formPropertiesFileOrFolder);
                 formPropertiesFileOrFolder.PrintProperties();
+                if (EnabledNightMode)
+                    formPropertiesFileOrFolder.PaintInDarkTheme();
+                else
+                    formPropertiesFileOrFolder.PaintInLightTheme();
             }
             else
             {
                 formPropertiesDisk = new FormPropertiesDisk(PathFileOrFolder);
                 openChildForm(formPropertiesDisk);
                 formPropertiesDisk.PrintProperties();
+                if (EnabledNightMode)
+                    formPropertiesDisk.PaintInDarkTheme();
+                else
+                    formPropertiesDisk.PaintInLightTheme();
             }
         }
 
@@ -118,6 +126,34 @@ namespace FileManager
             }
         }
 
-        
+        public void PaintInDarkTheme()
+        {
+            panelTop.BackColor = Color.FromArgb(36, 47, 61);
+            panelProterties.BackColor = Color.FromArgb(36, 47, 61);
+            panelButtons.BackColor = Color.FromArgb(36, 47, 61);
+            buttonCancel.BackColor = Color.FromArgb(36, 47, 61);
+            buttonCancel.ForeColor = Color.White;
+            buttonCancel.FlatAppearance.BorderColor = Color.White;
+            buttonOK.BackColor = Color.FromArgb(36, 47, 61);
+            buttonOK.ForeColor = Color.White;
+            buttonOK.FlatAppearance.BorderColor = Color.White;
+            buttonClose.BackColor = Color.FromArgb(36, 47, 61);
+            buttonClose.ForeColor = Color.White;
+        }
+
+        public void PaintInLightTheme()
+        {
+            panelTop.BackColor = Color.FromArgb(235, 235, 235);
+            panelProterties.BackColor = Color.FromArgb(235, 235, 235);
+            panelButtons.BackColor = Color.FromArgb(235, 235, 235);
+            buttonCancel.BackColor = Color.FromArgb(235, 235, 235);
+            buttonCancel.ForeColor = Color.Black;
+            buttonCancel.FlatAppearance.BorderColor = Color.Black;
+            buttonOK.BackColor = Color.FromArgb(235, 235, 235);
+            buttonOK.ForeColor = Color.Black;
+            buttonOK.FlatAppearance.BorderColor = Color.Black;
+            buttonClose.BackColor = Color.FromArgb(235, 235, 235);
+            buttonClose.ForeColor = Color.Black;
+        }
     }
 }
