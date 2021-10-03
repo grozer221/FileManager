@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using MyLibrary;
+using FileManager.Core;
 
 namespace FileManager
 {

@@ -30,9 +30,9 @@ namespace FileManager
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormFileManager));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormFileManager));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelTop = new System.Windows.Forms.Panel();
             this.buttonHide = new System.Windows.Forms.Button();
             this.labelTitle = new System.Windows.Forms.Label();
@@ -119,7 +119,7 @@ namespace FileManager
             this.labelTitle.ForeColor = System.Drawing.Color.White;
             this.labelTitle.Location = new System.Drawing.Point(3, 4);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(113, 21);
+            this.labelTitle.Size = new System.Drawing.Size(86, 17);
             this.labelTitle.TabIndex = 2;
             this.labelTitle.Text = "FileManager";
             // 
@@ -197,7 +197,7 @@ namespace FileManager
             this.textBoxSearchFiles.ForeColor = System.Drawing.Color.White;
             this.textBoxSearchFiles.Location = new System.Drawing.Point(50, 64);
             this.textBoxSearchFiles.Name = "textBoxSearchFiles";
-            this.textBoxSearchFiles.Size = new System.Drawing.Size(123, 25);
+            this.textBoxSearchFiles.Size = new System.Drawing.Size(123, 20);
             this.textBoxSearchFiles.TabIndex = 2;
             this.textBoxSearchFiles.TextChanged += new System.EventHandler(this.textBoxSearchFiles_TextChanged);
             this.textBoxSearchFiles.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxSearchFiles_KeyUp);
@@ -226,14 +226,14 @@ namespace FileManager
             this.dataGridViewQuickAccessFolders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewQuickAccessFolders.ColumnHeadersVisible = false;
             this.dataGridViewQuickAccessFolders.ContextMenuStrip = this.contextMenuStripQuickAccess;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(33)))), ((int)(((byte)(43)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(22)))), ((int)(((byte)(33)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewQuickAccessFolders.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(33)))), ((int)(((byte)(43)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(22)))), ((int)(((byte)(33)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewQuickAccessFolders.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewQuickAccessFolders.Location = new System.Drawing.Point(23, 131);
             this.dataGridViewQuickAccessFolders.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridViewQuickAccessFolders.MultiSelect = false;
@@ -255,12 +255,12 @@ namespace FileManager
             this.contextMenuStripQuickAccess.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.DeleteToolStripMenuItem1});
             this.contextMenuStripQuickAccess.Name = "contextMenuStripQuickAccess";
-            this.contextMenuStripQuickAccess.Size = new System.Drawing.Size(145, 28);
+            this.contextMenuStripQuickAccess.Size = new System.Drawing.Size(127, 26);
             // 
             // DeleteToolStripMenuItem1
             // 
             this.DeleteToolStripMenuItem1.Name = "DeleteToolStripMenuItem1";
-            this.DeleteToolStripMenuItem1.Size = new System.Drawing.Size(144, 24);
+            this.DeleteToolStripMenuItem1.Size = new System.Drawing.Size(126, 22);
             this.DeleteToolStripMenuItem1.Text = "Видалити";
             this.DeleteToolStripMenuItem1.Click += new System.EventHandler(this.DeleteToolStripMenuItem1_Click);
             // 
@@ -287,7 +287,7 @@ namespace FileManager
             this.labelEnterTextBoxError.ForeColor = System.Drawing.Color.Red;
             this.labelEnterTextBoxError.Location = new System.Drawing.Point(42, 88);
             this.labelEnterTextBoxError.Name = "labelEnterTextBoxError";
-            this.labelEnterTextBoxError.Size = new System.Drawing.Size(169, 18);
+            this.labelEnterTextBoxError.Size = new System.Drawing.Size(143, 14);
             this.labelEnterTextBoxError.TabIndex = 5;
             this.labelEnterTextBoxError.Text = "Директорію не знайдено";
             this.labelEnterTextBoxError.Visible = false;
@@ -334,7 +334,7 @@ namespace FileManager
             this.textBoxPath.Location = new System.Drawing.Point(67, 63);
             this.textBoxPath.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBoxPath.Name = "textBoxPath";
-            this.textBoxPath.Size = new System.Drawing.Size(608, 25);
+            this.textBoxPath.Size = new System.Drawing.Size(608, 20);
             this.textBoxPath.TabIndex = 1;
             this.textBoxPath.TextChanged += new System.EventHandler(this.textBoxPath_TextChanged);
             this.textBoxPath.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxPath_KeyDown);
@@ -353,14 +353,14 @@ namespace FileManager
             this.dataGridViewFileManager.ColumnHeadersVisible = false;
             this.dataGridViewFileManager.ContextMenuStrip = this.contextMenuStripFileManager;
             this.dataGridViewFileManager.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(22)))), ((int)(((byte)(33)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(33)))), ((int)(((byte)(43)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewFileManager.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(22)))), ((int)(((byte)(33)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(33)))), ((int)(((byte)(43)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewFileManager.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewFileManager.Location = new System.Drawing.Point(31, 131);
             this.dataGridViewFileManager.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridViewFileManager.Name = "dataGridViewFileManager";
@@ -396,13 +396,13 @@ namespace FileManager
             this.RenameToolStripMenuItem,
             this.PropertiesToolStripMenuItem});
             this.contextMenuStripFileManager.Name = "contextMenuStripFileManager";
-            this.contextMenuStripFileManager.Size = new System.Drawing.Size(261, 342);
+            this.contextMenuStripFileManager.Size = new System.Drawing.Size(220, 342);
             // 
             // CopyToolStripMenuItem
             // 
             this.CopyToolStripMenuItem.Image = global::FileManager.Properties.Resources.copy;
             this.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem";
-            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(260, 26);
+            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
             this.CopyToolStripMenuItem.Text = "Копіювати";
             this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             // 
@@ -410,7 +410,7 @@ namespace FileManager
             // 
             this.PasteToolStripMenuItem.Image = global::FileManager.Properties.Resources.paste;
             this.PasteToolStripMenuItem.Name = "PasteToolStripMenuItem";
-            this.PasteToolStripMenuItem.Size = new System.Drawing.Size(260, 26);
+            this.PasteToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
             this.PasteToolStripMenuItem.Text = "Вставити";
             this.PasteToolStripMenuItem.Click += new System.EventHandler(this.PasteToolStripMenuItem_Click);
             // 
@@ -418,7 +418,7 @@ namespace FileManager
             // 
             this.AddToQuickAccessToolStripMenuItem.Image = global::FileManager.Properties.Resources.folder;
             this.AddToQuickAccessToolStripMenuItem.Name = "AddToQuickAccessToolStripMenuItem";
-            this.AddToQuickAccessToolStripMenuItem.Size = new System.Drawing.Size(260, 26);
+            this.AddToQuickAccessToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
             this.AddToQuickAccessToolStripMenuItem.Text = "Додати в швидкий доступ";
             this.AddToQuickAccessToolStripMenuItem.Click += new System.EventHandler(this.AddToQuickAccessToolStripMenuItem_Click);
             // 
@@ -426,7 +426,7 @@ namespace FileManager
             // 
             this.ReloadToolStripMenuItem.Image = global::FileManager.Properties.Resources.refresh;
             this.ReloadToolStripMenuItem.Name = "ReloadToolStripMenuItem";
-            this.ReloadToolStripMenuItem.Size = new System.Drawing.Size(260, 26);
+            this.ReloadToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
             this.ReloadToolStripMenuItem.Text = "Оновити";
             this.ReloadToolStripMenuItem.Click += new System.EventHandler(this.ReloadToolStripMenuItem_Click);
             // 
@@ -434,7 +434,7 @@ namespace FileManager
             // 
             this.DeleteToolStripMenuItem.Image = global::FileManager.Properties.Resources.delete;
             this.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem";
-            this.DeleteToolStripMenuItem.Size = new System.Drawing.Size(260, 26);
+            this.DeleteToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
             this.DeleteToolStripMenuItem.Text = "Видалити";
             this.DeleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolStripMenuItem_Click);
             // 
@@ -442,7 +442,7 @@ namespace FileManager
             // 
             this.ArchivateToolStripMenuItem.Image = global::FileManager.Properties.Resources.winrar;
             this.ArchivateToolStripMenuItem.Name = "ArchivateToolStripMenuItem";
-            this.ArchivateToolStripMenuItem.Size = new System.Drawing.Size(260, 26);
+            this.ArchivateToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
             this.ArchivateToolStripMenuItem.Text = "Архівувати";
             this.ArchivateToolStripMenuItem.Click += new System.EventHandler(this.ArchivateToolStripMenuItem_Click);
             // 
@@ -450,7 +450,7 @@ namespace FileManager
             // 
             this.UnArchivateToolStripMenuItem.Image = global::FileManager.Properties.Resources.winrar;
             this.UnArchivateToolStripMenuItem.Name = "UnArchivateToolStripMenuItem";
-            this.UnArchivateToolStripMenuItem.Size = new System.Drawing.Size(260, 26);
+            this.UnArchivateToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
             this.UnArchivateToolStripMenuItem.Text = "Розархівувати";
             this.UnArchivateToolStripMenuItem.Click += new System.EventHandler(this.UnArchivateToolStripMenuItem_Click);
             // 
@@ -458,7 +458,7 @@ namespace FileManager
             // 
             this.EncryptToolStripMenuItem.Image = global::FileManager.Properties.Resources.crypt;
             this.EncryptToolStripMenuItem.Name = "EncryptToolStripMenuItem";
-            this.EncryptToolStripMenuItem.Size = new System.Drawing.Size(260, 26);
+            this.EncryptToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
             this.EncryptToolStripMenuItem.Text = "Шифрувати";
             this.EncryptToolStripMenuItem.Click += new System.EventHandler(this.EncryptToolStripMenuItem_Click);
             // 
@@ -466,7 +466,7 @@ namespace FileManager
             // 
             this.DecryptToolStripMenuItem.Image = global::FileManager.Properties.Resources.crypt;
             this.DecryptToolStripMenuItem.Name = "DecryptToolStripMenuItem";
-            this.DecryptToolStripMenuItem.Size = new System.Drawing.Size(260, 26);
+            this.DecryptToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
             this.DecryptToolStripMenuItem.Text = "Розшифрувати";
             this.DecryptToolStripMenuItem.Click += new System.EventHandler(this.DecryptToolStripMenuItem_Click);
             // 
@@ -474,7 +474,7 @@ namespace FileManager
             // 
             this.CreateShortcutToolStripMenuItem.Image = global::FileManager.Properties.Resources.shortcut;
             this.CreateShortcutToolStripMenuItem.Name = "CreateShortcutToolStripMenuItem";
-            this.CreateShortcutToolStripMenuItem.Size = new System.Drawing.Size(260, 26);
+            this.CreateShortcutToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
             this.CreateShortcutToolStripMenuItem.Text = "Створити ярлик";
             this.CreateShortcutToolStripMenuItem.Click += new System.EventHandler(this.CreateShortcutToolStripMenuItem_Click);
             // 
@@ -482,7 +482,7 @@ namespace FileManager
             // 
             this.NewFolderToolStripMenuItem.Image = global::FileManager.Properties.Resources.folder;
             this.NewFolderToolStripMenuItem.Name = "NewFolderToolStripMenuItem";
-            this.NewFolderToolStripMenuItem.Size = new System.Drawing.Size(260, 26);
+            this.NewFolderToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
             this.NewFolderToolStripMenuItem.Text = "Нова папка";
             this.NewFolderToolStripMenuItem.Click += new System.EventHandler(this.NewFolderToolStripMenuItem_Click);
             // 
@@ -490,7 +490,7 @@ namespace FileManager
             // 
             this.RenameToolStripMenuItem.Image = global::FileManager.Properties.Resources.rename;
             this.RenameToolStripMenuItem.Name = "RenameToolStripMenuItem";
-            this.RenameToolStripMenuItem.Size = new System.Drawing.Size(260, 26);
+            this.RenameToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
             this.RenameToolStripMenuItem.Text = "Перейменувати";
             this.RenameToolStripMenuItem.Click += new System.EventHandler(this.RenameToolStripMenuItem_Click);
             // 
@@ -498,13 +498,13 @@ namespace FileManager
             // 
             this.PropertiesToolStripMenuItem.Image = global::FileManager.Properties.Resources.properties;
             this.PropertiesToolStripMenuItem.Name = "PropertiesToolStripMenuItem";
-            this.PropertiesToolStripMenuItem.Size = new System.Drawing.Size(260, 26);
+            this.PropertiesToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
             this.PropertiesToolStripMenuItem.Text = "Властивості";
             this.PropertiesToolStripMenuItem.Click += new System.EventHandler(this.PropertiesToolStripMenuItem_Click);
             // 
             // FormFileManager
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(982, 668);
             this.Controls.Add(this.panelFileManager);

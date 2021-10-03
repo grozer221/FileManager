@@ -3,14 +3,21 @@
   <Class Name="MyLibrary.ClassFileManager">
     <Position X="4.5" Y="0.75" Width="3.25" />
     <TypeIdentifier>
-      <HashCode>CAAAQAIAAAAAAAAAQAAIAEAAACIGAAEACAQMABAAEog=</HashCode>
+      <HashCode>CAAAQAIAAAAAAAAAQAAIAEAAACIGAAEACAQMABCAEog=</HashCode>
       <FileName>Core\ClassFileManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MyLibrary.ContextMenuStripVisualise">
     <Position X="11.5" Y="0.75" Width="3.25" />
+    <NestedTypes>
+      <Enum Name="MyLibrary.ContextMenuStripVisualise.menu" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Core\ContextMenuStripVisualise.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>EAAAgAAIAAgAAgAAAAAQEIAgAAAAIAAEEBiAAAQAAAg=</HashCode>
+      <HashCode>AAAAAAAIAAAAAAAAAAAQAAAAAAAAAAAAABgAAAQAAAg=</HashCode>
       <FileName>Core\ContextMenuStripVisualise.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -23,19 +30,19 @@
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AAAABAAAAAABAgIAAJAAIAgAggAAAAgACAAAQQAAoAA=</HashCode>
+      <HashCode>AAEQBAAAAAABAgJAAJAAIAgAwgAAAAgAKACAQQAAoAA=</HashCode>
       <FileName>Core\DataGridViewVisualise.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MyLibrary.ModelQuickAccess">
-    <Position X="6.25" Y="6" Width="1.5" />
+    <Position X="6.25" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAABAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\ModelQuickAccess.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MyLibrary.ModelFileManager">
-    <Position X="4.5" Y="6" Width="1.5" />
+    <Position X="4.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAgAAAAAAAAIAAAIAAAAAQAAAAAABAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\ModelFileManager.cs</FileName>
@@ -51,55 +58,55 @@
   <Class Name="FileManager.FormFileManager" Collapsed="true">
     <Position X="11.5" Y="7.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>DQK6aQIAFCEAALEAcgSASYIikEEKggUwdIaBAoAhgwA=</HashCode>
+      <HashCode>DRI6aQMkECEAALEAcgSQWZIjkEEKggUwdKaBAoAhg4A=</HashCode>
       <FileName>Forms\FormFileManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FileManager.FormProperties" Collapsed="true">
     <Position X="11.5" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AMAAgAAAACAAACAABADARAACEAEwgQQIAAIAAIEBQAA=</HashCode>
+      <HashCode>AMAQgAAAACAAACAABAHARAACEAEwgQQIAAIAAIGBQAA=</HashCode>
       <FileName>Forms\FormProperties.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FileManager.FormPropertiesDisk" Collapsed="true">
     <Position X="13.25" Y="7.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QQAIAAAAACAAABAAAACAAAACEAAAQBAAAAAAAUAIACA=</HashCode>
+      <HashCode>QUAYAAAAACAAABAAAAGgAAADEAAAQBAAAAgAAcAIACA=</HashCode>
       <FileName>Forms\FormPropertiesDisk.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FileManager.FormPropertiesFileOrFolder" Collapsed="true">
     <Position X="13.25" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ACAgAAAIACAEABAAAADAAAACEAASAAIAAAAACQAAQCQ=</HashCode>
+      <HashCode>ACAwgAAIACAEABAAAAHAAAACEAASABKCAAAICQAARCQ=</HashCode>
       <FileName>Forms\FormPropertiesFileOrFolder.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FileManager.FormSettings" Collapsed="true">
     <Position X="11.5" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgAEAAgCAAAAAAAACARAACEAEIgAUIAAIAAIEBAAA=</HashCode>
+      <HashCode>AAAQAEAAgCAAAAAAAAGARAACEAEIgAUIAAIAAIEBAAE=</HashCode>
       <FileName>Forms\FormSettings.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FileManager.Program" Collapsed="true">
-    <Position X="9.75" Y="6" Width="1.5" />
+    <Position X="9.75" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FileManager.Properties.Resources" Collapsed="true">
-    <Position X="8" Y="6.75" Width="1.5" />
+    <Position X="8" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAKEAEIAEAAAAAAAAAAFFQASAQCAABIAEAAAADAQQIQ=</HashCode>
+      <HashCode>AAKEAEIAEAAAAAAAAAAFFQASAQCAAJIAEAAAADAYQIQ=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="FileManager.Properties.Settings" Collapsed="true">
-    <Position X="8" Y="6" Width="1.5" />
+    <Position X="8" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAEAIAAIAAAAAQBAAAAAAAAAAAACAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAIAAIAAAAAQBAAAAAAAAAACACAA=</HashCode>
       <FileName>Settings.cs</FileName>
     </TypeIdentifier>
   </Class>

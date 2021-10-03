@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace MyLibrary
+namespace FileManager.Core
 {
     public class ModelQuickAccess
     {

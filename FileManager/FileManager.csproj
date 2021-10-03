@@ -108,6 +108,11 @@
     <Compile Include="Models\ModelFileManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <EmbeddedResource Include="Forms\FormFileManager.resx">
       <DependentUpon>FormFileManager.cs</DependentUpon>
@@ -129,16 +134,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="app.manifest" />
     <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -183,6 +184,11 @@
     <None Include="bin\Debug\PlumberGame.exe" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\PlumberGameIco.ico" />
+    <None Include="Resources\Newtonsoft.Json.dll" />
+    <None Include="Resources\Plumber Game.exe" />
+    <None Include="bin\Debug\Interop.IWshRuntimeLibrary.dll" />
+    <None Include="bin\Debug\Ionic.Zip.dll" />
     <Content Include="file-explorer.ico" />
     <None Include="Resources\cross.png" />
     <None Include="Resources\arrow.png" />

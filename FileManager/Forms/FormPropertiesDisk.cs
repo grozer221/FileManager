@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.IO;
-using MyLibrary;
 using System.Drawing;
+using FileManager.Core;
 
 namespace FileManager
 {

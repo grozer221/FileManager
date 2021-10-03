@@ -8,13 +8,13 @@ using System.Windows.Forms;
 using Ionic.Zip;
 using IWshRuntimeLibrary;
 
-namespace MyLibrary
+namespace FileManager.Core
 {
     public class ClassFileManager
     {
         public bool EnabledNightMode;
 
-        public List<ModelFileManager> GetDisksInListOfObj(ref List<string> listVisualisedItems)
+        public List<ModelFileManager> GetDisksInListOfObj(ref List<string> listVisualisedItems)//отримати списку дисків у виді об'єктів для в вставлення в поле DataSourse DataGridView
         {
             listVisualisedItems.Clear();
             List<ModelFileManager> listDisks = new List<ModelFileManager>();
@@ -33,7 +33,7 @@ namespace MyLibrary
             return listDisks;
         }
 
-        public List<ModelFileManager> GetFilesAndFoldersInListOfObj(string currentPath, ref List<string> listVisualisedItems, string args = null, bool showHiddenFilesAndFolders = false)
+        public List<ModelFileManager> GetFilesAndFoldersInListOfObj(string currentPath, ref List<string> listVisualisedItems, string args = null, bool showHiddenFilesAndFolders = false)//отримати списку папок/файлів у виді об'єктів
         {
             listVisualisedItems.Clear();
             List<ModelFileManager> listFilesAndFolders = new List<ModelFileManager>();
@@ -80,7 +80,7 @@ namespace MyLibrary
             return listFilesAndFolders;
         }
 
-        public Bitmap ToDarkerColor(Bitmap bitmap)
+        public Bitmap ToDarkerColor(Bitmap bitmap)//повертає темнішу отриману картинку
         {
             for (int y = 0; y < bitmap.Height; y++)
                 for (int x = 0; x < bitmap.Width; x++)
@@ -91,7 +91,7 @@ namespace MyLibrary
             return bitmap;
         }
 
-        public Bitmap GetEmptyImage(Color color)
+        public Bitmap GetEmptyImage(Color color)//повертає bitmap в переданому кольорі
         {
             var bmp = new Bitmap(25, 25);
             using (var g = Graphics.FromImage(bmp))
@@ -99,7 +99,7 @@ namespace MyLibrary
             return bmp;
         }
 
-        public static string GetSizeInPropertyType(long fileLength)
+        public static string GetSizeInPropertyType(long fileLength)//повертає потрібний розмір файлу
         {
             if (fileLength / 1000000000 > 1)
                 return fileLength / 1000000000 + " ГБ";
@@ -111,7 +111,7 @@ namespace MyLibrary
                 return fileLength + " Б";
         }
 
-        public List<ModelQuickAccess> GetQuickAccessFoldersInObjs()
+        public List<ModelQuickAccess> GetQuickAccessFoldersInObjs()//отримати списку папок швидкого доступу у виді об'єктів
         {
             List<ModelQuickAccess> listQuickAccessFoldersInObj = new List<ModelQuickAccess>();
             listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = GetEmptyImage(EnabledNightMode ? Color.FromArgb(23, 33, 43) : Color.White), Name = "Швидкий доступ" });
@@ -120,11 +120,11 @@ namespace MyLibrary
                     listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = new Bitmap(FileManager.Properties.Resources.documents_folder_18875, 20, 20), Name = new DirectoryInfo(quickAccessFolder).Name });
             listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = GetEmptyImage(EnabledNightMode ? Color.FromArgb(23, 33, 43) : Color.White), Name = null });
             listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = new Bitmap(FileManager.Properties.Resources.mypc, 20, 20), Name = "Мій комп'ютер" });
-            listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = new Bitmap(FileManager.Properties.Resources.PluberGame, 20, 20), Name = "Пломбір" });
+            listQuickAccessFoldersInObj.Add(new ModelQuickAccess { Image = new Bitmap(FileManager.Properties.Resources.PlumberGameIco.ToBitmap(), 20, 20), Name = "Пломбір" });
             return listQuickAccessFoldersInObj;
         }
 
-        public void AddQuickAccessFolderToList(string pathSelectedFolder)
+        public void AddQuickAccessFolderToList(string pathSelectedFolder)//додати папку до списку папок швидкого доступу
         {
             if (FileManager.Properties.Settings.Default.ListQuickAccessFolder != null)
                 foreach (string folder in FileManager.Properties.Settings.Default.ListQuickAccessFolder)
@@ -141,13 +141,13 @@ namespace MyLibrary
             FileManager.Properties.Settings.Default.Save();
         }
 
-        public void RemoveQuickAccessFolder(int selectedRowIndex)
+        public void RemoveQuickAccessFolder(int selectedRowIndex)//видалити папку зі списку папок швидкого доступу
         {
             FileManager.Properties.Settings.Default.ListQuickAccessFolder.RemoveAt(selectedRowIndex);
             FileManager.Properties.Settings.Default.Save();
         }
 
-        public void PasteCopiedFoldersAndFile(string currentPath, List<string> ListPathsToCopiedFoldersAndFiles)
+        public void PasteCopiedFoldersAndFile(string currentPath, List<string> ListPathsToCopiedFoldersAndFiles)//вставити в вибрану директорію список файлів
         {
             for (int i = 0; i < ListPathsToCopiedFoldersAndFiles.Count; i++)
             {
@@ -167,7 +167,7 @@ namespace MyLibrary
             }
         }
 
-        public void PasteFolderOrFile(string sourcePath, string destPath)
+        public void PasteFolderOrFile(string sourcePath, string destPath)//вставити в вибраний шлях файл
         {
             while (Directory.Exists(destPath))
                 destPath += " - Copy";
@@ -190,14 +190,14 @@ namespace MyLibrary
                 MessageBox.Show("Невідома помилка", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        public void CopyDirectory(string sourceFileName, string destFileName)
+        public void CopyDirectory(string sourceFileName, string destFileName)//копіювання у вибрану директорію папки з вкладеним вмістом
         {
             DirectoryInfo dirInfo = new DirectoryInfo(sourceFileName);
             foreach (DirectoryInfo dir in dirInfo.GetDirectories())
             {
                 if (!Directory.Exists(destFileName + "\\" + dir.Name))
                     Directory.CreateDirectory(destFileName + "\\" + dir.Name);
-                //Рекурсия (перебираем вложенные папки и делаем для них то-же самое).
+                //Рекурсія (перебираємо вкладені папки и робимо для них теж саме).
                 CopyDirectory(dir.FullName, destFileName + "\\" + dir.Name);
             }
             foreach (string file in Directory.GetFiles(sourceFileName))
@@ -207,7 +207,7 @@ namespace MyLibrary
             }
         }
 
-        public static void DeleteFiles(List<string> listFiles)
+        public static void DeleteFiles(List<string> listFiles)//видалити файли
         {
             foreach(string file in listFiles)
             {
@@ -225,7 +225,7 @@ namespace MyLibrary
             }
         }
 
-        public void CreateNewFolder(string currentPath, string folderName)
+        public void CreateNewFolder(string currentPath, string folderName)//створення нової папки
         {
             if (folderName == "" || folderName == null)
                 return;
@@ -237,7 +237,7 @@ namespace MyLibrary
             Directory.CreateDirectory(Path.Combine(currentPath, folderName));
         }
 
-        public void RenameFolderOfFile(string pathFolderOrFile, string pathNewFolderOrFile)
+        public void RenameFolderOfFile(string pathFolderOrFile, string pathNewFolderOrFile)//перейменувати файл
         {
             if (pathNewFolderOrFile == null || pathNewFolderOrFile == "")
                 return;
@@ -250,7 +250,7 @@ namespace MyLibrary
                 MessageBox.Show("Невідома помилка", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        public static void SetAttributesHidden(string path, bool recursive)
+        public static void SetAttributesHidden(string path, bool recursive)//встановити атрибут прихований для файлу
         {
             System.IO.File.SetAttributes(path, FileAttributes.Hidden);
             if (recursive)
@@ -274,7 +274,7 @@ namespace MyLibrary
             }
         }
 
-        public static void DeleteAttributesHidden(string path, bool recursive)
+        public static void DeleteAttributesHidden(string path, bool recursive)//видалити атрибут прихований для файлу
         {
             System.IO.File.SetAttributes(path, FileAttributes.Normal);
             if (recursive)
@@ -298,7 +298,7 @@ namespace MyLibrary
             }
         }
 
-        public static void CompressFiles(List<string> listSourceFiles, string archivePath)
+        public static void CompressFiles(List<string> listSourceFiles, string archivePath)//архувувати передані файли
         {
             using (ZipFile zip = new ZipFile())
             {
@@ -315,7 +315,7 @@ namespace MyLibrary
             }
         }
 
-        public static void DecompressFiles(string archivePath)
+        public static void DecompressFiles(string archivePath)//розархівувати передані файли
         {
             using (ZipFile zip = ZipFile.Read(archivePath))
             {
@@ -330,7 +330,7 @@ namespace MyLibrary
             }
         }
 
-        public static void EncryptFile(string path, string skey)
+        public static void EncryptFile(string path, string skey)//шифрувати переданий файл
         {
             try
             {
@@ -352,7 +352,7 @@ namespace MyLibrary
             catch (Exception ex){ MessageBox.Show(ex.Message); }
         }
 
-        public static void DecryptFile(string path, string skey)
+        public static void DecryptFile(string path, string skey)//розшифрувати переданий файл
         {
             try
             {
@@ -374,7 +374,7 @@ namespace MyLibrary
             catch (Exception ex){ MessageBox.Show(ex.Message); }
         }
 
-        public static void CreateShortcut(string filePath, string shortcutPath)
+        public static void CreateShortcut(string filePath, string shortcutPath)//створення ярлика файлу
         {
             WshShell shell = new WshShell();
             IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutPath);

@@ -171,12 +171,42 @@ namespace FileManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Interop_IWshRuntimeLibrary {
+            get {
+                object obj = ResourceManager.GetObject("Interop_IWshRuntimeLibrary", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Ionic_Zip {
+            get {
+                object obj = ResourceManager.GetObject("Ionic_Zip", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap mypc {
             get {
                 object obj = ResourceManager.GetObject("mypc", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Newtonsoft_Json {
+            get {
+                object obj = ResourceManager.GetObject("Newtonsoft_Json", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -191,22 +221,22 @@ namespace FileManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static System.Drawing.Bitmap PluberGame {
+        internal static byte[] Plumber_Game {
             get {
-                object obj = ResourceManager.GetObject("PluberGame", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                object obj = ResourceManager.GetObject("Plumber_Game", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static byte[] PlumberGame {
+        internal static System.Drawing.Icon PlumberGameIco {
             get {
-                object obj = ResourceManager.GetObject("PlumberGame", resourceCulture);
-                return ((byte[])(obj));
+                object obj = ResourceManager.GetObject("PlumberGameIco", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         

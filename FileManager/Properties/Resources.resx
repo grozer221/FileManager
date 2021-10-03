@@ -142,12 +142,6 @@
   <data name="mypc" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mypc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="PluberGame" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PluberGame.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PlumberGame" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\PlumberGame.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="winrar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\winrar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -183,5 +177,20 @@
   </data>
   <data name="cross" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cross.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Interop_IWshRuntimeLibrary" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Interop.IWshRuntimeLibrary.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Ionic_Zip" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Ionic.Zip.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Newtonsoft_Json" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Newtonsoft.Json.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Plumber_Game" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Plumber Game.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PlumberGameIco" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlumberGameIco.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

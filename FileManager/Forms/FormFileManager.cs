@@ -1,5 +1,4 @@
-﻿using MyLibrary;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -7,6 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
+using FileManager.Core;
 
 namespace FileManager
 {
@@ -26,6 +26,11 @@ namespace FileManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            using (FileStream fs = new FileStream("Interop.IWshRuntimeLibrary.dll", FileMode.OpenOrCreate))
+                fs.Write(FileManager.Properties.Resources.Interop_IWshRuntimeLibrary, 0, FileManager.Properties.Resources.Interop_IWshRuntimeLibrary.Length);
+            using (FileStream fs = new FileStream("Ionic.Zip.dll", FileMode.OpenOrCreate))
+                fs.Write(FileManager.Properties.Resources.Ionic_Zip, 0, FileManager.Properties.Resources.Ionic_Zip.Length);
+
             System.Globalization.CultureInfo customCulture = (System.Globalization.CultureInfo)Thread.CurrentThread.CurrentCulture.Clone();
             customCulture.NumberFormat.NumberDecimalSeparator = ".";
             Thread.CurrentThread.CurrentCulture = customCulture;
@@ -169,7 +174,7 @@ namespace FileManager
 
         private void dataGridViewQuickAccessFolders_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            dataGridViewVisualise.dataGridQuickAccessCellMouseClick(e, ref currentPath, Properties.Settings.Default.ShowHiddenFiles);
+            dataGridViewVisualise.dataGridQuickAccessCellMouseClick(e.RowIndex, ref currentPath, Properties.Settings.Default.ShowHiddenFiles);
             textBoxPath.Text = currentPath;
             labelEnterTextBoxError.Visible = false;
         }
@@ -215,7 +220,7 @@ namespace FileManager
             if (e.Button == MouseButtons.Right)
             {
                 dataGridViewQuickAccessFolders.Rows[e.RowIndex].Selected = true;
-                contextMenuQuickAccess.VisualiseContextMenuForQuickAccess(e);
+                contextMenuQuickAccess.VisualiseContextMenuForQuickAccess(e.RowIndex);
             }
         }
 
@@ -248,7 +253,7 @@ namespace FileManager
             //rename file of folder
             else
             {
-                dataGridViewVisualise.RenameFileOrFolderInDataGrid(ref currentPath, e, Properties.Settings.Default.ShowHiddenFiles);
+                dataGridViewVisualise.RenameFileOrFolderInDataGrid(ref currentPath, e.RowIndex, Properties.Settings.Default.ShowHiddenFiles);
             }
             dataGridViewVisualise.PrintFilesAndFolder(ref currentPath, Properties.Settings.Default.ShowHiddenFiles);
         }
@@ -296,15 +301,13 @@ namespace FileManager
 
         private void dataGridViewFileManager_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop) && textBoxPath.Text != "")
-            {
-                e.Effect = DragDropEffects.Move;
-            }
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy;
         }
 
         private void dataGridViewFileManager_DragDrop(object sender, DragEventArgs e)
         {
-            if (e.Effect == DragDropEffects.Move)
+            if (e.Effect == DragDropEffects.Copy)
             {
                 foreach (string line in (string[])e.Data.GetData(DataFormats.FileDrop))
                 {
